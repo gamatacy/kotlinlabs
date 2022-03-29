@@ -9,10 +9,11 @@ import org.apache.commons.csv.CSVPrinter;
 import java.io.*;
 import java.util.Collection;
 
-public class fileManager{
+public class fileManager implements readFile{
     private Iterable<CSVRecord> fileCollection;
 
     //Парсит файл и записывает в коллекцию
+    @Override
     public void readFile(String path) throws IOException {
         File file = new File(path);
         Reader in = new InputStreamReader(new FileInputStream(file));

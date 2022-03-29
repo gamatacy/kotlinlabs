@@ -27,16 +27,17 @@ public class Product{
     static int usedId = 0;
     private static HashSet<Integer> UsedIDs = new HashSet<Integer>();
 
+
     public Product(){
-        this.id = usedId + 1;
+        UsedIDs.add(0);
+        this.id = ((Integer) UsedIDs.toArray()[UsedIDs.size()-1] )+1;
         UsedIDs.add(usedId);
-        usedId += 1;
         this.creationDate = new Date();
     }
 
     public void setId(Integer integer) throws invalidValueException, cannotBeNullException {
         if (integer < 0){
-            throw new invalidValueException("Cannot be zero");
+            throw new invalidValueException("ID cannot be zero");
         }
         else if (integer == null){
             throw new cannotBeNullException();

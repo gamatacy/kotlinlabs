@@ -1,7 +1,6 @@
 package Enums;
 
 import Collection.Classes.Organization;
-import com.sun.org.apache.xpath.internal.operations.Or;
 
 public enum OrganizationType {
     COMMERCIAL,

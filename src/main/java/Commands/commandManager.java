@@ -20,13 +20,5 @@ public class commandManager {
         return commands;
     }
 
-    public void registerCommand(String commandName) throws commandNotExistException{
-        if (commands.containsKey(commandName)){
-            commands.get(commandName).execute();
-        }else{
-            throw new commandNotExistException();
-        }
-    }
-
 }
 

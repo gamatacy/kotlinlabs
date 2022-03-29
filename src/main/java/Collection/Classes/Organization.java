@@ -63,6 +63,47 @@ public class Organization {
         return officialAddress;
     }
 
+    public void setName(String name) throws cannotBeNullException{
+        if (name.length() == 0){
+            throw new cannotBeNullException();
+        }
+        this.name = name;
+    }
+
+    public void setFullName(String fullName) throws cannotBeNullException, invalidValueException {
+        if (fullName.length() == 0){
+            throw new cannotBeNullException();
+        }
+        else if(fullName.length() > 844){
+            throw new invalidValueException("Maximum length is 844");
+        }
+
+        this.fullName = fullName;
+
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setType(OrganizationType type) throws cannotBeNullException {
+        if (type == null){
+            throw new cannotBeNullException();
+        }
+        this.type = type;
+
+    }
+
+    public void setOfficialAddress(Address officialAddress) {
+
+        this.officialAddress = officialAddress;
+
+    }
+
+    public void setOrganizationExist(boolean organizationExist) {
+        OrganizationExist = organizationExist;
+    }
+
     @Override
     public String toString() {
         if(OrganizationExist == false){

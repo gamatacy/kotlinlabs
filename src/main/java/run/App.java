@@ -12,18 +12,20 @@ public class App {
         commandManager CManager = new commandManager(
                 new infoCommand(cLM),
                 new showCommand(cLM),
-                new addCommand()
+                new addCommand(cLM),
+                new executeScriptCommand(cLM,fManager),
+                new historyCommand(consoleManager.getCommandHistory()),
+                new exitCommand()
         );
         consoleManager console = new consoleManager(CManager);
 
 
         try{
 
-            System.out.println(args[0]);
-            fManager.readFile("test2.csv");
+            fManager.readFile("test.csv");
             cLM.fill(fManager.getFileCollection());
-            fManager.saveFile("test2.csv",cLM.productsCollection);
             console.run();
+            fManager.saveFile("test2.csv",cLM.getProductsCollection());
 
         }catch (Exception e){
             System.err.println(e.getMessage());

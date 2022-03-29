@@ -4,6 +4,7 @@ import Collection.Classes.Product;
 import Collection.collectionManager;
 
 import java.util.Collection;
+import java.util.HashMap;
 
 
 public class showCommand extends Command{
@@ -19,5 +20,10 @@ public class showCommand extends Command{
         for (Product product : cManager.getProductsCollection()){
             System.out.println(product.toString());
         }
+    }
+
+    @Override
+    public void setArgument(String arg, HashMap<String, Command> commands) {
+
     }
 }

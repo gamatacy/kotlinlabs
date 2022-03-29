@@ -10,4 +10,11 @@ public class Address {
     public String getZipCode() {
         return zipCode;
     }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "zipCode='" + zipCode + '\'' +
+                '}';
+    }
 }

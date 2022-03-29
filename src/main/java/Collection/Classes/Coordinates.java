@@ -12,7 +12,7 @@ public class Coordinates {
             throw new invalidValueException("Maximum X value 177");
         }
         else if (x == null){
-            throw new cannotBeNullException("setX");
+            throw new cannotBeNullException("set X");
         }
         this.x = x;
         this.y = y;

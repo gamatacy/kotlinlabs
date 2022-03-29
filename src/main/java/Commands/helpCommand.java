@@ -15,4 +15,9 @@ public class helpCommand extends Command{
         System.out.println(commands.keySet());
     }
 
+    @Override
+    public void setArgument(String arg,HashMap<String, Command> commands) {
+
+    }
+
 }
