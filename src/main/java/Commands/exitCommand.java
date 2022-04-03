@@ -2,6 +2,7 @@ package Commands;
 
 import Console.consoleManager;
 
+import java.io.BufferedReader;
 import java.util.HashMap;
 
 public class exitCommand extends Command{
@@ -12,7 +13,7 @@ public class exitCommand extends Command{
 
 
     @Override
-    public void execute() {
+    public void execute(BufferedReader reader) {
         consoleManager.stop();
     }
 

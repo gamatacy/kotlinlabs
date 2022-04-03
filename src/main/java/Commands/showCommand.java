@@ -3,6 +3,7 @@ package Commands;
 import Collection.Classes.Product;
 import Collection.collectionManager;
 
+import java.io.BufferedReader;
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -16,7 +17,7 @@ public class showCommand extends Command{
     }
 
     @Override
-    public void execute() {
+    public void execute(BufferedReader reader) {
         for (Product product : cManager.getProductsCollection()){
             System.out.println(product.toString());
         }

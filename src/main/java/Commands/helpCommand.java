@@ -1,5 +1,6 @@
 package Commands;
 
+import java.io.BufferedReader;
 import java.util.HashMap;
 
 public class helpCommand extends Command{
@@ -11,7 +12,7 @@ public class helpCommand extends Command{
     }
 
     @Override
-    public void execute() {
+    public void execute(BufferedReader reader) {
         System.out.println(commands.keySet());
     }
 

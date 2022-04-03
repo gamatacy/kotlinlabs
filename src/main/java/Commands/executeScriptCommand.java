@@ -1,5 +1,6 @@
 package Commands;
 
+import Console.consoleManager;
 import Collection.collectionManager;
 import Exceptions.commandNotExistException;
 import fileUtils.*;
@@ -24,7 +25,7 @@ public class executeScriptCommand extends Command implements readFile, registerC
     }
 
     @Override
-    public void execute() {
+    public void execute(BufferedReader reader) {
         try{
             readFile(this.path);
             registerCommand("None", commands);
@@ -37,10 +38,6 @@ public class executeScriptCommand extends Command implements readFile, registerC
     public void setArgument(String arg,HashMap<String, Command> commands) {
         this.path = arg;
         this.commands = commands;
-    }
-
-    public void readScript(String path) throws IOException {
-
     }
 
     @Override
@@ -56,15 +53,17 @@ public class executeScriptCommand extends Command implements readFile, registerC
     public void registerCommand(String commandName, HashMap<String, Command> commands) throws commandNotExistException {
         while(true){
             try {
+                consoleManager.setScriptInput();
                 String cmd = script.readLine();
                 if (cmd != null){
                     String[] command = cmd.split(" ");
                     if (commands.containsKey(command[0]) && command.length == 1){
-                        commands.get(command[0]).execute();
+                        commands.get(command[0]).execute(this.script);
+
                     }
                     else if(commands.containsKey(command[0])){
                         commands.get(command[0]).setArgument(command[1], commands);
-                        commands.get(command[0]).execute();
+                        commands.get(command[0]).execute(this.script);
                     }
                     else{
                         throw new commandNotExistException();
@@ -78,5 +77,4 @@ public class executeScriptCommand extends Command implements readFile, registerC
             }
         }
     }
-
 }

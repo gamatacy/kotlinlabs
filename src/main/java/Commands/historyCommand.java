@@ -2,6 +2,7 @@ package Commands;
 
 import Console.*;
 
+import java.io.BufferedReader;
 import java.util.ArrayDeque;
 import java.util.HashMap;
 
@@ -15,7 +16,7 @@ public class historyCommand extends Command{
     }
 
     @Override
-    public void execute() {
+    public void execute(BufferedReader reader) {
 
         ArrayDeque<String> copyArray = new ArrayDeque<>(history);
 
