@@ -13,7 +13,7 @@ public class filterByPartNumberCommand extends Command{
 
 
     public filterByPartNumberCommand(collectionManager cManager){
-        super("filter_by_part_number");
+        super("filter_by_part_number","вывести элементы, значение поля partNumber которых равно заданному");
         this.cManager = cManager;
     }
 

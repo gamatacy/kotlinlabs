@@ -5,11 +5,18 @@ import java.io.BufferedReader;
 
 public abstract class Command {
     private String name;
+    private String description;
 
-    public Command(String name){
+
+    public Command(String name, String description){
         this.name = name;
+        this.description = description;
     }
 
+
+    public String getDescription(){
+        return this.description;
+    }
     public String getName() {
         return name;
     }
@@ -22,9 +29,9 @@ public abstract class Command {
 
 /**
  Ready commands:
-    help // visual correction + description
-    info // add some stuff
-    show // visual correction
+    help
+    info
+    show
     add
     execute_script
     history

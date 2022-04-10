@@ -16,7 +16,7 @@ public class removeAllByManufacturerCommand extends Command{
 
 
     public removeAllByManufacturerCommand(collectionManager cManager){
-        super("remove_all_by_manufacturer");
+        super("remove_all_by_manufacturer","удалить из коллекции все элементы, значение поля manufacturer которого эквивалентно заданному");
         this.cManager = cManager;
     }
 

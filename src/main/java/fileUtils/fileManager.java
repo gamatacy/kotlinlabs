@@ -47,7 +47,6 @@ public class fileManager implements readFile{
         }
     }
 
-    //Возвращает результат парсинга в виде коллекции какой-то хрени
     public Iterable<CSVRecord> getFileCollection() {
         return fileCollection;
     }

@@ -19,7 +19,7 @@ public class addCommand extends Command{
 
 
     public addCommand(collectionManager cManager){
-        super("add");
+        super("add","добавить новый элемент в коллекцию");
         this.cManager = cManager;
     }
 

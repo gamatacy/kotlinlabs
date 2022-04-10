@@ -19,7 +19,7 @@ public class executeScriptCommand extends Command implements readFile, registerC
     private HashMap<String, Command> commands;
 
     public executeScriptCommand(collectionManager collectionmanager,fileManager filemanager){
-        super("execute_script");
+        super("execute_script","считать и исполнить скрипт из указанного файла");
         this.collectionManager = collectionmanager;
         this.fileManager = filemanager;
     }
@@ -43,8 +43,9 @@ public class executeScriptCommand extends Command implements readFile, registerC
     @Override
     public void readFile(String path) throws IOException, commandNotExistException{
         if (path != null){
-        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(new File(path))));
-        this.script = reader;}
+             BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(new File(path))));
+             this.script = reader;
+        }
         else{
             throw new commandNotExistException("Specify an argument in execute_script command!");
         }

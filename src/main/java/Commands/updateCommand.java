@@ -17,7 +17,7 @@ public class updateCommand extends Command{
 
 
     public updateCommand(collectionManager cManager){
-        super("update");
+        super("update", "обновить значение элемента коллекции, id которого равен заданному");
         this.cManager = cManager;
     }
 
@@ -33,7 +33,7 @@ public class updateCommand extends Command{
 
     @Override
     public void setArgument(String arg, HashMap<String, Command> commands) {
-        this.id = new Integer(arg);
+        this.id = Integer.parseInt(arg);
     }
 
 

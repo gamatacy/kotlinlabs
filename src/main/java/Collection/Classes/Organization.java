@@ -4,6 +4,8 @@ import Exceptions.cannotBeEmptyException;
 import Exceptions.cannotBeNullException;
 import Exceptions.invalidValueException;
 
+import java.util.Objects;
+
 public class Organization {
     private int id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
@@ -102,6 +104,20 @@ public class Organization {
 
     public void setOrganizationExist(boolean organizationExist) {
         OrganizationExist = organizationExist;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Organization that = (Organization) o;
+        if(OrganizationExist == that.OrganizationExist){return true;}
+        return id == that.id  && Objects.equals(name, that.name) && Objects.equals(fullName, that.fullName) && type == that.type && Objects.equals(officialAddress, that.officialAddress);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, fullName, type, officialAddress, OrganizationExist);
     }
 
     @Override

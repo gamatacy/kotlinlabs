@@ -17,7 +17,7 @@ public class removeByIdCommand extends Command{
 
 
     public removeByIdCommand(collectionManager cManager){
-        super("remove_by_id");
+        super("remove_by_id"," удалить элемент из коллекции по его id");
         this.cManager = cManager;
     }
 
@@ -32,7 +32,7 @@ public class removeByIdCommand extends Command{
 
     @Override
     public void setArgument(String arg, HashMap<String, Command> commands) {
-        this.id = new Integer(arg);
+        this.id = Integer.parseInt(arg);
     }
 
     public void remove() throws invalidValueException{

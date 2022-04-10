@@ -10,7 +10,7 @@ public class headCommand extends Command{
 
 
     public headCommand(collectionManager cManager){
-        super("head");
+        super("head","вывести первый элемент коллекции");
         this.cManager = cManager;
     }
 

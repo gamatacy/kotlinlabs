@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.HashSet;
 
 
-public class Product{
+public class Product implements Comparable<Product> {
     private Integer id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; //Поле не может быть null
@@ -24,14 +24,29 @@ public class Product{
     private Organization manufacturer; //Поле может быть null
 
     //Ерунда для айди
-    static int usedId = 0;
+    private static int usedId = 0;
     private static HashSet<Integer> UsedIDs = new HashSet<Integer>();
 
+    public Product(Integer integer) throws invalidValueException,cannotBeNullException{
+        if (integer < 0){
+            throw new invalidValueException("ID cannot be zero");
+        }
+        else if (integer == null){
+            throw new cannotBeNullException();
+        }
+        else if ( UsedIDs.contains(integer) ){
+            throw new invalidValueException("ID already used");
+        }
+        this.id = integer;
+        UsedIDs.add(integer);
+    }
 
     public Product(){
-        UsedIDs.add(0);
-        this.id = ((Integer) UsedIDs.toArray()[UsedIDs.size()-1] )+1;
+        while(UsedIDs.contains(usedId) == true){
+            this.usedId += 1;
+        }
         UsedIDs.add(usedId);
+        this.id = usedId;
         this.creationDate = new Date();
     }
 
@@ -140,6 +155,10 @@ public class Product{
         return manufacturer;
     }
 
+    public void removeId(Integer id){
+        UsedIDs.remove(id);
+    }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -154,4 +173,15 @@ public class Product{
                 ", manufacturer=" + manufacturer.toString() +
                 '}';
     }
+
+    @Override
+    public int compareTo(Product product) {
+        if(this.id < product.id){
+            return -1;
+        }
+        else{
+            return 1;
+        }
+    }
+
 }

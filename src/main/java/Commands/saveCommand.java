@@ -12,7 +12,7 @@ public class saveCommand extends Command{
     private String path;
 
     public saveCommand(collectionManager cManager, fileManager fManager){
-        super("save");
+        super("save", " сохранить коллекцию в файл");
         this.cManager = cManager;
         this.fManager = fManager;
     }

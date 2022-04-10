@@ -11,7 +11,7 @@ public class historyCommand extends Command{
 
 
     public historyCommand(ArrayDeque<String> array){
-        super("history");
+        super("history","вывести последние 8 команд");
         this.history = array;
     }
 

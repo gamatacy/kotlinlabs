@@ -8,7 +8,7 @@ import java.util.HashMap;
 public class exitCommand extends Command{
 
     public exitCommand(){
-        super("exit");
+        super("exit","завершить программу");
     }
 
 

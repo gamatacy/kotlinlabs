@@ -9,15 +9,18 @@ public class infoCommand extends Command{
     private collectionManager cManager;
 
     public infoCommand(collectionManager CM){
-        super("info");
+        super("info", "вывести в стандартный поток вывода информацию о коллекции");
         this.cManager = CM;
     }
 
     @Override
     public void execute(BufferedReader reader) {
-        System.out.println(
-                cManager.getProductsCollection().getClass()
-        );
+        System.out.println("Тип коллекции: " +
+                cManager.getProductsCollection().getClass());
+        System.out.println("Дата инициализации: " +
+                cManager.getCreationDate());
+        System.out.println("Количество элементов: " +
+                cManager.getCollectionSize());
     }
 
     @Override

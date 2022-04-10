@@ -10,7 +10,7 @@ public class removeHeadCommand extends Command{
 
 
     public removeHeadCommand(collectionManager cManager){
-        super("remove_head");
+        super("remove_head","вывести первый элемент коллекции и удалить его");
         this.cManager = cManager;
     }
 
