@@ -3,6 +3,9 @@ package Commands;
 import java.io.BufferedReader;
 import java.util.HashMap;
 
+/**
+ * Print all commands and their descriptions
+ */
 public class helpCommand extends Command{
     private HashMap<String,Command> commands;
 

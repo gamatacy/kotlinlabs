@@ -5,6 +5,9 @@ import Collection.collectionManager;
 import java.io.BufferedReader;
 import java.util.HashMap;
 
+/**
+ *Print first element of the collection
+ */
 public class headCommand extends Command{
     private collectionManager cManager;
 

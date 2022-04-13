@@ -7,6 +7,13 @@ public class Coordinates {
     private Float x; //Максимальное значение поля: 177, Поле не может быть null
     private float y;
 
+    /**
+     *
+     * @param x
+     * @param y
+     * @throws invalidValueException
+     * @throws cannotBeNullException
+     */
     public Coordinates(Float x, float y) throws invalidValueException, cannotBeNullException{
         if (x.floatValue() > 177){
             throw new invalidValueException("Maximum X value 177");

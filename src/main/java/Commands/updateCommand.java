@@ -11,6 +11,9 @@ import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.HashMap;
 
+/**
+ * Update element value by Product ID
+ */
 public class updateCommand extends Command{
     private collectionManager cManager;
     private Integer id;
@@ -41,7 +44,6 @@ public class updateCommand extends Command{
         Product[] array = cManager.getProductsCollection().toArray(new Product[0]);
 
         for (int i = 0; i < array.length ;i++){
-            System.out.println(array[i].getId());
             if (array[i].getId().equals(this.id)){
                 array[i] = elementReader.readElement(reader);
                 array[i].removeId(this.id);

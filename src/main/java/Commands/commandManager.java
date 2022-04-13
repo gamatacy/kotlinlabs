@@ -4,9 +4,16 @@ import Exceptions.commandNotExistException;
 
 import java.util.HashMap;
 
+/**
+ * Manage commands
+ */
 public class commandManager {
-    HashMap<String, Command> commands = new HashMap<>();
+    private HashMap<String, Command> commands = new HashMap<>();
 
+    /**
+     *
+     * @param commands - list of commands
+     */
     public commandManager(Command ... commands){
         helpCommand helpcommand = new helpCommand(this.commands);
         this.commands.put(helpcommand.getName(),helpcommand);

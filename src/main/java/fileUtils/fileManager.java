@@ -9,6 +9,9 @@ import org.apache.commons.csv.CSVPrinter;
 import java.io.*;
 import java.util.Collection;
 
+/**
+ * Manager class for interact with files
+ */
 public class fileManager implements readFile{
     private Iterable<CSVRecord> fileCollection;
 
@@ -16,13 +19,15 @@ public class fileManager implements readFile{
     @Override
     public void readFile(String path) throws IOException {
         File file = new File(path);
-        Reader in = new InputStreamReader(new FileInputStream(file));
+        FileInputStream fis = new FileInputStream(file);
+        BufferedInputStream bis = new BufferedInputStream(fis);
+        Reader in = new InputStreamReader(bis);
         this.fileCollection = CSVFormat.EXCEL.parse(in);
     }
 
     //Парсит коллекцию обратно в csv
     public void saveFile(String path, Collection collection) throws IOException {
-        try (CSVPrinter printer = new CSVPrinter(new FileWriter("test2.csv"), CSVFormat.RFC4180)) {
+        try (CSVPrinter printer = new CSVPrinter(new FileWriter(path), CSVFormat.RFC4180)) {
             Collection<Product> copyCol = collection;
             for (Product product : copyCol){
                 printer.printRecord(

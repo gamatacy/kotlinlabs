@@ -7,6 +7,9 @@ import java.io.BufferedReader;
 import java.util.HashMap;
 import java.util.TreeSet;
 
+/**
+ * Print elements sorted by id
+ */
 public class printAscendingCommand extends Command{
     private collectionManager cManager;
 

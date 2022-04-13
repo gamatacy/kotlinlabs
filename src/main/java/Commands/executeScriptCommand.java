@@ -10,7 +10,9 @@ import org.apache.commons.csv.CSVRecord;
 import java.io.*;
 import java.util.HashMap;
 
-
+/**
+ * Execute script from file
+ */
 public class executeScriptCommand extends Command implements readFile, registerCommand{
     private collectionManager collectionManager;
     private fileManager fileManager;
@@ -18,11 +20,13 @@ public class executeScriptCommand extends Command implements readFile, registerC
     private String path;
     private HashMap<String, Command> commands;
 
+
     public executeScriptCommand(collectionManager collectionmanager,fileManager filemanager){
         super("execute_script","считать и исполнить скрипт из указанного файла");
         this.collectionManager = collectionmanager;
         this.fileManager = filemanager;
     }
+
 
     @Override
     public void execute(BufferedReader reader) {
@@ -34,23 +38,40 @@ public class executeScriptCommand extends Command implements readFile, registerC
         }
     }
 
+
     @Override
     public void setArgument(String arg,HashMap<String, Command> commands) {
         this.path = arg;
         this.commands = commands;
     }
 
+    /**
+     * Read file from path
+     *
+     * @param path
+     * @throws IOException
+     * @throws commandNotExistException
+     */
     @Override
     public void readFile(String path) throws IOException, commandNotExistException{
         if (path != null){
-             BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(new File(path))));
-             this.script = reader;
+            File file = new File(path);
+            FileInputStream fis = new FileInputStream(file);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(fis));
+            this.script = reader;
         }
         else{
             throw new commandNotExistException("Specify an argument in execute_script command!");
         }
     }
 
+    /**
+     * Register the commands from file
+     *
+     * @param commandName
+     * @param commands
+     * @throws commandNotExistException
+     */
     public void registerCommand(String commandName, HashMap<String, Command> commands) throws commandNotExistException {
         while(true){
             try {

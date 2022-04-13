@@ -8,6 +8,9 @@ import java.util.Collection;
 import java.util.HashMap;
 
 
+/**
+ * Print all collection elements in String
+ */
 public class showCommand extends Command{
     private collectionManager cManager;
 

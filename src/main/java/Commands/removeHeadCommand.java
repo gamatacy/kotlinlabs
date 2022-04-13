@@ -5,6 +5,9 @@ import Collection.collectionManager;
 import java.io.BufferedReader;
 import java.util.HashMap;
 
+/**
+ * Print first element and delete him
+ */
 public class removeHeadCommand extends Command{
     private collectionManager cManager;
 

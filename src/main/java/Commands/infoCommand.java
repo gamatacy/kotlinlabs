@@ -5,6 +5,9 @@ import Collection.collectionManager;
 import java.io.BufferedReader;
 import java.util.HashMap;
 
+/**
+ * Print info about the collection
+ */
 public class infoCommand extends Command{
     private collectionManager cManager;
 

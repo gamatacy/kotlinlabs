@@ -7,6 +7,9 @@ import java.io.BufferedReader;
 import java.util.ArrayDeque;
 import java.util.HashMap;
 
+/**
+ *Print elements by specified partNumber
+ */
 public class filterByPartNumberCommand extends Command{
     private collectionManager cManager;
     private String partNumber;

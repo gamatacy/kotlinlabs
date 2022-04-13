@@ -12,6 +12,9 @@ import java.io.InputStreamReader;
 import java.util.ArrayDeque;
 import java.util.HashMap;
 
+/**
+ * Read input from user and register commands
+ */
 public class consoleManager implements registerCommand {
     private commandManager CManager;
     private static ArrayDeque<String> commandHistory = new ArrayDeque<>();
@@ -46,18 +49,21 @@ public class consoleManager implements registerCommand {
 
             }
         }
+
+        try{reader.close();}catch (Exception e){e.printStackTrace();}
+
     }
 
     public void registerCommand(String commandName, HashMap<String, Command> commands) throws commandNotExistException {
         String[] cmd = commandName.split(" ");
         if (commands.containsKey(cmd[0]) && cmd.length == 1){
             commandHistory.addFirst(cmd[0]);
-            commands.get(cmd[0]).execute(new BufferedReader(new InputStreamReader(System.in)));
+            commands.get(cmd[0]).execute(this.reader);
         }
         else if(commands.containsKey(cmd[0])){
             commandHistory.addFirst(cmd[0]);
             commands.get(cmd[0]).setArgument(cmd[1], CManager.getCommands());
-            commands.get(cmd[0]).execute(new BufferedReader(new InputStreamReader(System.in)));
+            commands.get(cmd[0]).execute(this.reader);
         }
         else{
             throw new commandNotExistException();

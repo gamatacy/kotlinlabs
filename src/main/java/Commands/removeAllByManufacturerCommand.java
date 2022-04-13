@@ -11,6 +11,9 @@ import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.HashMap;
 
+/**
+ * Remove all elements by manufacturer value
+ */
 public class removeAllByManufacturerCommand extends Command{
     private collectionManager cManager;
 

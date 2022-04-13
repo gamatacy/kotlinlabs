@@ -7,6 +7,9 @@ import java.io.BufferedReader;
 import java.util.ArrayDeque;
 import java.util.HashMap;
 
+/**
+ * Delete all elements of collection
+ */
 public class clearCommand extends Command{
     private collectionManager cManager;
 
@@ -15,6 +18,10 @@ public class clearCommand extends Command{
         this.cManager = cManager;
     }
 
+    /**
+     * Just clear the collection
+     * @param reader
+     */
     @Override
     public void execute(BufferedReader reader) {
         this.cManager.getProductsCollection().clear();

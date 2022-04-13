@@ -6,6 +6,9 @@ import fileUtils.fileManager;
 import java.io.BufferedReader;
 import java.util.HashMap;
 
+/**
+ * Save collection into csv file, standart output is test.csv
+ */
 public class saveCommand extends Command{
     private collectionManager cManager;
     private fileManager fManager;
@@ -20,7 +23,12 @@ public class saveCommand extends Command{
     @Override
     public void execute(BufferedReader reader) {
         try {
-            fManager.saveFile(path, cManager.getProductsCollection());
+            if(this.path == null) {
+                fManager.saveFile("test.csv", this.cManager.getProductsCollection());
+            }
+            else{
+                fManager.saveFile(this.path,this.cManager.getProductsCollection());
+            }
         }catch (Exception e){
             System.out.println(e.getMessage());
         }

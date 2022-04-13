@@ -18,6 +18,17 @@ public class Organization {
         OrganizationExist = false;
     }
 
+    /**
+     *
+     * @param id
+     * @param name
+     * @param fullName
+     * @param type
+     * @param zipcode
+     * @throws invalidValueException
+     * @throws cannotBeNullException
+     * @throws cannotBeEmptyException
+     */
     public Organization(int id,String name, String fullName, OrganizationType type,String zipcode) throws invalidValueException, cannotBeNullException, cannotBeEmptyException {
         if (name.length() == 0){
             throw new cannotBeNullException();
@@ -45,26 +56,51 @@ public class Organization {
         this.officialAddress = new Address(zipcode);
     }
 
+    /**
+     *
+     * @return int id
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     *
+     * @return String name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     *
+     * @return String fullName
+     */
     public String getFullName() {
         return fullName;
     }
 
+    /**
+     *
+     * @return OrganizationType - Enum
+     */
     public OrganizationType getType() {
         return type;
     }
 
+    /**
+     *
+     * @return Address
+     */
     public Address getOfficialAddress() {
         return officialAddress;
     }
 
+    /**
+     *
+     * @param name
+     * @throws cannotBeNullException
+     */
     public void setName(String name) throws cannotBeNullException{
         if (name.length() == 0){
             throw new cannotBeNullException();
@@ -72,6 +108,12 @@ public class Organization {
         this.name = name;
     }
 
+    /**
+     *
+     * @param fullName
+     * @throws cannotBeNullException
+     * @throws invalidValueException
+     */
     public void setFullName(String fullName) throws cannotBeNullException, invalidValueException {
         if (fullName.length() == 0){
             throw new cannotBeNullException();
@@ -84,10 +126,19 @@ public class Organization {
 
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @param type
+     * @throws cannotBeNullException
+     */
     public void setType(OrganizationType type) throws cannotBeNullException {
         if (type == null){
             throw new cannotBeNullException();
@@ -96,16 +147,29 @@ public class Organization {
 
     }
 
+    /**
+     *
+     * @param officialAddress
+     */
     public void setOfficialAddress(Address officialAddress) {
 
         this.officialAddress = officialAddress;
 
     }
 
+    /**
+     *
+     * @param organizationExist
+     */
     public void setOrganizationExist(boolean organizationExist) {
         OrganizationExist = organizationExist;
     }
 
+    /**
+     * Organization equals
+     * @param o
+     * @return Boolean
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -115,11 +179,19 @@ public class Organization {
         return id == that.id  && Objects.equals(name, that.name) && Objects.equals(fullName, that.fullName) && type == that.type && Objects.equals(officialAddress, that.officialAddress);
     }
 
+    /**
+     *
+     * @return int
+     */
     @Override
     public int hashCode() {
         return Objects.hash(id, name, fullName, type, officialAddress, OrganizationExist);
     }
 
+    /**
+     *
+     * @return String
+     */
     @Override
     public String toString() {
         if(OrganizationExist == false){

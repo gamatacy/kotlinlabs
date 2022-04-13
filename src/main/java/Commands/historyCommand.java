@@ -6,6 +6,9 @@ import java.io.BufferedReader;
 import java.util.ArrayDeque;
 import java.util.HashMap;
 
+/**
+ * Print last 8 used commands
+ */
 public class historyCommand extends Command{
     private ArrayDeque history;
 

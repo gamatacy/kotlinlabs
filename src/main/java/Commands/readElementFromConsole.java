@@ -9,8 +9,16 @@ import Enums.UnitOfMeasure;
 
 import java.io.BufferedReader;
 
+/**
+ * Read product element from user or script
+ */
 public class readElementFromConsole {
 
+    /**
+     *
+     * @param reader
+     * @return Product
+     */
     public Product readElement(BufferedReader reader){
 
         Product product = new Product();
@@ -59,14 +67,19 @@ public class readElementFromConsole {
     }
 
     public void setCoordinates(BufferedReader reader,Product product) throws Exception {
-        try{
+        try {
             System.out.print("Enter X coordinate (float): ");
             Float x = Float.parseFloat(reader.readLine());
             System.out.print("Enter Y coordinate (float): ");
             float y = Float.parseFloat(reader.readLine());
 
-            product.setCoordinates(x,y);
-        }catch(Exception e){
+            product.setCoordinates(x, y);
+        }catch (NumberFormatException ne){
+            System.out.println("Must be float");
+            setCoordinates(reader,product
+            );
+        }
+        catch(Exception e){
             if(consoleManager.getScriptInput()) {
                 throw new Exception();
             }
@@ -89,6 +102,11 @@ public class readElementFromConsole {
                 product.setPrice(Float.parseFloat(price));
             }
 
+
+        }
+        catch(NumberFormatException ne){
+            System.out.println("Must be float");
+            setPrice(reader,product);
         }catch(Exception e) {
             if (consoleManager.getScriptInput()) {
                 throw new Exception();
@@ -118,7 +136,12 @@ public class readElementFromConsole {
         try{
             System.out.print("Enter manufacture cost: ");
             product.setManufactureCost(Integer.parseInt(reader.readLine()));
-        }catch(Exception e){
+        }
+        catch(NumberFormatException ne){
+            System.out.println("Must be int");
+            setManufactureCost(reader,product);
+        }
+        catch(Exception e){
             if(consoleManager.getScriptInput()) {
                 throw new Exception();
             }
@@ -151,6 +174,11 @@ public class readElementFromConsole {
         }
     }
 
+    /**
+     *
+     * @param reader
+     * @param product
+     */
     public void setOrganization(BufferedReader reader,Product product){
         try{
 

@@ -11,6 +11,9 @@ import java.util.LinkedList;
 import java.util.Arrays;
 import java.util.HashMap;
 
+/**
+ * Remove one element by id value
+ */
 public class removeByIdCommand extends Command{
     private collectionManager cManager;
     private Integer id;

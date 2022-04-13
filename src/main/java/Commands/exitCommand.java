@@ -5,7 +5,11 @@ import Console.consoleManager;
 import java.io.BufferedReader;
 import java.util.HashMap;
 
+/**
+ * Stop the programm
+ */
 public class exitCommand extends Command{
+
 
     public exitCommand(){
         super("exit","завершить программу");
