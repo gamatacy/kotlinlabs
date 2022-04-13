@@ -16,6 +16,7 @@ import java.util.HashMap;
  * Read input from user and register commands
  */
 public class consoleManager implements registerCommand {
+    private static String USERNAME = "user";
     private commandManager CManager;
     private static ArrayDeque<String> commandHistory = new ArrayDeque<>();
     private BufferedReader reader;
@@ -25,13 +26,17 @@ public class consoleManager implements registerCommand {
         this.reader = reader;
     }
 
+    public static String getUSERNAME() {
+        return USERNAME;
+    }
+
     private static boolean stop = true;
 
     private static boolean scriptInput = false;
 
     public void run() throws IOException {
         while(stop) {
-            System.out.print("<user>$ ");
+            System.out.print("<"+this.USERNAME+">$");
 
             //  BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 

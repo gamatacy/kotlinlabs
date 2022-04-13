@@ -11,24 +11,24 @@ import java.io.InputStreamReader;
 public class App {
     public static void main(String[] args) {
         String path;
-        collectionManager cLM = new collectionManager();
+        collectionManager clManager = new collectionManager();
         fileManager fManager = new fileManager();
         commandManager CManager = new commandManager(
-                new infoCommand(cLM),
-                new showCommand(cLM),
-                new addCommand(cLM),
-                new executeScriptCommand(cLM,fManager),
+                new infoCommand(clManager),
+                new showCommand(clManager),
+                new addCommand(clManager),
+                new executeScriptCommand(clManager,fManager),
                 new historyCommand(consoleManager.getCommandHistory()),
                 new exitCommand(),
-                new updateCommand(cLM),
-                new clearCommand(cLM),
-                new removeByIdCommand(cLM),
-                new saveCommand(cLM,fManager),
-                new headCommand(cLM),
-                new removeHeadCommand(cLM),
-                new removeAllByManufacturerCommand(cLM),
-                new filterByPartNumberCommand(cLM),
-                new printAscendingCommand(cLM)
+                new updateCommand(clManager),
+                new clearCommand(clManager),
+                new removeByIdCommand(clManager),
+                new saveCommand(clManager,fManager),
+                new headCommand(clManager),
+                new removeHeadCommand(clManager),
+                new removeAllByManufacturerCommand(clManager),
+                new filterByPartNumberCommand(clManager),
+                new printAscendingCommand(clManager)
         );
 
         consoleManager console = new consoleManager(CManager, new BufferedReader(new InputStreamReader(System.in)));
@@ -40,11 +40,10 @@ public class App {
             path = args[0];
         }
 
-
         try{
 
             fManager.readFile(path);
-            cLM.fill(fManager.getFileCollection());
+            clManager.fill(fManager.getFileCollection());
             console.run();
 
         }catch (Exception e){

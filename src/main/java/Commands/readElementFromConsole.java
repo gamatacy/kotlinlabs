@@ -23,7 +23,7 @@ public class readElementFromConsole {
 
         Product product = new Product();
 
-        System.out.print("<user>$ ");
+        System.out.print("<"+consoleManager.getUSERNAME()+">$");
 
         //BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
@@ -44,14 +44,14 @@ public class readElementFromConsole {
 
         if(consoleManager.getScriptInput()) {
             for (int i = 0; i < 10; i++) {
-                System.out.println("<user>$ ");
+                System.out.println("<"+consoleManager.getUSERNAME()+">$");
             }
         }
 
         return product;
     }
 
-    public void setName(BufferedReader reader,Product product) throws Exception {
+    private void setName(BufferedReader reader,Product product) throws Exception {
         try{
             System.out.print("Enter Name: ");
             product.setName(reader.readLine());
@@ -66,7 +66,7 @@ public class readElementFromConsole {
         }
     }
 
-    public void setCoordinates(BufferedReader reader,Product product) throws Exception {
+    private void setCoordinates(BufferedReader reader,Product product) throws Exception {
         try {
             System.out.print("Enter X coordinate (float): ");
             Float x = Float.parseFloat(reader.readLine());
@@ -90,7 +90,7 @@ public class readElementFromConsole {
         }
     }
 
-    public void setPrice(BufferedReader reader,Product product) throws Exception {
+    private void setPrice(BufferedReader reader,Product product) throws Exception {
 
         try{
             System.out.print("Enter price: ");
@@ -117,7 +117,7 @@ public class readElementFromConsole {
         }
     }
 
-    public void setPartNumber(BufferedReader reader,Product product) throws Exception {
+    private void setPartNumber(BufferedReader reader,Product product) throws Exception {
         try{
             System.out.print("Enter part number: ");
             product.setPartNumber(reader.readLine());
@@ -132,7 +132,7 @@ public class readElementFromConsole {
         }
     }
 
-    public void setManufactureCost(BufferedReader reader,Product product) throws Exception {
+    private void setManufactureCost(BufferedReader reader,Product product) throws Exception {
         try{
             System.out.print("Enter manufacture cost: ");
             product.setManufactureCost(Integer.parseInt(reader.readLine()));
@@ -152,7 +152,7 @@ public class readElementFromConsole {
         }
     }
 
-    public void setUnitOfMeasure(BufferedReader reader,Product product) throws Exception {
+    private void setUnitOfMeasure(BufferedReader reader,Product product) throws Exception {
         try{
             System.out.println("Unit of Measure list:  \n-----");
 
@@ -210,7 +210,7 @@ public class readElementFromConsole {
 
     }
 
-    public void setOrganizationName(BufferedReader reader,Organization organization) throws Exception {
+    private void setOrganizationName(BufferedReader reader,Organization organization) throws Exception {
 
         try{
             System.out.print("Enter organization name: ");
@@ -226,7 +226,7 @@ public class readElementFromConsole {
         }
     }
 
-    public void setOrganizationFullName(BufferedReader reader,Organization organization) throws Exception {
+    private void setOrganizationFullName(BufferedReader reader,Organization organization) throws Exception {
         try{
             System.out.print("Enter organization full name: ");
             organization.setFullName(reader.readLine());
@@ -241,7 +241,7 @@ public class readElementFromConsole {
         }
     }
 
-    public void setOrganizationType(BufferedReader reader,Organization organization) throws Exception {
+    private void setOrganizationType(BufferedReader reader,Organization organization) throws Exception {
         try{
             System.out.println("Organization type list:  \n-----");
             for(OrganizationType oType : OrganizationType.values()){
@@ -260,7 +260,7 @@ public class readElementFromConsole {
         }
     }
 
-    public void setZipCode(BufferedReader reader,Organization organization) throws Exception {
+    private void setZipCode(BufferedReader reader,Organization organization) throws Exception {
         try{
             System.out.print("Enter ZipCode: ");
             organization.setOfficialAddress(new Address(reader.readLine()));
