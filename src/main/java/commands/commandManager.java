@@ -1,6 +1,4 @@
-package Commands;
-
-import Exceptions.commandNotExistException;
+package commands;
 
 import java.util.HashMap;
 

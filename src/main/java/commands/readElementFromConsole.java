@@ -1,11 +1,11 @@
-package Commands;
+package commands;
 
-import Collection.Classes.Address;
-import Collection.Classes.Organization;
-import Collection.Classes.Product;
-import Console.consoleManager;
-import Enums.OrganizationType;
-import Enums.UnitOfMeasure;
+import productClasses.Address;
+import productClasses.Organization;
+import productClasses.Product;
+import console.consoleManager;
+import enums.OrganizationType;
+import enums.UnitOfMeasure;
 
 import java.io.BufferedReader;
 

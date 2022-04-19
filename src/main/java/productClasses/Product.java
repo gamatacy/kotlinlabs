@@ -1,13 +1,12 @@
-package Collection.Classes;
-import Enums.OrganizationType;
-import Enums.UnitOfMeasure;
-import Exceptions.cannotBeEmptyException;
-import Exceptions.cannotBeNegativeException;
-import Exceptions.cannotBeNullException;
-import Exceptions.invalidValueException;
+package productClasses;
+import enums.OrganizationType;
+import enums.UnitOfMeasure;
+import exceptions.cannotBeEmptyException;
+import exceptions.cannotBeNegativeException;
+import exceptions.cannotBeNullException;
+import exceptions.invalidValueException;
 
 
-import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
 

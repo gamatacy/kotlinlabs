@@ -1,10 +1,9 @@
-package Commands;
+package commands;
 
-import Console.consoleManager;
-import Collection.collectionManager;
-import Exceptions.commandNotExistException;
+import console.consoleManager;
+import collection.collectionManager;
+import exceptions.commandNotExistException;
 import fileUtils.*;
-import org.apache.commons.csv.CSVRecord;
 
 
 import java.io.*;

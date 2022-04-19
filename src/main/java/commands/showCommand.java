@@ -1,10 +1,9 @@
-package Commands;
+package commands;
 
-import Collection.Classes.Product;
-import Collection.collectionManager;
+import productClasses.Product;
+import collection.collectionManager;
 
 import java.io.BufferedReader;
-import java.util.Collection;
 import java.util.HashMap;
 
 

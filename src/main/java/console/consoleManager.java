@@ -1,14 +1,13 @@
-package Console;
+package console;
 
 
-import Commands.Command;
-import Commands.commandManager;
-import Commands.registerCommand;
-import Exceptions.commandNotExistException;
+import commands.Command;
+import commands.commandManager;
+import commands.registerCommand;
+import exceptions.commandNotExistException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayDeque;
 import java.util.HashMap;
 

@@ -1,6 +1,6 @@
 package fileUtils;
 
-import Collection.Classes.Product;
+import productClasses.Product;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.csv.CSVPrinter;

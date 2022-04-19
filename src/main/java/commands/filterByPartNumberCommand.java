@@ -1,7 +1,7 @@
-package Commands;
+package commands;
 
-import Collection.*;
-import Collection.Classes.Product;
+import collection.*;
+import productClasses.Product;
 
 import java.io.BufferedReader;
 import java.util.ArrayDeque;

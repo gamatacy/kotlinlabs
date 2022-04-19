@@ -1,7 +1,7 @@
 package fileUtils;
 
 import java.io.IOException;
-import Exceptions.*;
+import exceptions.*;
 
 /**
  * Read file by path

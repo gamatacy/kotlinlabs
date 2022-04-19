@@ -1,8 +1,8 @@
-package Collection.Classes;
-import Enums.OrganizationType;
-import Exceptions.cannotBeEmptyException;
-import Exceptions.cannotBeNullException;
-import Exceptions.invalidValueException;
+package productClasses;
+import enums.OrganizationType;
+import exceptions.cannotBeEmptyException;
+import exceptions.cannotBeNullException;
+import exceptions.invalidValueException;
 
 import java.util.Objects;
 

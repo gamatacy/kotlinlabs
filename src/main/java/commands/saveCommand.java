@@ -1,6 +1,6 @@
-package Commands;
+package commands;
 
-import Collection.collectionManager;
+import collection.collectionManager;
 import fileUtils.fileManager;
 
 import java.io.BufferedReader;

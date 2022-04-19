@@ -1,4 +1,4 @@
-package Collection.Classes;
+package productClasses;
 
 public class Address {
     private String zipCode; //Поле может быть null

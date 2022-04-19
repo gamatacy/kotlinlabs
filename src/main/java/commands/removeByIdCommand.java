@@ -1,14 +1,11 @@
-package Commands;
+package commands;
 
-import Collection.Classes.Product;
-import Collection.collectionManager;
-import Exceptions.cannotBeNullException;
-import Exceptions.invalidValueException;
+import productClasses.Product;
+import collection.collectionManager;
+import exceptions.invalidValueException;
 
 import java.io.BufferedReader;
 import java.util.ArrayDeque;
-import java.util.LinkedList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 /**

@@ -1,6 +1,6 @@
-package Commands;
+package commands;
 
-import Console.consoleManager;
+import console.consoleManager;
 
 import java.io.BufferedReader;
 import java.util.HashMap;

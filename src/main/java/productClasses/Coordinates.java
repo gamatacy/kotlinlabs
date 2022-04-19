@@ -1,6 +1,6 @@
-package Collection.Classes;
-import Exceptions.invalidValueException;
-import Exceptions.cannotBeNullException;
+package productClasses;
+import exceptions.invalidValueException;
+import exceptions.cannotBeNullException;
 
 
 public class Coordinates {

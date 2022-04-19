@@ -1,11 +1,6 @@
-package Collection;
+package collection;
 
-import Collection.Classes.Product;
-import Enums.OrganizationType;
-import Exceptions.cannotBeEmptyException;
-import Exceptions.cannotBeNegativeException;
-import Exceptions.cannotBeNullException;
-import Exceptions.invalidValueException;
+import productClasses.Product;
 import org.apache.commons.csv.CSVRecord;
 
 import java.util.ArrayDeque;

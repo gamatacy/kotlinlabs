@@ -1,6 +1,6 @@
-package Commands;
+package commands;
 
-import Collection.collectionManager;
+import collection.collectionManager;
 
 import java.io.BufferedReader;
 import java.util.HashMap;

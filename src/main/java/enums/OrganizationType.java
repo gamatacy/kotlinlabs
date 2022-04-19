@@ -1,6 +1,4 @@
-package Enums;
-
-import Collection.Classes.Organization;
+package enums;
 
 public enum OrganizationType {
     COMMERCIAL,

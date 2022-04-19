@@ -1,4 +1,4 @@
-package Exceptions;
+package exceptions;
 
 public class commandNotExistException extends Exception {
     public commandNotExistException(){

@@ -1,15 +1,10 @@
-package Collection;
+package collection;
 
-import Collection.Classes.Product;
-import Exceptions.cannotBeEmptyException;
-import Exceptions.cannotBeNegativeException;
-import Exceptions.cannotBeNullException;
-import Exceptions.invalidValueException;
-import fileUtils.fileManager;
+import exceptions.cannotBeEmptyException;
+import exceptions.cannotBeNegativeException;
+import exceptions.cannotBeNullException;
+import exceptions.invalidValueException;
 import org.apache.commons.csv.CSVRecord;
-
-import java.io.Reader;
-import java.util.ArrayDeque;
 
 /**
  * Provide collection filling from file

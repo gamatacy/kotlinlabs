@@ -1,9 +1,9 @@
 package run;
 
 import fileUtils.fileManager;
-import Collection.collectionManager;
-import Console.consoleManager;
-import Commands.*;
+import collection.collectionManager;
+import console.consoleManager;
+import commands.*;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

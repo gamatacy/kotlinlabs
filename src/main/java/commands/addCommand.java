@@ -1,18 +1,9 @@
-package Commands;
+package commands;
 
-import Collection.Classes.Address;
-import Collection.Classes.Organization;
-import Collection.Classes.Product;
-import Collection.collectionManager;
-import Console.consoleManager;
-import Enums.OrganizationType;
-import Enums.UnitOfMeasure;
+import collection.collectionManager;
 
-import java.lang.NumberFormatException;
 import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.HashMap;
-import java.util.function.BiFunction;
 
 /**
  * Add element to collection from user input

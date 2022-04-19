@@ -1,6 +1,4 @@
-package Commands;
-
-import Console.*;
+package commands;
 
 import java.io.BufferedReader;
 import java.util.ArrayDeque;
