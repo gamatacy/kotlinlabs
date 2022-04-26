@@ -12,7 +12,7 @@ import java.util.Collection;
 /**
  * Manager class for interact with files
  */
-public class fileManager implements readFile{
+public class FileManager implements ReadFile {
     private Iterable<CSVRecord> fileCollection;
 
     //Парсит файл и записывает в коллекцию

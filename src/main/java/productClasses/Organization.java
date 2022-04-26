@@ -1,8 +1,8 @@
 package productClasses;
 import enums.OrganizationType;
-import exceptions.cannotBeEmptyException;
-import exceptions.cannotBeNullException;
-import exceptions.invalidValueException;
+import exceptions.CannotBeEmptyException;
+import exceptions.CannotBeNullException;
+import exceptions.InvalidValueException;
 
 import java.util.Objects;
 
@@ -25,28 +25,28 @@ public class Organization {
      * @param fullName
      * @param type
      * @param zipcode
-     * @throws invalidValueException
-     * @throws cannotBeNullException
-     * @throws cannotBeEmptyException
+     * @throws InvalidValueException
+     * @throws CannotBeNullException
+     * @throws CannotBeEmptyException
      */
-    public Organization(int id,String name, String fullName, OrganizationType type,String zipcode) throws invalidValueException, cannotBeNullException, cannotBeEmptyException {
+    public Organization(int id,String name, String fullName, OrganizationType type,String zipcode) throws InvalidValueException, CannotBeNullException, CannotBeEmptyException {
         if (name.length() == 0){
-            throw new cannotBeNullException();
+            throw new CannotBeNullException();
         }
         else if (name.replaceAll(" ", "").length() == 0){
-            throw new cannotBeEmptyException();
+            throw new CannotBeEmptyException();
         }
         if (fullName.length() == 0){
-            throw new cannotBeNullException();
+            throw new CannotBeNullException();
         }
         else if (fullName.length() > 844){
-            throw new invalidValueException("Maximum value 844");
+            throw new InvalidValueException("Maximum value 844");
         }
         if (type == null){
-            throw new cannotBeNullException();
+            throw new CannotBeNullException();
         }
         if (zipcode.length() == 0){
-            throw new cannotBeNullException();
+            throw new CannotBeNullException();
         }
 
         this.id = id;
@@ -99,11 +99,11 @@ public class Organization {
     /**
      *
      * @param name
-     * @throws cannotBeNullException
+     * @throws CannotBeNullException
      */
-    public void setName(String name) throws cannotBeNullException{
+    public void setName(String name) throws CannotBeNullException {
         if (name.length() == 0){
-            throw new cannotBeNullException();
+            throw new CannotBeNullException();
         }
         this.name = name;
     }
@@ -111,15 +111,15 @@ public class Organization {
     /**
      *
      * @param fullName
-     * @throws cannotBeNullException
-     * @throws invalidValueException
+     * @throws CannotBeNullException
+     * @throws InvalidValueException
      */
-    public void setFullName(String fullName) throws cannotBeNullException, invalidValueException {
+    public void setFullName(String fullName) throws CannotBeNullException, InvalidValueException {
         if (fullName.length() == 0){
-            throw new cannotBeNullException();
+            throw new CannotBeNullException();
         }
         else if(fullName.length() > 844){
-            throw new invalidValueException("Maximum length is 844");
+            throw new InvalidValueException("Maximum length is 844");
         }
 
         this.fullName = fullName;
@@ -137,11 +137,11 @@ public class Organization {
     /**
      *
      * @param type
-     * @throws cannotBeNullException
+     * @throws CannotBeNullException
      */
-    public void setType(OrganizationType type) throws cannotBeNullException {
+    public void setType(OrganizationType type) throws CannotBeNullException {
         if (type == null){
-            throw new cannotBeNullException();
+            throw new CannotBeNullException();
         }
         this.type = type;
 

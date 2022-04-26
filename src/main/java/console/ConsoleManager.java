@@ -2,9 +2,9 @@ package console;
 
 
 import commands.Command;
-import commands.commandManager;
-import commands.registerCommand;
-import exceptions.commandNotExistException;
+import commands.CommandManager;
+import commands.RegisterCommand;
+import exceptions.CommandNotExistException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,13 +14,13 @@ import java.util.HashMap;
 /**
  * Read input from user and register commands
  */
-public class consoleManager implements registerCommand {
+public class ConsoleManager implements RegisterCommand {
     private static String USERNAME = "user";
-    private commandManager CManager;
+    private CommandManager CManager;
     private static ArrayDeque<String> commandHistory = new ArrayDeque<>();
     private BufferedReader reader;
 
-    public consoleManager(commandManager commandmanager, BufferedReader reader){
+    public ConsoleManager(CommandManager commandmanager, BufferedReader reader){
         this.CManager = commandmanager;
         this.reader = reader;
     }
@@ -58,7 +58,7 @@ public class consoleManager implements registerCommand {
 
     }
 
-    public void registerCommand(String commandName, HashMap<String, Command> commands) throws commandNotExistException {
+    public void registerCommand(String commandName, HashMap<String, Command> commands) throws CommandNotExistException {
         String[] cmd = commandName.split(" ");
         if (commands.containsKey(cmd[0]) && cmd.length == 1){
             commandHistory.addFirst(cmd[0]);
@@ -70,7 +70,7 @@ public class consoleManager implements registerCommand {
             commands.get(cmd[0]).execute(this.reader);
         }
         else{
-            throw new commandNotExistException();
+            throw new CommandNotExistException();
         }
     }
 

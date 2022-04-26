@@ -1,6 +1,6 @@
 package commands;
 
-import collection.collectionManager;
+import collection.CollectionManager;
 
 import java.io.BufferedReader;
 import java.util.HashMap;
@@ -8,10 +8,10 @@ import java.util.HashMap;
 /**
  * Delete all elements of collection
  */
-public class clearCommand extends Command{
-    private collectionManager cManager;
+public class ClearCommand extends Command{
+    private CollectionManager cManager;
 
-    public clearCommand(collectionManager cManager){
+    public ClearCommand(CollectionManager cManager){
         super("clear","очистить коллекцию");
         this.cManager = cManager;
     }

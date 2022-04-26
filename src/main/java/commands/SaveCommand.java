@@ -1,7 +1,7 @@
 package commands;
 
-import collection.collectionManager;
-import fileUtils.fileManager;
+import collection.CollectionManager;
+import fileUtils.FileManager;
 
 import java.io.BufferedReader;
 import java.util.HashMap;
@@ -9,12 +9,12 @@ import java.util.HashMap;
 /**
  * Save collection into csv file, standart output is test.csv
  */
-public class saveCommand extends Command{
-    private collectionManager cManager;
-    private fileManager fManager;
+public class SaveCommand extends Command{
+    private CollectionManager cManager;
+    private FileManager fManager;
     private String path;
 
-    public saveCommand(collectionManager cManager, fileManager fManager){
+    public SaveCommand(CollectionManager cManager, FileManager fManager){
         super("save", " сохранить коллекцию в файл");
         this.cManager = cManager;
         this.fManager = fManager;

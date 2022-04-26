@@ -7,11 +7,11 @@ import java.util.HashMap;
 /**
  * Print last 8 used commands
  */
-public class historyCommand extends Command{
+public class HistoryCommand extends Command{
     private ArrayDeque history;
 
 
-    public historyCommand(ArrayDeque<String> array){
+    public HistoryCommand(ArrayDeque<String> array){
         super("history","вывести последние 8 команд");
         this.history = array;
     }

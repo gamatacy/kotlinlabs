@@ -3,7 +3,7 @@ package commands;
 import productClasses.Address;
 import productClasses.Organization;
 import productClasses.Product;
-import console.consoleManager;
+import console.ConsoleManager;
 import enums.OrganizationType;
 import enums.UnitOfMeasure;
 
@@ -12,7 +12,7 @@ import java.io.BufferedReader;
 /**
  * Read product element from user or script
  */
-public class readElementFromConsole {
+public class ReadElementFromConsole {
 
     /**
      *
@@ -23,7 +23,7 @@ public class readElementFromConsole {
 
         Product product = new Product();
 
-        System.out.print("<"+consoleManager.getUSERNAME()+">$");
+        System.out.print("<"+ ConsoleManager.getUSERNAME()+">$");
 
         //BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
@@ -42,9 +42,9 @@ public class readElementFromConsole {
         }
 
 
-        if(consoleManager.getScriptInput()) {
+        if(ConsoleManager.getScriptInput()) {
             for (int i = 0; i < 10; i++) {
-                System.out.println("<"+consoleManager.getUSERNAME()+">$");
+                System.out.println("<"+ ConsoleManager.getUSERNAME()+">$");
             }
         }
 
@@ -56,7 +56,7 @@ public class readElementFromConsole {
             System.out.print("Enter Name: ");
             product.setName(reader.readLine());
         }catch(Exception e){
-            if(consoleManager.getScriptInput()) {
+            if(ConsoleManager.getScriptInput()) {
                 throw new Exception();
             }
             else {
@@ -80,7 +80,7 @@ public class readElementFromConsole {
             );
         }
         catch(Exception e){
-            if(consoleManager.getScriptInput()) {
+            if(ConsoleManager.getScriptInput()) {
                 throw new Exception();
             }
             else {
@@ -108,7 +108,7 @@ public class readElementFromConsole {
             System.out.println("Must be float");
             setPrice(reader,product);
         }catch(Exception e) {
-            if (consoleManager.getScriptInput()) {
+            if (ConsoleManager.getScriptInput()) {
                 throw new Exception();
             } else {
                 System.out.println(e.getMessage());
@@ -122,7 +122,7 @@ public class readElementFromConsole {
             System.out.print("Enter part number: ");
             product.setPartNumber(reader.readLine());
         }catch(Exception e){
-            if(consoleManager.getScriptInput()) {
+            if(ConsoleManager.getScriptInput()) {
                 throw new Exception();
             }
             else {
@@ -142,7 +142,7 @@ public class readElementFromConsole {
             setManufactureCost(reader,product);
         }
         catch(Exception e){
-            if(consoleManager.getScriptInput()) {
+            if(ConsoleManager.getScriptInput()) {
                 throw new Exception();
             }
             else {
@@ -164,7 +164,7 @@ public class readElementFromConsole {
 
             product.setUnitOfMeasure(reader.readLine());
         }catch(Exception e){
-            if(consoleManager.getScriptInput()) {
+            if(ConsoleManager.getScriptInput()) {
                 throw new Exception();
             }
             else {
@@ -216,7 +216,7 @@ public class readElementFromConsole {
             System.out.print("Enter organization name: ");
             organization.setName(reader.readLine());
         }catch (Exception e){
-            if(consoleManager.getScriptInput()) {
+            if(ConsoleManager.getScriptInput()) {
                 throw new Exception();
             }
             else {
@@ -231,7 +231,7 @@ public class readElementFromConsole {
             System.out.print("Enter organization full name: ");
             organization.setFullName(reader.readLine());
         }catch (Exception e){
-            if(consoleManager.getScriptInput()) {
+            if(ConsoleManager.getScriptInput()) {
                 throw new Exception();
             }
             else {
@@ -250,7 +250,7 @@ public class readElementFromConsole {
             System.out.print("-----\nEnter Organization type from  list: ");
             organization.setType(OrganizationType.equals(reader.readLine()));
         }catch(Exception e){
-            if(consoleManager.getScriptInput()) {
+            if(ConsoleManager.getScriptInput()) {
                 throw new Exception();
             }
             else {
@@ -265,7 +265,7 @@ public class readElementFromConsole {
             System.out.print("Enter ZipCode: ");
             organization.setOfficialAddress(new Address(reader.readLine()));
         }catch (Exception e){
-            if(consoleManager.getScriptInput()) {
+            if(ConsoleManager.getScriptInput()) {
                 throw new Exception();
             }
             else {

@@ -6,10 +6,10 @@ import java.util.HashMap;
 /**
  * Print all commands and their descriptions
  */
-public class helpCommand extends Command{
+public class HelpCommand extends Command{
     private HashMap<String,Command> commands;
 
-    public helpCommand(HashMap<String, Command> commands){
+    public HelpCommand(HashMap<String, Command> commands){
         super("help","вывести справку по доступным командам");
         this.commands = commands;
     }

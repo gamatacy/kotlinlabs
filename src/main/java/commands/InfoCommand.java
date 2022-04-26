@@ -1,6 +1,6 @@
 package commands;
 
-import collection.collectionManager;
+import collection.CollectionManager;
 
 import java.io.BufferedReader;
 import java.util.HashMap;
@@ -8,10 +8,10 @@ import java.util.HashMap;
 /**
  * Print info about the collection
  */
-public class infoCommand extends Command{
-    private collectionManager cManager;
+public class InfoCommand extends Command{
+    private CollectionManager cManager;
 
-    public infoCommand(collectionManager CM){
+    public InfoCommand(CollectionManager CM){
         super("info", "вывести в стандартный поток вывода информацию о коллекции");
         this.cManager = CM;
     }

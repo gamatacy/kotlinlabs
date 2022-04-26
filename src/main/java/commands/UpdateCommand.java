@@ -1,9 +1,9 @@
 package commands;
 
 import productClasses.Product;
-import collection.collectionManager;
-import exceptions.cannotBeNullException;
-import exceptions.invalidValueException;
+import collection.CollectionManager;
+import exceptions.CannotBeNullException;
+import exceptions.InvalidValueException;
 
 import java.io.BufferedReader;
 import java.util.ArrayDeque;
@@ -13,12 +13,12 @@ import java.util.HashMap;
 /**
  * Update element value by Product ID
  */
-public class updateCommand extends Command{
-    private collectionManager cManager;
+public class UpdateCommand extends Command{
+    private CollectionManager cManager;
     private Integer id;
 
 
-    public updateCommand(collectionManager cManager){
+    public UpdateCommand(CollectionManager cManager){
         super("update", "обновить значение элемента коллекции, id которого равен заданному");
         this.cManager = cManager;
     }
@@ -26,7 +26,7 @@ public class updateCommand extends Command{
     @Override
     public void execute(BufferedReader reader) {
         try {
-            readElementFromConsole elementReader = new readElementFromConsole();
+            ReadElementFromConsole elementReader = new ReadElementFromConsole();
             update(elementReader, reader);
         }catch (Exception e){
             System.out.println(e.getMessage());
@@ -39,7 +39,7 @@ public class updateCommand extends Command{
     }
 
 
-    public void update(readElementFromConsole elementReader, BufferedReader reader) throws invalidValueException, cannotBeNullException {
+    public void update(ReadElementFromConsole elementReader, BufferedReader reader) throws InvalidValueException, CannotBeNullException {
         Product[] array = cManager.getProductsCollection().toArray(new Product[0]);
 
         for (int i = 0; i < array.length ;i++){
@@ -50,7 +50,7 @@ public class updateCommand extends Command{
                 break;
             }
             if(i== array.length) {
-                throw new invalidValueException("Product with this ID doesn't exist");
+                throw new InvalidValueException("Product with this ID doesn't exist");
             }
         }
 

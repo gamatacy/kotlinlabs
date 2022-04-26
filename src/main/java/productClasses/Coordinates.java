@@ -1,6 +1,6 @@
 package productClasses;
-import exceptions.invalidValueException;
-import exceptions.cannotBeNullException;
+import exceptions.InvalidValueException;
+import exceptions.CannotBeNullException;
 
 
 public class Coordinates {
@@ -11,15 +11,15 @@ public class Coordinates {
      *
      * @param x
      * @param y
-     * @throws invalidValueException
-     * @throws cannotBeNullException
+     * @throws InvalidValueException
+     * @throws CannotBeNullException
      */
-    public Coordinates(Float x, float y) throws invalidValueException, cannotBeNullException{
+    public Coordinates(Float x, float y) throws InvalidValueException, CannotBeNullException {
         if (x.floatValue() > 177){
-            throw new invalidValueException("Maximum X value 177");
+            throw new InvalidValueException("Maximum X value 177");
         }
         else if (x == null){
-            throw new cannotBeNullException("set X");
+            throw new CannotBeNullException("set X");
         }
         this.x = x;
         this.y = y;

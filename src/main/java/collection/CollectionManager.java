@@ -10,11 +10,11 @@ import java.util.Date;
  *  Manager class for interact with collection
  * */
 
-public class collectionManager implements fillCollection{
+public class CollectionManager implements FillCollection {
     private java.util.Date creationDate;
     private ArrayDeque<Product> productsCollection = new ArrayDeque<>();
 
-    public collectionManager(){
+    public CollectionManager(){
         this.creationDate = new Date();
     }
 

@@ -1,10 +1,10 @@
 package productClasses;
 import enums.OrganizationType;
 import enums.UnitOfMeasure;
-import exceptions.cannotBeEmptyException;
-import exceptions.cannotBeNegativeException;
-import exceptions.cannotBeNullException;
-import exceptions.invalidValueException;
+import exceptions.CannotBeEmptyException;
+import exceptions.CannotBeNegativeException;
+import exceptions.CannotBeNullException;
+import exceptions.InvalidValueException;
 
 
 import java.util.Date;
@@ -30,18 +30,18 @@ public class Product implements Comparable<Product> {
     /**
      *
      * @param integer product ID
-     * @throws invalidValueException
-     * @throws cannotBeNullException
+     * @throws InvalidValueException
+     * @throws CannotBeNullException
      */
-    public Product(Integer integer) throws invalidValueException,cannotBeNullException{
+    public Product(Integer integer) throws InvalidValueException, CannotBeNullException {
         if (integer < 0){
-            throw new invalidValueException("ID cannot be zero");
+            throw new InvalidValueException("ID cannot be zero");
         }
         else if (integer == null){
-            throw new cannotBeNullException();
+            throw new CannotBeNullException();
         }
         else if ( UsedIDs.contains(integer) ){
-            throw new invalidValueException("ID already used");
+            throw new InvalidValueException("ID already used");
         }
         this.id = integer;
         UsedIDs.add(integer);
@@ -63,18 +63,18 @@ public class Product implements Comparable<Product> {
     /**
      *
      * @param integer
-     * @throws invalidValueException
-     * @throws cannotBeNullException
+     * @throws InvalidValueException
+     * @throws CannotBeNullException
      */
-    public void setId(Integer integer) throws invalidValueException, cannotBeNullException {
+    public void setId(Integer integer) throws InvalidValueException, CannotBeNullException {
         if (integer < 0){
-            throw new invalidValueException("ID cannot be zero");
+            throw new InvalidValueException("ID cannot be zero");
         }
         else if (integer == null){
-            throw new cannotBeNullException();
+            throw new CannotBeNullException();
         }
         else if ( UsedIDs.contains(integer) ){
-            throw new invalidValueException("ID already used");
+            throw new InvalidValueException("ID already used");
         }
         this.id = integer;
         UsedIDs.add(integer);
@@ -83,15 +83,15 @@ public class Product implements Comparable<Product> {
     /**
      *
      * @param name
-     * @throws cannotBeNullException
-     * @throws cannotBeEmptyException
+     * @throws CannotBeNullException
+     * @throws CannotBeEmptyException
      */
-    public void setName(String name) throws cannotBeNullException, cannotBeEmptyException{
+    public void setName(String name) throws CannotBeNullException, CannotBeEmptyException {
         if (name.length() == 0){
-            throw new cannotBeNullException();
+            throw new CannotBeNullException();
         }
         else if (name.replaceAll(" ", "").length() == 0){
-            throw new cannotBeEmptyException();
+            throw new CannotBeEmptyException();
         }
         this.name = name;
     }
@@ -100,10 +100,10 @@ public class Product implements Comparable<Product> {
      *
      * @param x
      * @param y
-     * @throws invalidValueException
-     * @throws cannotBeNullException
+     * @throws InvalidValueException
+     * @throws CannotBeNullException
      */
-    public void setCoordinates(Float x, float y) throws invalidValueException, cannotBeNullException {
+    public void setCoordinates(Float x, float y) throws InvalidValueException, CannotBeNullException {
         this.coordinates = new Coordinates(x,y);
     }
 
@@ -118,22 +118,22 @@ public class Product implements Comparable<Product> {
     /**
      *
      * @param price
-     * @throws cannotBeNegativeException
+     * @throws CannotBeNegativeException
      */
-    public void setPrice(Float price) throws cannotBeNegativeException{
+    public void setPrice(Float price) throws CannotBeNegativeException {
         if (price < 0){
-            throw new cannotBeNegativeException();
+            throw new CannotBeNegativeException();
         }
         this.price = price;
     }
 
     /**
      * @param partNumber
-     * @throws cannotBeNullException
+     * @throws CannotBeNullException
      */
-    public void setPartNumber(String partNumber) throws cannotBeNullException{
+    public void setPartNumber(String partNumber) throws CannotBeNullException {
         if (partNumber.length() == 0) {
-            throw new cannotBeNullException();
+            throw new CannotBeNullException();
         }
         else{
             this.partNumber = partNumber;
@@ -162,11 +162,11 @@ public class Product implements Comparable<Product> {
      * @param fullName
      * @param type
      * @param zipcode
-     * @throws invalidValueException
-     * @throws cannotBeNullException
-     * @throws cannotBeEmptyException
+     * @throws InvalidValueException
+     * @throws CannotBeNullException
+     * @throws CannotBeEmptyException
      */
-    public void setManufacturer(String name, String fullName, String type, String zipcode) throws invalidValueException, cannotBeNullException, cannotBeEmptyException {
+    public void setManufacturer(String name, String fullName, String type, String zipcode) throws InvalidValueException, CannotBeNullException, CannotBeEmptyException {
         try {
             this.manufacturer = new Organization(this.id, name, fullName, OrganizationType.equals(type), zipcode);
         }catch (Throwable e){

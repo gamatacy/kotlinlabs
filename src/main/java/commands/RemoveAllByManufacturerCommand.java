@@ -1,9 +1,9 @@
 package commands;
 
 import productClasses.Product;
-import collection.collectionManager;
-import exceptions.cannotBeNullException;
-import exceptions.invalidValueException;
+import collection.CollectionManager;
+import exceptions.CannotBeNullException;
+import exceptions.InvalidValueException;
 
 import java.io.BufferedReader;
 import java.util.ArrayDeque;
@@ -12,11 +12,11 @@ import java.util.HashMap;
 /**
  * Remove all elements by manufacturer value
  */
-public class removeAllByManufacturerCommand extends Command{
-    private collectionManager cManager;
+public class RemoveAllByManufacturerCommand extends Command{
+    private CollectionManager cManager;
 
 
-    public removeAllByManufacturerCommand(collectionManager cManager){
+    public RemoveAllByManufacturerCommand(CollectionManager cManager){
         super("remove_all_by_manufacturer","удалить из коллекции все элементы, значение поля manufacturer которого эквивалентно заданному");
         this.cManager = cManager;
     }
@@ -25,7 +25,7 @@ public class removeAllByManufacturerCommand extends Command{
     public void execute(BufferedReader reader) {
         Product product = new Product();
 
-        readElementFromConsole readConsole = new readElementFromConsole();
+        ReadElementFromConsole readConsole = new ReadElementFromConsole();
 
         readConsole.setOrganization(reader, product);
 
@@ -42,7 +42,7 @@ public class removeAllByManufacturerCommand extends Command{
 
     }
 
-    public void remove(Product product) throws invalidValueException, cannotBeNullException {
+    public void remove(Product product) throws InvalidValueException, CannotBeNullException {
         Product[] array = cManager.getProductsCollection().toArray(new Product[0]);
         ArrayDeque<Product> newCollection = new ArrayDeque<>();
 

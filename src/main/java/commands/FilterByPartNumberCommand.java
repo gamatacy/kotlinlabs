@@ -10,12 +10,12 @@ import java.util.HashMap;
 /**
  *Print elements by specified partNumber
  */
-public class filterByPartNumberCommand extends Command{
-    private collectionManager cManager;
+public class FilterByPartNumberCommand extends Command{
+    private CollectionManager cManager;
     private String partNumber;
 
 
-    public filterByPartNumberCommand(collectionManager cManager){
+    public FilterByPartNumberCommand(CollectionManager cManager){
         super("filter_by_part_number","вывести элементы, значение поля partNumber которых равно заданному");
         this.cManager = cManager;
     }

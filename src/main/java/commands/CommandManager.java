@@ -5,15 +5,15 @@ import java.util.HashMap;
 /**
  * Manage commands
  */
-public class commandManager {
+public class CommandManager {
     private HashMap<String, Command> commands = new HashMap<>();
 
     /**
      *
      * @param commands - list of commands
      */
-    public commandManager(Command ... commands){
-        helpCommand helpcommand = new helpCommand(this.commands);
+    public CommandManager(Command ... commands){
+        HelpCommand helpcommand = new HelpCommand(this.commands);
         this.commands.put(helpcommand.getName(),helpcommand);
 
         for( Command cmd : commands){

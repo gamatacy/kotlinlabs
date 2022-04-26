@@ -1,6 +1,6 @@
 package commands;
 
-import collection.collectionManager;
+import collection.CollectionManager;
 
 import java.io.BufferedReader;
 import java.util.HashMap;
@@ -8,11 +8,11 @@ import java.util.HashMap;
 /**
  * Add element to collection from user input
  */
-public class addCommand extends Command{
-    private collectionManager cManager;
+public class AddCommand extends Command{
+    private CollectionManager cManager;
 
 
-    public addCommand(collectionManager cManager){
+    public AddCommand(CollectionManager cManager){
         super("add","добавить новый элемент в коллекцию");
         this.cManager = cManager;
     }
@@ -23,7 +23,7 @@ public class addCommand extends Command{
      */
     @Override
     public void execute(BufferedReader reader){
-        readElementFromConsole elementReader = new readElementFromConsole();
+        ReadElementFromConsole elementReader = new ReadElementFromConsole();
         cManager.addToCollectionLast(elementReader.readElement(reader));
     }
 

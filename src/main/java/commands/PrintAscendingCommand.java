@@ -1,7 +1,7 @@
 package commands;
 
 import productClasses.Product;
-import collection.collectionManager;
+import collection.CollectionManager;
 
 import java.io.BufferedReader;
 import java.util.HashMap;
@@ -10,10 +10,10 @@ import java.util.TreeSet;
 /**
  * Print elements sorted by id
  */
-public class printAscendingCommand extends Command{
-    private collectionManager cManager;
+public class PrintAscendingCommand extends Command{
+    private CollectionManager cManager;
 
-    public printAscendingCommand(collectionManager cManager){
+    public PrintAscendingCommand(CollectionManager cManager){
         super("print_ascending","вывести элементы коллекции в порядке возрастания");
         this.cManager = cManager;
     }

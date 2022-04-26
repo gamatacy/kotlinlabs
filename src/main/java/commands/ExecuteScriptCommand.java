@@ -1,8 +1,8 @@
 package commands;
 
-import console.consoleManager;
-import collection.collectionManager;
-import exceptions.commandNotExistException;
+import console.ConsoleManager;
+import collection.CollectionManager;
+import exceptions.CommandNotExistException;
 import fileUtils.*;
 
 
@@ -12,15 +12,15 @@ import java.util.HashMap;
 /**
  * Execute script from file
  */
-public class executeScriptCommand extends Command implements readFile, registerCommand{
-    private collectionManager collectionManager;
-    private fileManager fileManager;
+public class ExecuteScriptCommand extends Command implements ReadFile, RegisterCommand {
+    private CollectionManager collectionManager;
+    private FileManager fileManager;
     private BufferedReader script;
     private String path;
     private HashMap<String, Command> commands;
 
 
-    public executeScriptCommand(collectionManager collectionmanager,fileManager filemanager){
+    public ExecuteScriptCommand(CollectionManager collectionmanager, FileManager filemanager){
         super("execute_script","считать и исполнить скрипт из указанного файла");
         this.collectionManager = collectionmanager;
         this.fileManager = filemanager;
@@ -49,10 +49,10 @@ public class executeScriptCommand extends Command implements readFile, registerC
      *
      * @param path
      * @throws IOException
-     * @throws commandNotExistException
+     * @throws CommandNotExistException
      */
     @Override
-    public void readFile(String path) throws IOException, commandNotExistException{
+    public void readFile(String path) throws IOException, CommandNotExistException {
         if (path != null){
             File file = new File(path);
             FileInputStream fis = new FileInputStream(file);
@@ -60,7 +60,7 @@ public class executeScriptCommand extends Command implements readFile, registerC
             this.script = reader;
         }
         else{
-            throw new commandNotExistException("Specify an argument in execute_script command!");
+            throw new CommandNotExistException("Specify an argument in execute_script command!");
         }
     }
 
@@ -69,12 +69,12 @@ public class executeScriptCommand extends Command implements readFile, registerC
      *
      * @param commandName
      * @param commands
-     * @throws commandNotExistException
+     * @throws CommandNotExistException
      */
-    public void registerCommand(String commandName, HashMap<String, Command> commands) throws commandNotExistException {
+    public void registerCommand(String commandName, HashMap<String, Command> commands) throws CommandNotExistException {
         while(true){
             try {
-                consoleManager.setScriptInput();
+                ConsoleManager.setScriptInput();
                 String cmd = script.readLine();
                 if (cmd != null){
                     String[] command = cmd.split(" ");
@@ -87,7 +87,7 @@ public class executeScriptCommand extends Command implements readFile, registerC
                         commands.get(command[0]).execute(this.script);
                     }
                     else{
-                        throw new commandNotExistException();
+                        throw new CommandNotExistException();
                     }
                 }
                 else{

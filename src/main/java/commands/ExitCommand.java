@@ -1,6 +1,6 @@
 package commands;
 
-import console.consoleManager;
+import console.ConsoleManager;
 
 import java.io.BufferedReader;
 import java.util.HashMap;
@@ -8,17 +8,17 @@ import java.util.HashMap;
 /**
  * Stop the programm
  */
-public class exitCommand extends Command{
+public class ExitCommand extends Command{
 
 
-    public exitCommand(){
+    public ExitCommand(){
         super("exit","завершить программу");
     }
 
 
     @Override
     public void execute(BufferedReader reader) {
-        consoleManager.stop();
+        ConsoleManager.stop();
     }
 
     @Override

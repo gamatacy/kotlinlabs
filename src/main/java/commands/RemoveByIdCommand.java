@@ -1,8 +1,8 @@
 package commands;
 
 import productClasses.Product;
-import collection.collectionManager;
-import exceptions.invalidValueException;
+import collection.CollectionManager;
+import exceptions.InvalidValueException;
 
 import java.io.BufferedReader;
 import java.util.ArrayDeque;
@@ -11,12 +11,12 @@ import java.util.HashMap;
 /**
  * Remove one element by id value
  */
-public class removeByIdCommand extends Command{
-    private collectionManager cManager;
+public class RemoveByIdCommand extends Command{
+    private CollectionManager cManager;
     private Integer id;
 
 
-    public removeByIdCommand(collectionManager cManager){
+    public RemoveByIdCommand(CollectionManager cManager){
         super("remove_by_id"," удалить элемент из коллекции по его id");
         this.cManager = cManager;
     }
@@ -35,7 +35,7 @@ public class removeByIdCommand extends Command{
         this.id = Integer.parseInt(arg);
     }
 
-    public void remove() throws invalidValueException{
+    public void remove() throws InvalidValueException {
         Product[] array = cManager.getProductsCollection().toArray(new Product[0]);
         ArrayDeque<Product> newCollection = new ArrayDeque<>();
 
@@ -47,7 +47,7 @@ public class removeByIdCommand extends Command{
         }
 
         if(array.length == newCollection.size()){
-            throw new invalidValueException("Product with this ID doesn't exist");
+            throw new InvalidValueException("Product with this ID doesn't exist");
         }
 
         //ArrayDeque<Product> newCollection = new ArrayDeque<Product>(Arrays.asList(array));

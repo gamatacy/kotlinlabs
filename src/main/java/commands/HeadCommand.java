@@ -1,6 +1,6 @@
 package commands;
 
-import collection.collectionManager;
+import collection.CollectionManager;
 
 import java.io.BufferedReader;
 import java.util.HashMap;
@@ -8,11 +8,11 @@ import java.util.HashMap;
 /**
  *Print first element of the collection
  */
-public class headCommand extends Command{
-    private collectionManager cManager;
+public class HeadCommand extends Command{
+    private CollectionManager cManager;
 
 
-    public headCommand(collectionManager cManager){
+    public HeadCommand(CollectionManager cManager){
         super("head","вывести первый элемент коллекции");
         this.cManager = cManager;
     }

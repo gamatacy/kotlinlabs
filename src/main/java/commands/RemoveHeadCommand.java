@@ -1,6 +1,6 @@
 package commands;
 
-import collection.collectionManager;
+import collection.CollectionManager;
 
 import java.io.BufferedReader;
 import java.util.HashMap;
@@ -8,11 +8,11 @@ import java.util.HashMap;
 /**
  * Print first element and delete him
  */
-public class removeHeadCommand extends Command{
-    private collectionManager cManager;
+public class RemoveHeadCommand extends Command{
+    private CollectionManager cManager;
 
 
-    public removeHeadCommand(collectionManager cManager){
+    public RemoveHeadCommand(CollectionManager cManager){
         super("remove_head","вывести первый элемент коллекции и удалить его");
         this.cManager = cManager;
     }
