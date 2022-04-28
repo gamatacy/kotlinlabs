@@ -3,17 +3,16 @@ package commands;
 import collection.CollectionManager;
 
 import java.io.BufferedReader;
-import java.util.HashMap;
 
 /**
  * Delete all elements of collection
  */
 public class ClearCommand extends Command{
-    private CollectionManager cManager;
+    private CollectionManager collectionManager;
 
-    public ClearCommand(CollectionManager cManager){
+    public ClearCommand(CollectionManager collectionManager){
         super("clear","очистить коллекцию");
-        this.cManager = cManager;
+        this.collectionManager = collectionManager;
     }
 
     /**
@@ -22,12 +21,12 @@ public class ClearCommand extends Command{
      */
     @Override
     public void execute(BufferedReader reader) {
-        this.cManager.getProductsCollection().clear();
+        this.collectionManager.getProductsCollection().clear();
         System.out.println("Collection cleared");
     }
 
     @Override
-    public void setArgument(String arg, HashMap<String, Command> commands) {
+    public void setArgument(String arg) {
 
     }
 }

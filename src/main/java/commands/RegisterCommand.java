@@ -8,5 +8,5 @@ import java.util.HashMap;
  * Register command from user or script
  */
 public interface RegisterCommand {
-    public void registerCommand(String commandName, HashMap<String, Command> commands) throws CommandNotExistException;
+    void registerCommand(String commandName, HashMap<String, Command> commands) throws CommandNotExistException;
 }

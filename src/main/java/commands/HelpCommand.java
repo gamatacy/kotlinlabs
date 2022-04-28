@@ -6,25 +6,23 @@ import java.util.HashMap;
 /**
  * Print all commands and their descriptions
  */
-public class HelpCommand extends Command{
-    private HashMap<String,Command> commands;
+public class HelpCommand extends Command {
+    private final HashMap<String, Command> commands;
 
-    public HelpCommand(HashMap<String, Command> commands){
-        super("help","вывести справку по доступным командам");
+    public HelpCommand(HashMap<String, Command> commands) {
+        super("help", "вывести справку по доступным командам");
         this.commands = commands;
     }
 
     @Override
     public void execute(BufferedReader reader) {
-        //System.out.println(commands.keySet());
-        for(Command cmd : commands.values()){
+        for (Command cmd : commands.values()) {
             System.out.println(cmd.getName() + ": " + cmd.getDescription());
         }
     }
 
     @Override
-    public void setArgument(String arg,HashMap<String, Command> commands) {
-        //this.commands = commands;
+    public void setArgument(String arg) {
     }
 
 }

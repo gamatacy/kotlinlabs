@@ -19,6 +19,6 @@ public interface FillCollection {
      * @throws CannotBeNegativeException
      * @throws CannotBeEmptyException
      */
-    public void fill(Iterable<CSVRecord> records) throws InvalidValueException, CannotBeNullException, CannotBeNegativeException, CannotBeEmptyException;
+     void fill(Iterable<CSVRecord> records) throws InvalidValueException, CannotBeNullException, CannotBeNegativeException, CannotBeEmptyException;
 
 }

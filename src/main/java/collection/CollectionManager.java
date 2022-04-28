@@ -91,8 +91,6 @@ public class CollectionManager implements FillCollection {
     @Override
     public void fill(Iterable<CSVRecord> records){
         for (CSVRecord record : records) {
-
-
             try {
                 Product product = new Product(Integer.parseInt(record.get(0)));
                 product.setName(record.get(1));

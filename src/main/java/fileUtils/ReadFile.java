@@ -7,5 +7,5 @@ import exceptions.*;
  * Read file by path
  */
 public interface ReadFile {
-    public void readFile(String path) throws IOException, CommandNotExistException;
+    void readFile(String path) throws IOException, CommandNotExistException;
 }

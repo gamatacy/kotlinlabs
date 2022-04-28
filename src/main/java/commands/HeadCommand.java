@@ -3,27 +3,26 @@ package commands;
 import collection.CollectionManager;
 
 import java.io.BufferedReader;
-import java.util.HashMap;
 
 /**
  *Print first element of the collection
  */
 public class HeadCommand extends Command{
-    private CollectionManager cManager;
+    private final CollectionManager collectionManager;
 
 
-    public HeadCommand(CollectionManager cManager){
+    public HeadCommand(CollectionManager collectionManager){
         super("head","вывести первый элемент коллекции");
-        this.cManager = cManager;
+        this.collectionManager = collectionManager;
     }
 
     @Override
     public void execute(BufferedReader reader) {
-        System.out.println(cManager.getCollectionFirst());
+        System.out.println(collectionManager.getCollectionFirst());
     }
 
     @Override
-    public void setArgument(String arg, HashMap<String, Command> commands) {
+    public void setArgument(String arg) {
 
     }
 }

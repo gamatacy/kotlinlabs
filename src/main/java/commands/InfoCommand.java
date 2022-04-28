@@ -3,31 +3,30 @@ package commands;
 import collection.CollectionManager;
 
 import java.io.BufferedReader;
-import java.util.HashMap;
 
 /**
  * Print info about the collection
  */
-public class InfoCommand extends Command{
-    private CollectionManager cManager;
+public class InfoCommand extends Command {
+    private final CollectionManager collectionManager;
 
-    public InfoCommand(CollectionManager CM){
+    public InfoCommand(CollectionManager collectionManager) {
         super("info", "вывести в стандартный поток вывода информацию о коллекции");
-        this.cManager = CM;
+        this.collectionManager = collectionManager;
     }
 
     @Override
     public void execute(BufferedReader reader) {
         System.out.println("Тип коллекции: " +
-                cManager.getProductsCollection().getClass());
+                collectionManager.getProductsCollection().getClass());
         System.out.println("Дата инициализации: " +
-                cManager.getCreationDate());
+                collectionManager.getCreationDate());
         System.out.println("Количество элементов: " +
-                cManager.getCollectionSize());
+                collectionManager.getCollectionSize());
     }
 
     @Override
-    public void setArgument(String arg, HashMap<String, Command> commands) {
+    public void setArgument(String arg) {
 
     }
 }

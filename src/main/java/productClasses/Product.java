@@ -25,7 +25,7 @@ public class Product implements Comparable<Product> {
     /**
      * Contains used IDs
      */
-    private static HashSet<Integer> UsedIDs = new HashSet<Integer>();
+    private static HashSet<Integer> UsedIds = new HashSet<Integer>();
 
     /**
      *
@@ -40,11 +40,11 @@ public class Product implements Comparable<Product> {
         else if (integer == null){
             throw new CannotBeNullException();
         }
-        else if ( UsedIDs.contains(integer) ){
+        else if ( UsedIds.contains(integer) ){
             throw new InvalidValueException("ID already used");
         }
         this.id = integer;
-        UsedIDs.add(integer);
+        UsedIds.add(integer);
     }
 
     /**
@@ -52,10 +52,10 @@ public class Product implements Comparable<Product> {
      *
      */
     public Product(){
-        while(UsedIDs.contains(usedId) == true){
+        while(UsedIds.contains(usedId)){
             this.usedId += 1;
         }
-        UsedIDs.add(usedId);
+        UsedIds.add(usedId);
         this.id = usedId;
         this.creationDate = new Date();
     }
@@ -73,11 +73,11 @@ public class Product implements Comparable<Product> {
         else if (integer == null){
             throw new CannotBeNullException();
         }
-        else if ( UsedIDs.contains(integer) ){
+        else if ( UsedIds.contains(integer) ){
             throw new InvalidValueException("ID already used");
         }
         this.id = integer;
-        UsedIDs.add(integer);
+        UsedIds.add(integer);
     }
 
     /**
@@ -105,14 +105,6 @@ public class Product implements Comparable<Product> {
      */
     public void setCoordinates(Float x, float y) throws InvalidValueException, CannotBeNullException {
         this.coordinates = new Coordinates(x,y);
-    }
-
-    /**
-     *
-     * @param creationDate
-     */
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = new Date();
     }
 
     /**
@@ -166,7 +158,7 @@ public class Product implements Comparable<Product> {
      * @throws CannotBeNullException
      * @throws CannotBeEmptyException
      */
-    public void setManufacturer(String name, String fullName, String type, String zipcode) throws InvalidValueException, CannotBeNullException, CannotBeEmptyException {
+    public void setManufacturer(String name, String fullName, String type, String zipcode) {
         try {
             this.manufacturer = new Organization(this.id, name, fullName, OrganizationType.equals(type), zipcode);
         }catch (Throwable e){
@@ -260,7 +252,7 @@ public class Product implements Comparable<Product> {
      * @param id
      */
     public void removeId(Integer id){
-        UsedIDs.remove(id);
+        UsedIds.remove(id);
     }
 
     @Override

@@ -1,14 +1,13 @@
 package commands;
 
-import java.util.HashMap;
 import java.io.BufferedReader;
 
 /**
  * Abstract class for all commands
  */
 public abstract class Command {
-    private String name;
-    private String description;
+    private final String name;
+    private final String description;
 
 
     /**
@@ -46,9 +45,9 @@ public abstract class Command {
     /**
      * Set params for command
      * @param arg
-     * @param commands
+     *
      */
-    public abstract void setArgument(String arg, HashMap<String, Command> commands);
+    public abstract void setArgument(String arg);
 
 }
 

@@ -26,10 +26,10 @@ public class FileManager implements ReadFile {
     }
 
     //Парсит коллекцию обратно в csv
-    public void saveFile(String path, Collection collection) throws IOException {
+    public void saveFile(String path, Collection collection) {
         try (CSVPrinter printer = new CSVPrinter(new FileWriter(path), CSVFormat.RFC4180)) {
             Collection<Product> copyCol = collection;
-            for (Product product : copyCol){
+            for (Product product : copyCol) {
                 printer.printRecord(
                         product.getId(),
                         product.getName(),

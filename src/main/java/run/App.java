@@ -11,27 +11,25 @@ import java.io.InputStreamReader;
 public class App {
     public static void main(String[] args) {
         String path;
-        CollectionManager clManager = new CollectionManager();
-        FileManager fManager = new FileManager();
-        CommandManager CManager = new CommandManager(
-                new InfoCommand(clManager),
-                new ShowCommand(clManager),
-                new AddCommand(clManager),
-                new ExecuteScriptCommand(clManager,fManager),
-                new HistoryCommand(ConsoleManager.getCommandHistory()),
+        CollectionManager collectionManager = new CollectionManager();
+        FileManager fileManager = new FileManager();
+        CommandManager commandManager = new CommandManager(
+                new InfoCommand(collectionManager),
+                new ShowCommand(collectionManager),
+                new AddCommand(collectionManager),
                 new ExitCommand(),
-                new UpdateCommand(clManager),
-                new ClearCommand(clManager),
-                new RemoveByIdCommand(clManager),
-                new SaveCommand(clManager,fManager),
-                new HeadCommand(clManager),
-                new RemoveHeadCommand(clManager),
-                new RemoveAllByManufacturerCommand(clManager),
-                new FilterByPartNumberCommand(clManager),
-                new PrintAscendingCommand(clManager)
+                new UpdateCommand(collectionManager),
+                new ClearCommand(collectionManager),
+                new RemoveByIdCommand(collectionManager),
+                new SaveCommand(collectionManager,fileManager),
+                new HeadCommand(collectionManager),
+                new RemoveHeadCommand(collectionManager),
+                new RemoveAllByManufacturerCommand(collectionManager),
+                new FilterByPartNumberCommand(collectionManager),
+                new PrintAscendingCommand(collectionManager)
         );
 
-        ConsoleManager console = new ConsoleManager(CManager, new BufferedReader(new InputStreamReader(System.in)));
+        ConsoleManager console = new ConsoleManager(commandManager, new BufferedReader(new InputStreamReader(System.in)));
 
         if(args.length == 0){
             path = "test.csv";
@@ -41,15 +39,12 @@ public class App {
         }
 
         try{
-
-            fManager.readFile(path);
-            clManager.fill(fManager.getFileCollection());
+            fileManager.readFile(path);
+            collectionManager.fill(fileManager.getFileCollection());
             console.run();
-
         }catch (Exception e){
             System.err.println(e.getMessage());
         }
 
     }
-
 }

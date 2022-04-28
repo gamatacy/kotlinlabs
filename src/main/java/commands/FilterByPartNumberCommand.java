@@ -5,44 +5,39 @@ import productClasses.Product;
 
 import java.io.BufferedReader;
 import java.util.ArrayDeque;
-import java.util.HashMap;
 
 /**
  *Print elements by specified partNumber
  */
 public class FilterByPartNumberCommand extends Command{
-    private CollectionManager cManager;
+    private CollectionManager collectionManager;
     private String partNumber;
 
 
-    public FilterByPartNumberCommand(CollectionManager cManager){
+    public FilterByPartNumberCommand(CollectionManager collectionManager){
         super("filter_by_part_number","вывести элементы, значение поля partNumber которых равно заданному");
-        this.cManager = cManager;
+        this.collectionManager = collectionManager;
     }
 
 
     @Override
     public void execute(BufferedReader reader) {
-        filter();
+        ArrayDeque<Product> products = new ArrayDeque<>(collectionManager.getProductsCollection());
+
+        for ( Product product: products){
+            if (product.getPartNumber().equals(this.partNumber)){
+                System.out.println(products.pop());
+            }
+            else{
+                products.pop();
+            }
+        }
     }
 
     @Override
-    public void setArgument(String arg, HashMap<String, Command> commands) {
+    public void setArgument(String arg) {
         this.partNumber = arg;
     }
 
-    private void filter(){
-        ArrayDeque<Product> copy = new ArrayDeque<Product>(cManager.getProductsCollection());
-
-        for ( Product product: copy){
-            if (product.getPartNumber().equals(this.partNumber)){
-                System.out.println(copy.pop());
-            }
-            else{
-                copy.pop();
-            }
-        }
-
-    }
 
 }

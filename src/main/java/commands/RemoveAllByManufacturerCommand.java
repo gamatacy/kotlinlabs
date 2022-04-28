@@ -2,23 +2,20 @@ package commands;
 
 import productClasses.Product;
 import collection.CollectionManager;
-import exceptions.CannotBeNullException;
-import exceptions.InvalidValueException;
 
 import java.io.BufferedReader;
 import java.util.ArrayDeque;
-import java.util.HashMap;
 
 /**
  * Remove all elements by manufacturer value
  */
-public class RemoveAllByManufacturerCommand extends Command{
-    private CollectionManager cManager;
+public class RemoveAllByManufacturerCommand extends Command {
+    private final CollectionManager collectionManager;
 
 
-    public RemoveAllByManufacturerCommand(CollectionManager cManager){
-        super("remove_all_by_manufacturer","удалить из коллекции все элементы, значение поля manufacturer которого эквивалентно заданному");
-        this.cManager = cManager;
+    public RemoveAllByManufacturerCommand(CollectionManager collectionManager) {
+        super("remove_all_by_manufacturer", "удалить из коллекции все элементы, значение поля manufacturer которого эквивалентно заданному");
+        this.collectionManager = collectionManager;
     }
 
     @Override
@@ -31,28 +28,28 @@ public class RemoveAllByManufacturerCommand extends Command{
 
         try {
             remove(product);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
     }
 
     @Override
-    public void setArgument(String arg, HashMap<String, Command> commands) {
+    public void setArgument(String arg) {
 
     }
 
-    public void remove(Product product) throws InvalidValueException, CannotBeNullException {
-        Product[] array = cManager.getProductsCollection().toArray(new Product[0]);
+    public void remove(Product product) {
+        Product[] array = collectionManager.getProductsCollection().toArray(new Product[0]);
         ArrayDeque<Product> newCollection = new ArrayDeque<>();
 
-        for (int i = 0; i < array.length ;i++){
-            if (array[i].getManufacturer().equals(product.getManufacturer())==false){
+        for (int i = 0; i < array.length; i++) {
+            if (!array[i].getManufacturer().equals(product.getManufacturer())) {
                 newCollection.addLast(array[i]);
             }
         }
 
-        this.cManager.updateCollection(newCollection);
+        this.collectionManager.updateCollection(newCollection);
 
     }
 

@@ -3,18 +3,17 @@ package commands;
 import collection.CollectionManager;
 
 import java.io.BufferedReader;
-import java.util.HashMap;
 
 /**
  * Add element to collection from user input
  */
 public class AddCommand extends Command{
-    private CollectionManager cManager;
+    private final CollectionManager collectionManager;
 
 
-    public AddCommand(CollectionManager cManager){
+    public AddCommand(CollectionManager collectionManager){
         super("add","добавить новый элемент в коллекцию");
-        this.cManager = cManager;
+        this.collectionManager = collectionManager;
     }
 
     /**
@@ -24,15 +23,14 @@ public class AddCommand extends Command{
     @Override
     public void execute(BufferedReader reader){
         ReadElementFromConsole elementReader = new ReadElementFromConsole();
-        cManager.addToCollectionLast(elementReader.readElement(reader));
+        collectionManager.addToCollectionLast(elementReader.readElement(reader));
     }
 
     /**
+     *  @param arg
      *
-     * @param arg
-     * @param commands
      */
     @Override
-    public void setArgument(String arg, HashMap<String, Command> commands) {}
+    public void setArgument(String arg) {}
 
 }

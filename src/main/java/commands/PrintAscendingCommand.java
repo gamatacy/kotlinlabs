@@ -4,36 +4,31 @@ import productClasses.Product;
 import collection.CollectionManager;
 
 import java.io.BufferedReader;
-import java.util.HashMap;
 import java.util.TreeSet;
 
 /**
  * Print elements sorted by id
  */
-public class PrintAscendingCommand extends Command{
-    private CollectionManager cManager;
+public class PrintAscendingCommand extends Command {
+    private CollectionManager collectionManager;
 
-    public PrintAscendingCommand(CollectionManager cManager){
-        super("print_ascending","вывести элементы коллекции в порядке возрастания");
-        this.cManager = cManager;
+    public PrintAscendingCommand(CollectionManager collectionManager) {
+        super("print_ascending", "вывести элементы коллекции в порядке возрастания");
+        this.collectionManager = collectionManager;
     }
 
     @Override
     public void execute(BufferedReader reader) {
-        sort();
+        TreeSet<Product> productTreeSet = new TreeSet<>(collectionManager.getProductsCollection());
+
+        for (Product product : productTreeSet) {
+            System.out.println(product.toString());
+        }
+
     }
 
     @Override
-    public void setArgument(String arg, HashMap<String, Command> commands) {
-
-    }
-
-    public void sort(){
-        TreeSet<Product> treset = new TreeSet<>(cManager.getProductsCollection());
-
-        for(Product product: treset){
-            System.out.println(product.toString());
-        }
+    public void setArgument(String arg) {
 
     }
 

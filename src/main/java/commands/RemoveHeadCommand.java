@@ -3,27 +3,26 @@ package commands;
 import collection.CollectionManager;
 
 import java.io.BufferedReader;
-import java.util.HashMap;
 
 /**
  * Print first element and delete him
  */
 public class RemoveHeadCommand extends Command{
-    private CollectionManager cManager;
+    private final CollectionManager collectionManager;
 
 
-    public RemoveHeadCommand(CollectionManager cManager){
+    public RemoveHeadCommand(CollectionManager collectionManager){
         super("remove_head","вывести первый элемент коллекции и удалить его");
-        this.cManager = cManager;
+        this.collectionManager = collectionManager;
     }
 
     @Override
     public void execute(BufferedReader reader) {
-        System.out.println(cManager.getProductsCollection().pop());
+        System.out.println(collectionManager.getProductsCollection().pop());
     }
 
     @Override
-    public void setArgument(String arg, HashMap<String, Command> commands) {
+    public void setArgument(String arg) {
 
     }
 }
