@@ -41,9 +41,11 @@ public class App {
         try{
             fileManager.readFile(path);
             collectionManager.fill(fileManager.getFileCollection());
-            console.run();
         }catch (Exception e){
-            System.err.println(e.getMessage());
+            System.out.println(e.getMessage());
+        }
+        finally {
+            console.run();
         }
 
     }
