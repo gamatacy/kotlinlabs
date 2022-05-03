@@ -16,20 +16,28 @@ public class FileManager implements ReadFile {
     private Iterable<CSVRecord> fileCollection;
 
     //Парсит файл и записывает в коллекцию
+
     @Override
     public void readFile(String path) throws IOException {
         File file = new File(path);
         FileInputStream fis = new FileInputStream(file);
-        BufferedInputStream bis = new BufferedInputStream(fis);
-        Reader in = new InputStreamReader(bis);
+        Reader in = new InputStreamReader(fis);
         this.fileCollection = CSVFormat.EXCEL.parse(in);
+        if(in == null){
+            try{
+                in.close();
+                fis.close();
+            }catch (Exception e){
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     //Парсит коллекцию обратно в csv
     public void saveFile(String path, Collection collection) {
         try (CSVPrinter printer = new CSVPrinter(new FileWriter(path), CSVFormat.RFC4180)) {
-            Collection<Product> copyCol = collection;
-            for (Product product : copyCol) {
+            Collection<Product> products = collection;
+            for (Product product : products) {
                 printer.printRecord(
                         product.getId(),
                         product.getName(),
