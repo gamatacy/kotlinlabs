@@ -45,6 +45,7 @@ public class Product implements Comparable<Product> {
         }
         this.id = integer;
         UsedIds.add(integer);
+        this.creationDate = new Date();
     }
 
     /**

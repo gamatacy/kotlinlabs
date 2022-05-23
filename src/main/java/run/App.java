@@ -8,6 +8,18 @@ import commands.*;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+/**
+ * Паттерны
+ * Переделать команд менеджер
+ * Переделать историю команд
+ * Убрать сет аргумент
+ * Билдер паттерн
+ *
+ *
+ * */
+
+
+
 public class App {
     public static void main(String[] args) {
         String path;
