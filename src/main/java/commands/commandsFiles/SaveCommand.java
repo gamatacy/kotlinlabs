@@ -1,6 +1,9 @@
-package commands;
+package commands.commandsFiles;
 
 import collection.CollectionManager;
+import commands.Command;
+import commands.CommandWithArgument;
+import commands.ExecutionResult;
 import fileUtils.FileManager;
 
 import java.io.BufferedReader;
@@ -8,7 +11,7 @@ import java.io.BufferedReader;
 /**
  * Save collection into csv file, standart output is test.csv
  */
-public class SaveCommand extends Command{
+public class SaveCommand extends Command implements CommandWithArgument {
     private final CollectionManager collectionManager;
     private final FileManager fileManager;
     private String path;
@@ -20,7 +23,7 @@ public class SaveCommand extends Command{
     }
 
     @Override
-    public void execute(BufferedReader reader) {
+    public ExecutionResult execute(BufferedReader reader) {
         try {
             if(this.path == null) {
                 fileManager.saveFile("test.csv", this.collectionManager.getProductsCollection());
@@ -28,13 +31,19 @@ public class SaveCommand extends Command{
             else{
                 fileManager.saveFile(this.path,this.collectionManager.getProductsCollection());
             }
+            return ExecutionResult.executionResult(true, "Collection saved");
         }catch (Exception e){
-            System.out.println(e.getMessage());
+            return ExecutionResult.executionResult(false, "Failed to saved collection");
         }
     }
 
     @Override
-    public void setArgument(String arg) {
-        this.path = arg;
+    public void setArgument(String[] args) {
+        this.path = args[0];
+    }
+
+    @Override
+    public int getArgumentsCount() {
+        return 1;
     }
 }

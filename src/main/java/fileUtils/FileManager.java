@@ -5,6 +5,8 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.csv.CSVPrinter;
 
+
+import java.lang.reflect.Field;
 import java.nio.file.*;
 import java.io.*;
 import java.util.Collection;
@@ -60,22 +62,7 @@ public class FileManager implements ReadFile {
         try (CSVPrinter printer = new CSVPrinter(new FileWriter(path), CSVFormat.RFC4180)) {
             Collection<Product> products = collection;
             for (Product product : products) {
-                printer.printRecord(
-                        product.getId(),
-                        product.getName(),
-                        product.getCoordinates().getX(),
-                        product.getCoordinates().getY(),
-                        product.getCreationDate(),
-                        product.getPrice(),
-                        product.getPartNumber(),
-                        product.getManufactureCost(),
-                        product.getUnitOfMeasure(),
-                        product.getManufacturer().getId(),
-                        product.getManufacturer().getName(),
-                        product.getManufacturer().getFullName(),
-                        product.getManufacturer().getType(),
-                        product.getManufacturer().getOfficialAddress()
-                );
+                printer.printRecord(product.productToObject());
             }
         } catch (IOException ex) {
             ex.printStackTrace();

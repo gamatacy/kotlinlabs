@@ -1,39 +1,36 @@
 package commands;
 
-import java.util.ArrayDeque;
+import exceptions.InvalidValueException;
+
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Set;
 
 /**
  * Manage commands
  */
 public class CommandManager {
     private final HashMap<String, Command> commands = new HashMap<>();
-    private final ArrayDeque<String> commandHistory = new ArrayDeque<>();
 
-    /**
-     * @param commands - list of commands
-     */
-    public CommandManager(Command... commands) {
-        HelpCommand helpCommand = new HelpCommand(this.commands);
-        HistoryCommand historyCommand = new HistoryCommand(this.commandHistory);
-        ExecuteScriptCommand executeScriptCommand = new ExecuteScriptCommand(this.commands);
-        this.commands.put(helpCommand.getName(), helpCommand);
-        this.commands.put(historyCommand.getName(), historyCommand);
-        this.commands.put(executeScriptCommand.getName(), executeScriptCommand);
+    public CommandManager() {}
+
+    public void registerCommands(Command... commands){
         for (Command cmd : commands) {
             this.commands.put(cmd.getName(), cmd);
         }
     }
-
-    public void updateHistory(String command) {
-        if (this.commandHistory.size() >= 8) {
-            this.commandHistory.removeLast();
-        }
-        this.commandHistory.addFirst(command);
+    public Collection<Command>  getCommandsInfo(){
+        return commands.values();
     }
 
-    public ArrayDeque<String> getCommandHistory() {
-        return commandHistory;
+    public Command getCommand(String commandName) throws InvalidValueException{
+        Command cmd = commands.get(commandName);
+        if(cmd != null){
+            return cmd;
+        }
+        else{
+            throw new InvalidValueException("Command doesn't exist");
+        }
     }
 
     public HashMap<String, Command> getCommands() {

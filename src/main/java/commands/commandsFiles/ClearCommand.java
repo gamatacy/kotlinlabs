@@ -1,13 +1,16 @@
-package commands;
+package commands.commandsFiles;
 
 import collection.CollectionManager;
+import commands.Command;
+import commands.ExecutionResult;
+import productClasses.ProductBuilder;
 
 import java.io.BufferedReader;
 
 /**
  * Delete all elements of collection
  */
-public class ClearCommand extends Command{
+public class ClearCommand extends Command {
     private CollectionManager collectionManager;
 
     public ClearCommand(CollectionManager collectionManager){
@@ -18,15 +21,13 @@ public class ClearCommand extends Command{
     /**
      * Just clear the collection
      * @param reader
+     * @return
      */
     @Override
-    public void execute(BufferedReader reader) {
+    public ExecutionResult execute(BufferedReader reader) {
         this.collectionManager.getProductsCollection().clear();
-        System.out.println("Collection cleared");
+        ProductBuilder.getBuilder().clearId();
+        return ExecutionResult.executionResult(true,"Collection cleared");
     }
 
-    @Override
-    public void setArgument(String arg) {
-
-    }
 }

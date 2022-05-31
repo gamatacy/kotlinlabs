@@ -1,9 +1,13 @@
 package productClasses;
+import annotations.LowerThan;
+import annotations.NotNull;
 import exceptions.InvalidValueException;
 import exceptions.CannotBeNullException;
 
 
 public class Coordinates {
+    @NotNull
+    @LowerThan(value = 177)
     private Float x; //Максимальное значение поля: 177, Поле не может быть null
     private float y;
 
@@ -14,13 +18,7 @@ public class Coordinates {
      * @throws InvalidValueException
      * @throws CannotBeNullException
      */
-    public Coordinates(Float x, float y) throws InvalidValueException, CannotBeNullException {
-        if (x.floatValue() > 177){
-            throw new InvalidValueException("Maximum X value 177");
-        }
-        else if (x == null){
-            throw new CannotBeNullException("set X");
-        }
+    public Coordinates(Float x, float y){
         this.x = x;
         this.y = y;
     }

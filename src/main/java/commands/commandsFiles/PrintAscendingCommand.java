@@ -1,5 +1,7 @@
-package commands;
+package commands.commandsFiles;
 
+import commands.Command;
+import commands.ExecutionResult;
 import productClasses.Product;
 import collection.CollectionManager;
 
@@ -18,18 +20,16 @@ public class PrintAscendingCommand extends Command {
     }
 
     @Override
-    public void execute(BufferedReader reader) {
+    public ExecutionResult execute(BufferedReader reader) {
         TreeSet<Product> productTreeSet = new TreeSet<>(collectionManager.getProductsCollection());
-
-        for (Product product : productTreeSet) {
-            System.out.println(product.toString());
+        if (productTreeSet.size() == 0){
+            return ExecutionResult.executionResult(false,"Collection is empty");
         }
-
-    }
-
-    @Override
-    public void setArgument(String arg) {
-
+        String result = "\n";
+        for (Product product : productTreeSet) {
+            result += product + "\n";
+        }
+        return ExecutionResult.executionResult(true,result);
     }
 
 }

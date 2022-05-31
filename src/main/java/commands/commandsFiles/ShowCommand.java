@@ -1,5 +1,7 @@
-package commands;
+package commands.commandsFiles;
 
+import commands.Command;
+import commands.ExecutionResult;
 import productClasses.Product;
 import collection.CollectionManager;
 
@@ -18,14 +20,17 @@ public class ShowCommand extends Command {
     }
 
     @Override
-    public void execute(BufferedReader reader) {
-        for (Product product : collectionManager.getProductsCollection()) {
-            System.out.println(product.toString());
+    public ExecutionResult execute(BufferedReader reader) {
+        if (collectionManager.getProductsCollection().size() != 0) {
+            String products = "\n";
+            for (Product product : collectionManager.getProductsCollection()) {
+                products += product + "\n";
+            }
+            return ExecutionResult.executionResult(true, products);
+        }else {
+            return ExecutionResult.executionResult(true, "Collection is empty");
         }
     }
 
-    @Override
-    public void setArgument(String arg) {
 
-    }
 }

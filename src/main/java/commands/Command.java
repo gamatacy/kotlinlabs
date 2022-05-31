@@ -39,15 +39,9 @@ public abstract class Command {
     /**
      * Execute method for every command
      * @param reader
+     * @return
      */
-    public abstract void execute(BufferedReader reader);
-
-    /**
-     * Set params for command
-     * @param arg
-     *
-     */
-    public abstract void setArgument(String arg);
+    public abstract ExecutionResult execute(BufferedReader reader);
 
 }
 
