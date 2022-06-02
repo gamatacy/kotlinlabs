@@ -27,7 +27,7 @@ public class ShowCommand extends Command {
                 products += product + "\n";
             }
             return ExecutionResult.executionResult(true, products);
-        }else {
+        } else {
             return ExecutionResult.executionResult(true, "Collection is empty");
         }
     }

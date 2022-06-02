@@ -20,10 +20,10 @@ public class InfoCommand extends Command {
     @Override
     public ExecutionResult execute(BufferedReader reader) {
         String info = "\n" +
-                "Тип коллекции: " +  collectionManager.getProductsCollection().getClass() + "\n" +
+                "Тип коллекции: " + collectionManager.getProductsCollection().getClass() + "\n" +
                 "Дата инициализации: " + collectionManager.getCreationDate() + "\n" +
                 "Количество элементов: " + collectionManager.getCollectionSize() + "\n";
-        return ExecutionResult.executionResult(true,info);
+        return ExecutionResult.executionResult(true, info);
     }
 
 }

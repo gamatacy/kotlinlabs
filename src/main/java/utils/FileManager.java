@@ -1,13 +1,10 @@
-package fileUtils;
+package utils;
 
 import productClasses.Product;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.csv.CSVPrinter;
 
-
-import java.lang.reflect.Field;
-import java.nio.file.*;
 import java.io.*;
 import java.util.Collection;
 

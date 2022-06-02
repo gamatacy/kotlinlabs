@@ -1,5 +1,6 @@
 package commands;
 
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,14 +16,14 @@ public class CommandHistory {
         commandHistory.add(command);
     }
 
-    public void printHistory() {
+    public void printHistory(PrintStream printStream) {
         if (commandHistory.size() < 8) {
             for (int i = 0; i < commandHistory.size();i++) {
-                System.out.println(commandHistory.get(i));
+                printStream.println(commandHistory.get(i));
             }
         } else {
             for (int i = 0; i < 8; i++) {
-                System.out.println(commandHistory.get(i));
+                printStream.println(commandHistory.get(i));
             }
         }
 

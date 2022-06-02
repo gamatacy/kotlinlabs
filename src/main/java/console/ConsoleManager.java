@@ -7,25 +7,28 @@ import commands.CommandInvoker;
 import commands.ExecutionResult;
 
 import java.io.BufferedReader;
+import java.io.PrintStream;
 
 /**
- * Read input from user and register commands
+ * Read input from user and return commands results
  */
 public class ConsoleManager {
     private String username = "user";
     private final CommandManager commandManager;
     private final BufferedReader reader;
     private final CommandHistory history;
+    private final PrintStream printStream;
 
-    public ConsoleManager(CommandManager commandmanager, BufferedReader reader) {
+    public ConsoleManager(CommandManager commandmanager, BufferedReader reader, PrintStream printStream) {
         this.commandManager = commandmanager;
         this.history = new CommandHistory();
         this.reader = reader;
+        this.printStream = printStream;
     }
 
     public void run() {
         while (true) {
-            System.out.print("<" + this.username + ">$");
+            printStream.print("<" + this.username + ">$");
             try {
                 String command = reader.readLine();
 
@@ -36,27 +39,27 @@ public class ConsoleManager {
                 ExecutionResult executionResult = CommandInvoker.invokeUserCommand(command.split(" "), reader, commandManager);
 
                 if (executionResult.getResult()) {
-                    if (executionResult.getMessage().equalsIgnoreCase("Exit success")) {
+                    if (executionResult.getMessage().equals("Exit success")) {
                         break;
                     }
-                    if (executionResult.getMessage().equalsIgnoreCase("history")) {
-                        history.printHistory();
+                    if (executionResult.getMessage().equals("history")) {
+                        history.printHistory(printStream);
                     } else {
-                        System.out.println(executionResult.getMessage());
+                       printStream.println(executionResult.getMessage());
                     }
                     history.updateHistory(command.split(" ")[0]);
                 } else {
-                    System.out.println(executionResult.getMessage());
+                    printStream.println(executionResult.getMessage());
                 }
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                printStream.println(e.getMessage());
             }
 
         }
         try {
             reader.close();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            printStream.println(e.getMessage());
         }
     }
 

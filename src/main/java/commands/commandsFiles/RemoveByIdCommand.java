@@ -14,6 +14,7 @@ import java.util.ArrayDeque;
  * Remove one element by id value
  */
 public class RemoveByIdCommand extends Command implements CommandWithArgument {
+    private final int argumentsCount = 1;
     private final CollectionManager collectionManager;
     private Integer id;
 
@@ -40,24 +41,24 @@ public class RemoveByIdCommand extends Command implements CommandWithArgument {
         }
 
         if (array.length == updatedDeque.size()) {
-            return ExecutionResult.executionResult(false,"Product with this ID doesn't exist");
+            return ExecutionResult.executionResult(false, "Product with this ID doesn't exist");
         }
 
         this.collectionManager.updateCollection(updatedDeque);
-        return ExecutionResult.executionResult(true,"Element removed");
+        return ExecutionResult.executionResult(true, "Element removed");
     }
 
     @Override
     public void setArgument(String[] args) {
-        try{
+        try {
             this.id = Integer.valueOf(args[0]);
-        }catch (Exception e){
+        } catch (Exception e) {
             this.id = null;
         }
     }
 
     @Override
     public int getArgumentsCount() {
-        return 1;
+        return this.argumentsCount;
     }
 }

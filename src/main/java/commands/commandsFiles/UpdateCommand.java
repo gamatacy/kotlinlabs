@@ -19,6 +19,7 @@ import java.util.Arrays;
  * Update element value by Product ID
  */
 public class UpdateCommand extends Command implements CommandWithArgument {
+    private final int argumentsCount = 1;
     private CollectionManager collectionManager;
     private Integer id;
 
@@ -59,6 +60,6 @@ public class UpdateCommand extends Command implements CommandWithArgument {
 
     @Override
     public int getArgumentsCount() {
-        return 1;
+        return this.argumentsCount;
     }
 }

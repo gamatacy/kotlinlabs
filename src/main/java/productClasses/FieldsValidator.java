@@ -15,6 +15,7 @@ public class FieldsValidator {
         enumCheck(value, field);
     }
 
+    /**
     public static void validateArray(String[] values) throws InvalidValueException{
         int index = 0;
         for (Field field : Product.class.getDeclaredFields()) {
@@ -34,6 +35,7 @@ public class FieldsValidator {
             index += 1;
         }
     }
+     */
 
     private static void nullCheck(Object value, Field field) throws InvalidValueException {
         if (field.isAnnotationPresent(NotNull.class)) {
@@ -51,7 +53,7 @@ public class FieldsValidator {
         }
         if (field.isAnnotationPresent(LowerThan.class)) {
             if (field.getAnnotation(LowerThan.class).value() < Float.valueOf((String) value)) {
-                throw new InvalidValueException(field.getName() + " must be lower than " + field.getAnnotation(GreaterThan.class).value());
+                throw new InvalidValueException(field.getName() + " must be lower than " + field.getAnnotation(LowerThan.class).value());
             }
         }
     }

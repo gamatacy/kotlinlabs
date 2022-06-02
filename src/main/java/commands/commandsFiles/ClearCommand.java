@@ -13,21 +13,16 @@ import java.io.BufferedReader;
 public class ClearCommand extends Command {
     private CollectionManager collectionManager;
 
-    public ClearCommand(CollectionManager collectionManager){
-        super("clear","очистить коллекцию");
+    public ClearCommand(CollectionManager collectionManager) {
+        super("clear", "очистить коллекцию");
         this.collectionManager = collectionManager;
     }
 
-    /**
-     * Just clear the collection
-     * @param reader
-     * @return
-     */
     @Override
     public ExecutionResult execute(BufferedReader reader) {
         this.collectionManager.getProductsCollection().clear();
         ProductBuilder.getBuilder().clearId();
-        return ExecutionResult.executionResult(true,"Collection cleared");
+        return ExecutionResult.executionResult(true, "Collection cleared");
     }
 
 }

@@ -9,8 +9,8 @@ public class ExecutionResult {
         this.message = message;
     }
 
-    public static ExecutionResult executionResult(boolean result, String message){
-        return new ExecutionResult(result,message);
+    public static ExecutionResult executionResult(boolean result, String message) {
+        return new ExecutionResult(result, message);
     }
 
     public Boolean getResult() {
@@ -23,6 +23,6 @@ public class ExecutionResult {
 
     @Override
     public String toString() {
-       return message;
+        return message;
     }
 }

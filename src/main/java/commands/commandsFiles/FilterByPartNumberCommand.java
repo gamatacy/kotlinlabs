@@ -4,19 +4,18 @@ import collection.*;
 import commands.Command;
 import commands.ExecutionResult;
 import productClasses.Product;
-import productClasses.ProductBuilder;
 
 import java.io.BufferedReader;
-import java.util.ArrayDeque;
+
 
 /**
- *Print elements by specified partNumber
+ * Print elements by specified partNumber
  */
 public class FilterByPartNumberCommand extends Command {
     private CollectionManager collectionManager;
 
-    public FilterByPartNumberCommand(CollectionManager collectionManager){
-        super("filter_by_part_number","вывести элементы, значение поля partNumber которых равно заданному");
+    public FilterByPartNumberCommand(CollectionManager collectionManager) {
+        super("filter_by_part_number", "вывести элементы, значение поля partNumber которых равно заданному");
         this.collectionManager = collectionManager;
     }
 
@@ -29,12 +28,12 @@ public class FilterByPartNumberCommand extends Command {
         try {
             System.out.print("Введите partNumber: ");
             String partNumber = reader.readLine();
-            for (int i = 0; i < products.length; i++){
-                if (products[i].getPartNumber().equals(partNumber)){
+            for (int i = 0; i < products.length; i++) {
+                if (products[i].getPartNumber().equals(partNumber)) {
                     result += products[i] + "\n";
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             return ExecutionResult.executionResult(false, "Reading failed");
         }
 

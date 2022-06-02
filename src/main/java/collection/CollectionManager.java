@@ -3,6 +3,7 @@ package collection;
 import exceptions.InvalidValueException;
 import productClasses.*;
 import org.apache.commons.csv.CSVRecord;
+import utils.StringToObject;
 
 import java.lang.reflect.Field;
 import java.util.*;
@@ -47,19 +48,6 @@ public class CollectionManager implements FillCollection {
         productsCollection.addFirst(p);
     }
 
-    /**
-     * @param p Product
-     */
-    public void addToCollectionLast(Product p) {
-        productsCollection.addLast(p);
-    }
-
-    /**
-     * @return Product
-     */
-    public Product getCollectionLast() {
-        return productsCollection.getLast();
-    }
 
     /**
      * @return Product
@@ -96,7 +84,7 @@ public class CollectionManager implements FillCollection {
     public void fill(Iterable<CSVRecord> records) {
         int successCount = 0;
         int recordsCount = 0;
-        Field[] fields = FieldsReader.getRecursiveFields(Product.class);
+        Field[] fields = FieldsReader.getClassFields(Product.class);
 
         for (CSVRecord record : records) {
             Object[] values = new Object[fields.length];
@@ -107,7 +95,7 @@ public class CollectionManager implements FillCollection {
                 Field field = fields[counter];
                 String input = record.get(counter);
                 try {
-                    Object objectValue = FieldsReader.StringToObject(input, field.getType());
+                    Object objectValue = StringToObject.convert(input, field.getType());
                     FieldsValidator.validateField(input, field);
                     values[counter] = objectValue;
                 } catch (Exception e) {

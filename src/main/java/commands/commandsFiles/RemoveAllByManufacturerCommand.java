@@ -31,20 +31,19 @@ public class RemoveAllByManufacturerCommand extends Command {
         Product[] products = collectionManager.getProductsCollection().toArray(new Product[0]);
         ArrayDeque<Product> newDeque = new ArrayDeque<>();
 
-        for (int i = 0; i< collectionManager.getCollectionSize(); i++){
-            if (products[i].getManufacturer().equals(product.getManufacturer())){
+        for (int i = 0; i < collectionManager.getCollectionSize(); i++) {
+            if (products[i].getManufacturer().equals(product.getManufacturer())) {
                 continue;
-            }else {
+            } else {
                 ProductBuilder.getBuilder().removeId(product.getId());
                 newDeque.addFirst(products[i]);
             }
         }
 
 
-
-        if (newDeque.size() == products.length){
+        if (newDeque.size() == products.length) {
             return ExecutionResult.executionResult(false, "No elements with this manufacturer");
-        }else {
+        } else {
             collectionManager.updateCollection(newDeque);
             return ExecutionResult.executionResult(true, "Collection updated");
         }

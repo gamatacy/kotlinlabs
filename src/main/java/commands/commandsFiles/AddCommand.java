@@ -13,6 +13,7 @@ import java.io.BufferedReader;
  * Add element to collection from user input
  */
 public class AddCommand extends Command implements CommandWithArgument {
+    private final int argumentsCount = 0;
     private final CollectionManager collectionManager;
     private InputMode inputMode = InputMode.USER;
 
@@ -33,7 +34,7 @@ public class AddCommand extends Command implements CommandWithArgument {
             collectionManager.addToCollectionFirst(product);
             this.inputMode = InputMode.USER;
             return ExecutionResult.executionResult(true, "Element added");
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return ExecutionResult.executionResult(false, "Element not added");
@@ -48,6 +49,6 @@ public class AddCommand extends Command implements CommandWithArgument {
 
     @Override
     public int getArgumentsCount() {
-        return 0;
+        return this.argumentsCount ;
     }
 }

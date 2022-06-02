@@ -2,12 +2,12 @@ package commands;
 
 
 import commands.commandsFiles.AddCommand;
+import commands.commandsFiles.ExitCommand;
 import exceptions.InvalidValueException;
 
 import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.NoSuchElementException;
 
 
 public class CommandInvoker {
@@ -32,26 +32,32 @@ public class CommandInvoker {
     }
 
     public static ExecutionResult invokeScriptCommand(BufferedReader reader, CommandManager commandManager) {
+        String result = "\n";
+        String line;
         try {
-            while (reader != null) {
-                String[] input = reader.readLine().split(" ");
+            while ((line = reader.readLine()) != null) {
+                String[] input = line.split(" ");
                 Command command = commandManager.getCommand(input[0]);
                 if (command.getClass() == AddCommand.class) {
                     ((AddCommand) command).setArgument(new String[2]);
                     command.execute(reader);
+                } else if (command.getClass() == ExitCommand.class) {
+                    return command.execute(reader);
                 } else if (command instanceof CommandWithArgument) {
                     String[] args = new String[((CommandWithArgument) command).getArgumentsCount()];
                     for (int j = 1; j < input.length; j++) {
                         args[j - 1] = input[j];
                     }
                     ((CommandWithArgument) command).setArgument(args);
-                    System.out.println(command.execute(reader).getMessage());
+                    result += command.execute(reader).getMessage() + "\n";
                 } else {
-                    System.out.println(command.execute(reader).getMessage());
+                    result += command.execute(reader).getMessage() + "\n";
                 }
             }
-        } catch (Exception e) {return ExecutionResult.executionResult(false, "Script not executed");}
-        return ExecutionResult.executionResult(true, "Script executed");
+        } catch (Exception e) {
+            return ExecutionResult.executionResult(false, result + "Script not fully executed\n");
+        }
+        return ExecutionResult.executionResult(true, result + "Script executed\n");
     }
 }
 

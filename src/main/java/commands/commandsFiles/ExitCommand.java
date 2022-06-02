@@ -2,7 +2,6 @@ package commands.commandsFiles;
 
 import commands.Command;
 import commands.ExecutionResult;
-import console.ConsoleManager;
 
 import java.io.BufferedReader;
 

@@ -3,7 +3,6 @@ package commands.commandsFiles;
 import collection.CollectionManager;
 import commands.Command;
 import commands.ExecutionResult;
-import productClasses.Product;
 
 import java.io.BufferedReader;
 

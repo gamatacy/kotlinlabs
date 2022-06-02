@@ -1,30 +1,17 @@
 package run;
 
-import com.opencsv.bean.function.AccessorInvoker;
 import commands.commandsFiles.*;
-import fileUtils.FileManager;
+import utils.FileManager;
 import collection.CollectionManager;
 import console.ConsoleManager;
 import commands.*;
 import productClasses.ProductBuilder;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
-/**
- * Паттерны
- * Переделать команд менеджер
- * Переделать историю команд
- * Убрать сет аргумент
- * Билдер паттерн
- *
- *
- * */
-
-
+import java.io.*;
 
 public class App {
     public static void main(String[] args) {
+        PrintStream printStream = System.out;
         String path;
         CollectionManager collectionManager = new CollectionManager();
         FileManager fileManager = new FileManager();
@@ -32,13 +19,13 @@ public class App {
         commandManager.registerCommands(
                 new HelpCommand(commandManager.getCommandsInfo()),
                 new HistoryCommand(),
-                new ExecuteScriptCommand(commandManager,fileManager),
+                new ExecuteScriptCommand(commandManager, fileManager),
                 new InfoCommand(collectionManager),
                 new ShowCommand(collectionManager),
                 new AddCommand(collectionManager),
                 new ExitCommand(),
                 new ClearCommand(collectionManager),
-                new SaveCommand(collectionManager,fileManager),
+                new SaveCommand(collectionManager, fileManager),
                 new UpdateCommand(collectionManager),
                 new RemoveByIdCommand(collectionManager),
                 new RemoveHeadCommand(collectionManager),
@@ -48,23 +35,21 @@ public class App {
                 new FilterByPartNumberCommand(collectionManager)
         );
 
-        ConsoleManager console = new ConsoleManager(commandManager, new BufferedReader(new InputStreamReader(System.in)));
+        ConsoleManager console = new ConsoleManager(commandManager, new BufferedReader(new InputStreamReader(System.in)), printStream);
 
-        if(args.length == 0){
+        if (args.length == 0) {
             path = "test.csv";
-        }
-        else {
+        } else {
             path = args[0];
         }
 
-        try{
+        try {
             ProductBuilder.newBuilder();
             fileManager.readFile(path);
             collectionManager.fill(fileManager.getFileCollection());
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }
-        finally {
+        } finally {
             console.run();
         }
 

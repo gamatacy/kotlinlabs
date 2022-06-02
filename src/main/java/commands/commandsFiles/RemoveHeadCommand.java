@@ -27,7 +27,7 @@ public class RemoveHeadCommand extends Command {
             ProductBuilder.getBuilder().removeId(product.getId());
             System.out.println(product.toString());
             return ExecutionResult.executionResult(true, "Element removed");
-        }catch (Exception e){
+        } catch (Exception e) {
             return ExecutionResult.executionResult(false, "Collection is empty");
         }
     }

@@ -1,22 +1,25 @@
 package productClasses;
 
 import annotations.AutoGen;
-import enums.InputMode;
+import enums.*;
+import utils.StringToObject;
 
 import java.io.BufferedReader;
 import java.lang.reflect.Field;
 import java.util.*;
-import java.util.function.Function;
+import java.util.stream.Collectors;
+
+import static java.util.Arrays.stream;
 
 
 public class FieldsReader {
     private Field[] allFields;
 
     public FieldsReader(Class<?> aClass) {
-        this.allFields = getRecursiveFields(aClass);
+        this.allFields = getClassFields(aClass);
     }
 
-    public Object[] read(BufferedReader reader, InputMode inputMode)  {
+    public Object[] read(BufferedReader reader, InputMode inputMode) {
         Object[] values = new Object[allFields.length];
 
         int counter = 0;
@@ -28,6 +31,11 @@ public class FieldsReader {
                 if (field.isAnnotationPresent(AutoGen.class)) {
                     counter++;
                     continue;
+                } else if (field.getType().isEnum()) {
+                    System.out.print("Enter " + field.getName() + " " +
+                            stream(field.getType().getEnumConstants())
+                            .map(Object::toString)
+                            .collect(Collectors.joining(", ", " (", ")")) + " : ");
                 } else {
                     System.out.print("Enter " + field.getName() + " : ");
                 }
@@ -38,36 +46,39 @@ public class FieldsReader {
                     continue;
                 }
             }
-                try {
-                    input = reader.readLine();
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
-                }
-
-
-                try {
-                    Object objectValue = StringToObject(input, field.getType());
-                    FieldsValidator.validateField(input, field);
-                    values[counter] = objectValue;
-                } catch (Exception e) {
-                    if (inputMode == InputMode.SCRIPT) {
-                        e.printStackTrace();
-                    }
-                    System.out.println(e.getMessage());
-                    continue;
-                }
-                counter++;
+            try {
+                input = reader.readLine();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
+
+
+            try {
+                Object objectValue = StringToObject.convert(input, field.getType());
+                FieldsValidator.validateField(input, field);
+                values[counter] = objectValue;
+            } catch (NumberFormatException ne) {
+                System.out.println(field.getName() + " must be " + field.getType());
+                continue;
+            } catch (Exception e) {
+                if (inputMode == InputMode.SCRIPT) {
+                    e.printStackTrace();
+                }
+                System.out.println(e.getMessage());
+                continue;
+            }
+            counter++;
+        }
         return values;
     }
 
-    public static Field[] getRecursiveFields(Class<?> clazz) {
+    public static Field[] getClassFields(Class<?> aClass) {
         List<Field> fields = new ArrayList<>();
 
-        for (Field field : clazz.getDeclaredFields()) {
+        for (Field field : aClass.getDeclaredFields()) {
             Class<?> fieldType = field.getType();
-            if (clazz.getPackage().equals(fieldType.getPackage()) && !fieldType.isEnum()) {
-                fields.addAll(Arrays.asList(getRecursiveFields(fieldType)));
+            if (aClass.getPackage().equals(fieldType.getPackage()) && !fieldType.isEnum()) {
+                fields.addAll(Arrays.asList(getClassFields(fieldType)));
                 continue;
             }
             fields.add(field);
@@ -75,38 +86,5 @@ public class FieldsReader {
         return fields.toArray(new Field[]{});
     }
 
-    public static Object StringToObject(String str, Class<?> fieldClass) {
-        HashMap<Class<?>, Function<String, ?>> parser = new HashMap<>();
-        parser.put(int.class, Integer::parseInt);
-        parser.put(float.class, Float::parseFloat);
-        parser.put(Integer.class, Integer::valueOf);
-        parser.put(Float.class, Float::valueOf);
-        parser.put(String.class, String::valueOf);
-
-        if (fieldClass == Date.class){
-            return str;
-        }
-
-        if (str.length() == 0) return null;
-
-        Function<String, ?> function = parser.get(fieldClass);
-        if (function != null) {
-            try {
-                return function.apply(str);
-            } catch (Exception e) {
-                throw e;
-            }
-        }
-
-        if (fieldClass.isEnum())
-            try {
-                Object enumConstant = Enum.valueOf((Class<Enum>) fieldClass, str);
-                return enumConstant;
-            } catch (IllegalArgumentException e) {
-                return null;
-            }
-
-        throw new UnsupportedOperationException("Can't parse string to " + fieldClass.getName());
-    }
 }
 

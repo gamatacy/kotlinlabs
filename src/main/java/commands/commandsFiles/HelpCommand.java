@@ -5,8 +5,6 @@ import commands.ExecutionResult;
 
 import java.io.BufferedReader;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Set;
 
 /**
  * Print all commands and their descriptions
@@ -22,7 +20,7 @@ public class HelpCommand extends Command {
     @Override
     public ExecutionResult execute(BufferedReader reader) {
         String info = "\n";
-        for (Command command : commands){
+        for (Command command : commands) {
             info += command.getName() + " : " + command.getDescription() + "\n";
         }
         return ExecutionResult.executionResult(true, info);

@@ -22,14 +22,14 @@ public class PrintAscendingCommand extends Command {
     @Override
     public ExecutionResult execute(BufferedReader reader) {
         TreeSet<Product> productTreeSet = new TreeSet<>(collectionManager.getProductsCollection());
-        if (productTreeSet.size() == 0){
-            return ExecutionResult.executionResult(false,"Collection is empty");
+        if (productTreeSet.size() == 0) {
+            return ExecutionResult.executionResult(false, "Collection is empty");
         }
         String result = "\n";
         for (Product product : productTreeSet) {
             result += product + "\n";
         }
-        return ExecutionResult.executionResult(true,result);
+        return ExecutionResult.executionResult(true, result);
     }
 
 }
