@@ -32,10 +32,11 @@ public class FieldsReader {
                     counter++;
                     continue;
                 } else if (field.getType().isEnum()) {
-                    System.out.print("Enter " + field.getName() + " " +
-                            stream(field.getType().getEnumConstants())
-                            .map(Object::toString)
-                            .collect(Collectors.joining(", ", " (", ")")) + " : ");
+                    System.out.print("Enter " + field.getName() + " ( ");
+                    for (Object enums : field.getType().getEnumConstants()) {
+                        System.out.print(enums.toString() + " ");
+                    }
+                    System.out.print("): ");
                 } else {
                     System.out.print("Enter " + field.getName() + " : ");
                 }
