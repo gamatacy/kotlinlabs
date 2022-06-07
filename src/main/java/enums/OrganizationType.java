@@ -8,7 +8,7 @@ public enum OrganizationType {
 
     public static OrganizationType equals(String str){
         for (OrganizationType organizationType : OrganizationType.values()){
-            if (organizationType.name().equalsIgnoreCase(str)){
+            if (organizationType.name().equals(str)){
                 return organizationType;
             }
         }

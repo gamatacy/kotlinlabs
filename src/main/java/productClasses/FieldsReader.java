@@ -7,10 +7,6 @@ import utils.StringToObject;
 import java.io.BufferedReader;
 import java.lang.reflect.Field;
 import java.util.*;
-import java.util.stream.Collectors;
-
-import static java.util.Arrays.stream;
-
 
 public class FieldsReader {
     private Field[] allFields;
@@ -41,12 +37,14 @@ public class FieldsReader {
                     System.out.print("Enter " + field.getName() + " : ");
                 }
             }
+
             if (inputMode == InputMode.SCRIPT) {
                 if (field.isAnnotationPresent(AutoGen.class)) {
                     counter++;
                     continue;
                 }
             }
+
             try {
                 input = reader.readLine();
             } catch (Exception e) {

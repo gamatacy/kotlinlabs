@@ -20,23 +20,20 @@ public class StringToObject {
         if (str.length() == 0) return null;
 
         Function<String, ?> function = parser.get(fieldClass);
+
         if (function != null) {
-            try {
-                return function.apply(str);
-            }
-            catch (Exception e) {
-                throw e;
-            }
+            return function.apply(str);
         }
 
         if (fieldClass.isEnum())
             try {
-                Object enumConstant = Enum.valueOf((Class<Enum>) fieldClass, str.toUpperCase());
-                return enumConstant;
-            } catch (IllegalArgumentException e) {
+                Object anEnum = Enum.valueOf((Class<Enum>) fieldClass, str.toUpperCase());
+                return anEnum;
+            } catch (Exception e) {
                 return null;
             }
 
         throw new UnsupportedOperationException("Can't parse string to " + fieldClass.getName());
     }
+
 }

@@ -4,7 +4,6 @@ import annotations.*;
 import enums.*;
 import exceptions.InvalidValueException;
 
-
 import java.lang.reflect.Field;
 
 public class FieldsValidator {
