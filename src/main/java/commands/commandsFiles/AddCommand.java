@@ -22,10 +22,6 @@ public class AddCommand extends Command implements CommandWithArgument {
         this.collectionManager = collectionManager;
     }
 
-    /**
-     * @param reader
-     * @return
-     */
     @Override
     public ExecutionResult execute(BufferedReader reader) {
         try {
@@ -39,6 +35,7 @@ public class AddCommand extends Command implements CommandWithArgument {
         }
         return ExecutionResult.executionResult(false, "Element not added");
     }
+
 
     @Override
     public void setArgument(String[] args) {

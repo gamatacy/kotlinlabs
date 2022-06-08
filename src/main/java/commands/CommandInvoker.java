@@ -9,7 +9,9 @@ import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-
+/**
+ * Invoke from user or script
+ */
 public class CommandInvoker {
     public static ExecutionResult invokeUserCommand(String[] data, BufferedReader reader, CommandManager commandManager) {
         try {
@@ -30,7 +32,7 @@ public class CommandInvoker {
             return ExecutionResult.executionResult(false, e.getMessage());
         }
     }
-
+    
     public static ExecutionResult invokeScriptCommand(BufferedReader reader, CommandManager commandManager) {
         String result = "\n";
         String line;

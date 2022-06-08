@@ -6,12 +6,12 @@ import java.util.function.Function;
 
 public class StringToObject {
     public static Object convert(String str, Class<?> fieldClass) {
-        HashMap<Class<?>, Function<String, ?>> parser = new HashMap<>();
-        parser.put(int.class, Integer::parseInt);
-        parser.put(float.class, Float::parseFloat);
-        parser.put(Integer.class, Integer::valueOf);
-        parser.put(Float.class, Float::valueOf);
-        parser.put(String.class, String::valueOf);
+        HashMap<Class<?>, Function<String, ?>> converter = new HashMap<>();
+        converter.put(int.class, Integer::parseInt);
+        converter.put(float.class, Float::parseFloat);
+        converter.put(Integer.class, Integer::valueOf);
+        converter.put(Float.class, Float::valueOf);
+        converter.put(String.class, String::valueOf);
 
         if (fieldClass == Date.class) {
             return str;
@@ -19,7 +19,7 @@ public class StringToObject {
 
         if (str.length() == 0) return null;
 
-        Function<String, ?> function = parser.get(fieldClass);
+        Function<String, ?> function = converter.get(fieldClass);
 
         if (function != null) {
             return function.apply(str);
@@ -34,6 +34,7 @@ public class StringToObject {
             }
 
         throw new UnsupportedOperationException("Can't parse string to " + fieldClass.getName());
+
     }
 
 }

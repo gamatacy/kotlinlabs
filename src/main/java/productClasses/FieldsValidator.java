@@ -14,7 +14,7 @@ public class FieldsValidator {
         enumCheck(value, field);
     }
 
-    /**
+    /*
     public static void validateArray(String[] values) throws InvalidValueException{
         int index = 0;
         for (Field field : Product.class.getDeclaredFields()) {
