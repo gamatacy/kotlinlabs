@@ -1,0 +1,23 @@
+Command doesn't exist
+
+add : добавить новый элемент в коллекцию
+remove_head : вывести первый элемент коллекции и удалить его
+remove_all_by_manufacturer : удалить из коллекции все элементы, значение поля manufacturer которого эквивалентно заданному
+execute_script : считать и исполнить скрипт из указанного файла
+show : вывести в стандартный поток вывода все элементы коллекции в строковом представлении
+clear : очистить коллекцию
+save :  сохранить коллекцию в файл
+update : обновить значение элемента коллекции, id которого равен заданному
+remove_by_id :  удалить элемент из коллекции по его id
+history : вывести последние 8 команд
+print_ascending : вывести элементы коллекции в порядке возрастания
+head : вывести первый элемент коллекции
+help : вывести справку по доступным командам
+exit : завершить программу
+filter_by_part_number : вывести элементы, значение поля partNumber которых равно заданному
+info : вывести в стандартный поток вывода информацию о коллекции
+
+
+Product{id=1, name='laptop', coordinates=Coordinates{x=15.0, y=23.0}, creationDate=Fri Jun 03 01:58:42 MSK 2022, price=150000.0, partNumber='333580', manufactureCost=40000, unitOfMeasure=KILOGRAMS, manufacturer=Organization{id=1, name='123', fullName='123', type=COMMERCIAL, officialAddress=333}}
+Product{id=0, name='scriptest', coordinates=Coordinates{x=1.0, y=2.0}, creationDate=Fri Jun 03 01:58:42 MSK 2022, price=5000.0, partNumber='3131', manufactureCost=15, unitOfMeasure=GRAMS, manufacturer=Organization{id=0, name='23', fullName='13', type=COMMERCIAL, officialAddress=192491}}
+
