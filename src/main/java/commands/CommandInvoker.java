@@ -2,6 +2,7 @@ package commands;
 
 
 import commands.commandsFiles.AddCommand;
+import commands.commandsFiles.ExecuteScriptCommand;
 import commands.commandsFiles.ExitCommand;
 import exceptions.InvalidValueException;
 
@@ -32,7 +33,7 @@ public class CommandInvoker {
             return ExecutionResult.executionResult(false, e.getMessage());
         }
     }
-    
+
     public static ExecutionResult invokeScriptCommand(BufferedReader reader, CommandManager commandManager) {
         String result = "\n";
         String line;
@@ -43,6 +44,8 @@ public class CommandInvoker {
                 if (command.getClass() == AddCommand.class) {
                     ((AddCommand) command).setArgument(new String[2]);
                     command.execute(reader);
+                } else if (command.getClass() == ExecuteScriptCommand.class) {
+                    throw new InvalidValueException("Recursion detected");
                 } else if (command.getClass() == ExitCommand.class) {
                     return command.execute(reader);
                 } else if (command instanceof CommandWithArgument) {
@@ -56,6 +59,8 @@ public class CommandInvoker {
                     result += command.execute(reader).getMessage() + "\n";
                 }
             }
+        } catch (InvalidValueException ie) {
+            return ExecutionResult.executionResult(false, result + "Script not fully executed: " + ie.getMessage());
         } catch (Exception e) {
             return ExecutionResult.executionResult(false, result + "Script not fully executed\n");
         }
