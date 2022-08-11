@@ -59,11 +59,14 @@ public class FieldsReader {
                 FieldsValidator.validateField(input, field);
                 values[counter] = objectValue;
             } catch (NumberFormatException ne) {
+                if (inputMode == InputMode.SCRIPT) {
+                    continue;
+                }
                 System.out.println(field.getName() + " must be " + field.getType());
                 continue;
             } catch (Exception e) {
                 if (inputMode == InputMode.SCRIPT) {
-                    e.printStackTrace();
+                    continue;
                 }
                 System.out.println(e.getMessage());
                 continue;

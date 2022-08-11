@@ -8,7 +8,9 @@ import exceptions.CannotBeEmptyException;
 import exceptions.CannotBeNullException;
 import exceptions.InvalidValueException;
 
-public class Organization {
+import java.io.Serializable;
+
+public class Organization implements Serializable {
     @NotNull
     @GreaterThan
     @AutoGen

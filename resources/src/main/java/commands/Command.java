@@ -1,11 +1,12 @@
 package commands;
 
 import java.io.BufferedReader;
+import java.io.Serializable;
 
 /**
  * Abstract class for all commands
  */
-public abstract class Command {
+public abstract class Command implements Serializable {
     private final String name;
     private final String description;
 

@@ -1,1 +1,1 @@
-C:\Users\van1k\Desktop\student-5\client\build\classes\kotlin\main\ClientKt.class
+C:\Users\voron\Desktop\javarebuild\student-5\client\build\classes\kotlin\main\ClientKt.class;C:\Users\voron\Desktop\javarebuild\student-5\client\build\classes\kotlin\main\ConnectionHandler.class

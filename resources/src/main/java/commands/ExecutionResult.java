@@ -1,6 +1,8 @@
 package commands;
 
-public class ExecutionResult {
+import java.io.Serializable;
+
+public class ExecutionResult implements Serializable {
     private Boolean result;
     private String message;
 

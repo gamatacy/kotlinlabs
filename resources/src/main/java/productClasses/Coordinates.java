@@ -5,8 +5,10 @@ import annotations.NotNull;
 import exceptions.CannotBeNullException;
 import exceptions.InvalidValueException;
 
+import java.io.Serializable;
 
-public class Coordinates {
+
+public class Coordinates implements Serializable {
     @NotNull
     @LowerThan(value = 177)
     private Float x; //Максимальное значение поля: 177, Поле не может быть null

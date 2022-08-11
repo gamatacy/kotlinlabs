@@ -38,12 +38,7 @@ public class SaveCommand extends Command implements CommandWithArgument {
     }
 
     @Override
-    public void setArgument(String[] args) {
-        this.path = args[0];
-    }
-
-    @Override
-    public int getArgumentsCount() {
-        return this.argumentsCount;
+    public void setArgument(Object argument) {
+        this.path = (String) argument;
     }
 }

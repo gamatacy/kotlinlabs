@@ -49,16 +49,11 @@ public class UpdateCommand extends Command implements CommandWithArgument {
     }
 
     @Override
-    public void setArgument(String[] args) {
-        try{
-            this.id = Integer.valueOf(args[0]);
-        }catch (Exception e){
+    public void setArgument(Object argument) {
+        try {
+            this.id = (int) argument;
+        } catch (Exception e) {
             this.id = null;
         }
-    }
-
-    @Override
-    public int getArgumentsCount() {
-        return this.argumentsCount;
     }
 }

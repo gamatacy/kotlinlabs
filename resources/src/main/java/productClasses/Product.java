@@ -5,9 +5,10 @@ import annotations.GreaterThan;
 import annotations.NotNull;
 import enums.UnitOfMeasure;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Product implements Comparable<Product> {
+public class Product implements Comparable<Product>, Serializable {
     @NotNull
     @GreaterThan
     @AutoGen

@@ -13,7 +13,6 @@ import java.io.FileReader;
  * Execute script from file
  */
 public class ExecuteScriptCommand extends Command implements CommandWithArgument {
-    private final int argumentsCount = 1;
     private String path;
     private CommandManager commandManager;
     private FileManager fileManager;
@@ -37,14 +36,8 @@ public class ExecuteScriptCommand extends Command implements CommandWithArgument
     }
 
     @Override
-    public void setArgument(String[] args) {
-        this.path = args[0];
+    public void setArgument(Object argument) {
+        this.path = (String) argument;
     }
-
-    @Override
-    public int getArgumentsCount() {
-        return argumentsCount;
-    }
-
 
 }

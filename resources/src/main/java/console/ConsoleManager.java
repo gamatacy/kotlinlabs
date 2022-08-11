@@ -12,8 +12,8 @@ import java.io.PrintStream;
 /**
  * Read input from user and return commands results
  */
-public class ConsoleManager {
-    private String username = "user";
+public class ConsoleManager implements Runnable{
+    private final String username = "user";
     private final CommandManager commandManager;
     private final BufferedReader reader;
     private final CommandHistory history;
@@ -26,6 +26,7 @@ public class ConsoleManager {
         this.printStream = printStream;
     }
 
+    @Override
     public void run() {
         while (true) {
             printStream.print("<" + this.username + ">$");

@@ -2,6 +2,7 @@ package commands.commandsFiles;
 
 import collection.CollectionManager;
 import commands.Command;
+import commands.CommandWithArgument;
 import commands.ExecutionResult;
 import enums.InputMode;
 import productClasses.FieldsReader;
@@ -15,9 +16,10 @@ import java.util.ArrayDeque;
 /**
  * Remove all elements by manufacturer value
  */
-public class RemoveAllByManufacturerCommand extends Command {
+public class RemoveAllByManufacturerCommand extends Command implements CommandWithArgument {
     private final CollectionManager collectionManager;
-
+    private Product argument = null;
+    private Product product;
 
     public RemoveAllByManufacturerCommand(CollectionManager collectionManager) {
         super("remove_all_by_manufacturer", "удалить из коллекции все элементы, значение поля manufacturer которого эквивалентно заданному");
@@ -26,8 +28,14 @@ public class RemoveAllByManufacturerCommand extends Command {
 
     @Override
     public ExecutionResult execute(BufferedReader reader) {
-        FieldsReader fieldsReader = new FieldsReader(Organization.class);
-        Product product = ProductBuilder.getBuilder().buildManufacturer(fieldsReader.read(reader, InputMode.USER));
+        if(argument == null) {
+            FieldsReader fieldsReader = new FieldsReader(Organization.class);
+            product = ProductBuilder.getBuilder().buildManufacturer(fieldsReader.read(reader, InputMode.USER));
+        }
+        else {
+            product = argument;
+        }
+
         Product[] products = collectionManager.getProductsCollection().toArray(new Product[0]);
         ArrayDeque<Product> newDeque = new ArrayDeque<>();
 
@@ -49,5 +57,10 @@ public class RemoveAllByManufacturerCommand extends Command {
         }
     }
 
+
+    @Override
+    public void setArgument(Object argument) {
+        this.argument = (Product) argument;
+    }
 
 }

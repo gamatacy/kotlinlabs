@@ -14,7 +14,6 @@ import java.util.ArrayDeque;
  * Remove one element by id value
  */
 public class RemoveByIdCommand extends Command implements CommandWithArgument {
-    private final int argumentsCount = 1;
     private final CollectionManager collectionManager;
     private Integer id;
 
@@ -49,16 +48,11 @@ public class RemoveByIdCommand extends Command implements CommandWithArgument {
     }
 
     @Override
-    public void setArgument(String[] args) {
+    public void setArgument(Object argument) {
         try {
-            this.id = Integer.valueOf(args[0]);
+            this.id = (int) argument;
         } catch (Exception e) {
             this.id = null;
         }
-    }
-
-    @Override
-    public int getArgumentsCount() {
-        return this.argumentsCount;
     }
 }
