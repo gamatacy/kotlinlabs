@@ -16,28 +16,6 @@ public class FieldsValidator {
         enumCheck(value, field);
     }
 
-    /*
-    public static void validateArray(String[] values) throws InvalidValueException{
-        int index = 0;
-        for (Field field : Product.class.getDeclaredFields()) {
-            if (field.getType() == Coordinates.class) {
-                for (Field field1 : Coordinates.class.getDeclaredFields()){
-                    validateField(values[index], field1);
-                    index += 1;
-                }
-            } else if (field.getType() == Organization.class) {
-                for (Field field1 : Coordinates.class.getDeclaredFields()){
-                    validateField(values[index], field1);
-                    index += 1;
-                }
-            } else {
-                validateField(values[index], field);
-            }
-            index += 1;
-        }
-    }
-     */
-
     private static void nullCheck(Object value, Field field) throws InvalidValueException {
         if (field.isAnnotationPresent(NotNull.class)) {
             if (value == null || value.toString().length() == 0) {

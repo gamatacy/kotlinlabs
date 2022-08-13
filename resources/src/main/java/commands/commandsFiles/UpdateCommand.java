@@ -11,6 +11,7 @@ import productClasses.ProductBuilder;
 
 import java.io.BufferedReader;
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 
@@ -18,10 +19,9 @@ import java.util.Arrays;
  * Update element value by Product ID
  */
 public class UpdateCommand extends Command implements CommandWithArgument {
-    private final int argumentsCount = 1;
     private CollectionManager collectionManager;
-    private Integer id;
-
+    private Integer id = null;
+    private Product product = null;
 
     public UpdateCommand(CollectionManager collectionManager) {
         super("update", "обновить значение элемента коллекции, id которого равен заданному");
@@ -30,30 +30,41 @@ public class UpdateCommand extends Command implements CommandWithArgument {
 
     @Override
     public ExecutionResult execute(BufferedReader reader) {
-        return update(reader);
-    }
-
-    private ExecutionResult update(BufferedReader reader) {
         Product[] products = collectionManager.getProductsCollection().toArray(new Product[0]);
-        for (int i = 0; i < products.length; i++) {
-            if (products[i].getId() == this.id) {
-                FieldsReader fieldsReader = new FieldsReader(Product.class);
-                ProductBuilder.getBuilder().removeId(this.id);
-                products[i] = ProductBuilder.getBuilder().buildProduct(fieldsReader.read(reader, InputMode.USER));
-                ArrayDeque<Product> updatedDeque = new ArrayDeque<>(Arrays.asList(products));
-                collectionManager.updateCollection(updatedDeque);
-                return ExecutionResult.executionResult(true, "Element updated");
+        if (product == null) {
+            for (int i = 0; i < products.length; i++) {
+                if (products[i].getId().intValue() == this.id.intValue()) {
+                    FieldsReader fieldsReader = new FieldsReader(Product.class);
+                    ProductBuilder.getBuilder().removeId(this.id);
+                    products[i] = ProductBuilder.getBuilder().buildProduct(fieldsReader.read(reader, InputMode.USER));
+                    ArrayDeque<Product> updatedDeque = new ArrayDeque<>(Arrays.asList(products));
+                    collectionManager.updateCollection(updatedDeque);
+                    return ExecutionResult.executionResult(true, "Element updated");
+                }
+            }
+        }else {
+            for (int i = 0; i < products.length; i++) {
+                if (products[i].getId().intValue() == this.id.intValue()) {
+                    product.setId(this.id);
+                    products[i] = product;
+                    ArrayDeque<Product> updatedDeque = new ArrayDeque<>(Arrays.asList(products));
+                    collectionManager.updateCollection(updatedDeque);
+                    return ExecutionResult.executionResult(true, "Element updated");
+                }
             }
         }
+        product = null;
         return ExecutionResult.executionResult(false, "No element with this id");
     }
 
     @Override
-    public void setArgument(Object argument) {
+    public void setArgument(ArrayList<Object> argument) {
         try {
-            this.id = (int) argument;
+            this.id = Integer.valueOf(argument.get(0).toString());
+            this.product = (Product) argument.get(1);
         } catch (Exception e) {
             this.id = null;
+            this.product = null;
         }
     }
 }

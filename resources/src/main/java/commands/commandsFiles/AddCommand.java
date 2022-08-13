@@ -10,6 +10,7 @@ import productClasses.Product;
 import productClasses.ProductBuilder;
 
 import java.io.BufferedReader;
+import java.util.ArrayList;
 
 /**
  * Add element to collection from user input
@@ -36,7 +37,7 @@ public class AddCommand extends Command implements CommandWithArgument {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }else{
+        } else {
             collectionManager.addToCollectionFirst(argument);
             this.inputMode = InputMode.USER;
             argument = null;
@@ -47,8 +48,15 @@ public class AddCommand extends Command implements CommandWithArgument {
 
 
     @Override
-    public void setArgument(Object argument) {
-        this.argument = (Product) argument;
+    public void setArgument(ArrayList<Object> argument) {
+        try {
+            this.argument = (Product) argument.get(0);
+        } catch (Exception e) {
+            this.argument = null;
+        }
+    }
+
+    public void setScriptMode(){
         this.inputMode = InputMode.SCRIPT;
     }
 

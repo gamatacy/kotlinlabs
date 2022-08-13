@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
 
 /**
  * Execute script from file
@@ -31,13 +32,14 @@ public class ExecuteScriptCommand extends Command implements CommandWithArgument
             BufferedReader scriptReader = new BufferedReader(new FileReader(file));
             return CommandInvoker.invokeScriptCommand(scriptReader, commandManager);
         } catch (FileNotFoundException ef) {
+            ef.printStackTrace();
             return ExecutionResult.executionResult(false, "File doesn't exist");
         }
     }
 
     @Override
-    public void setArgument(Object argument) {
-        this.path = (String) argument;
+    public void setArgument(ArrayList<Object> argument) {
+        this.path = (String) argument.get(0);
     }
 
 }

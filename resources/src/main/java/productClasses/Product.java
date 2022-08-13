@@ -96,6 +96,10 @@ public class Product implements Comparable<Product>, Serializable {
     public Integer getId() {
         return id;
     }
+    public void setId(Integer id) {
+        this.id = id;
+        this.manufacturer.setId(id);
+    }
 
     /**
      * Compare products by id

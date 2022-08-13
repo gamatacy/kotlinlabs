@@ -7,6 +7,7 @@ import commands.ExecutionResult;
 import utils.FileManager;
 
 import java.io.BufferedReader;
+import java.util.ArrayList;
 
 /**
  * Save collection into csv file, standart output is test.csv
@@ -38,7 +39,7 @@ public class SaveCommand extends Command implements CommandWithArgument {
     }
 
     @Override
-    public void setArgument(Object argument) {
-        this.path = (String) argument;
+    public void setArgument(ArrayList<Object> argument) {
+        this.path = (String) argument.get(0);
     }
 }

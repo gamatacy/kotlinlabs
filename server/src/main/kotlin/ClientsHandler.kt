@@ -2,6 +2,7 @@ import collection.CollectionManager
 import commands.CommandManager
 import commands.ExecutionResult
 import commands.ServerRequest
+import console.User
 import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
 import java.net.Socket
@@ -12,14 +13,24 @@ class ClientsHandler(
 ) : Thread() {
 
     override fun run() {
-        println("Connected")
         var input = ObjectInputStream(socket.getInputStream())
         var output = ObjectOutputStream(socket.getOutputStream())
-        while (socket.isConnected) {
-            var request = input.readObject() as ServerRequest
-            output.writeObject(ServerCommandInvoker.invoke(request, commandManager))
+
+        var username = (input.readObject() as User).username
+
+        println("\n$username connected\n")
+
+        try {
+            while (socket.isConnected) {
+                var request = input.readObject() as ServerRequest
+                output.writeObject(ServerCommandInvoker.invoke(request, commandManager))
+            }
+        }catch (e: Exception){
+            println("\n$username disconnected\n")
         }
-        println("Disconnected")
+        input.close()
+        output.close()
+        socket.close()
     }
 
 }

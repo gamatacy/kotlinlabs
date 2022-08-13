@@ -17,8 +17,14 @@ public class CommandInvoker {
     public static ExecutionResult invokeUserCommand(String[] data, BufferedReader reader, CommandManager commandManager) {
         try {
             Command command = commandManager.getCommand(data[0]);
+            ArrayList<Object> args = new ArrayList<>();
+            if (data.length > 1) {
+                for (int i = 1; i < data.length; i++) {
+                    args.add(data[i]);
+                }
+            }
             if (command instanceof CommandWithArgument) {
-                    ((CommandWithArgument) command).setArgument(data[1]);
+                ((CommandWithArgument) command).setArgument(args);
             }
             return command.execute(reader);
         } catch (Exception e) {
@@ -32,29 +38,24 @@ public class CommandInvoker {
         try {
             while ((line = reader.readLine()) != null) {
                 String[] input = line.split(" ");
+                if(input[0].isEmpty()){
+                    break;
+                }
                 Command command = commandManager.getCommand(input[0]);
                 if (command.getClass() == AddCommand.class) {
                     ((AddCommand) command).setArgument(null);
+                    ((AddCommand) command).setScriptMode();
                     command.execute(reader);
                 } else if (command.getClass() == ExecuteScriptCommand.class) {
                     throw new InvalidValueException("Recursion detected");
                 } else if (command.getClass() == ExitCommand.class) {
                     return command.execute(reader);
-                } else if (command instanceof CommandWithArgument) {
-                    /*
-                    String[] args = new String[((CommandWithArgument) command).getArgumentsCount()];
-                    for (int j = 1; j < input.length; j++) {
-                        args[j - 1] = input[j];
-                    }
-                    ((CommandWithArgument) command).setArgument(args);
-                    result += command.execute(reader).getMessage() + "\n";
-                     */
                 } else {
                     result += command.execute(reader).getMessage() + "\n";
                 }
             }
         } catch (InvalidValueException ie) {
-            return ExecutionResult.executionResult(false, result + "Script not fully executed: " + ie.getMessage());
+            return ExecutionResult.executionResult(false, result + "Script not fully executed: " + ie.getMessage() + "\n");
         } catch (Exception e) {
             return ExecutionResult.executionResult(false, result + "Script not fully executed\n");
         }

@@ -12,6 +12,7 @@ import productClasses.ProductBuilder;
 
 import java.io.BufferedReader;
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 
 /**
  * Remove all elements by manufacturer value
@@ -59,8 +60,8 @@ public class RemoveAllByManufacturerCommand extends Command implements CommandWi
 
 
     @Override
-    public void setArgument(Object argument) {
-        this.argument = (Product) argument;
+    public void setArgument(ArrayList<Object> argument) {
+        this.argument = (Product) argument.get(0);
     }
 
 }

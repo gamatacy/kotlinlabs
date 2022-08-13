@@ -21,7 +21,7 @@ fun main() {
     var output: ObjectOutputStream
     var request: ServerRequest
 
-    val path: String = "test.csv"
+    val path: String = "test2.csv"
     val collectionManager = CollectionManager()
     val fileManager = FileManager()
     val commandManager = CommandManager()
@@ -44,7 +44,7 @@ fun main() {
         FilterByPartNumberCommand(collectionManager)
     )
 
-    val console = ConsoleManager(commandManager, BufferedReader(InputStreamReader(System.`in`)), System.out)
+    val console = ConsoleManager(commandManager, BufferedReader(InputStreamReader(System.`in`)), System.out, "server")
 
     try {
         ProductBuilder.newBuilder()
@@ -53,17 +53,16 @@ fun main() {
     } catch (e: Exception) {
         System.err.println(e.message)
     } finally {
-        //console.run()
+        console.start()
     }
 
 
     println("Waiting for connect")
     serverSocket = ServerSocket(port)
     while (true) {
-        try {
-            ClientsHandler(serverSocket.accept(),commandManager).start()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
+        ClientsHandler(serverSocket.accept(), commandManager).start()
     }
+
+    serverSocket.close()
+
 }

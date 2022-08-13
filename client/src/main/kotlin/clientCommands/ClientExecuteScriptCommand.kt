@@ -30,29 +30,22 @@ class ClientExecuteScriptCommand {
                     }
 
                     var command = commandManager.getCommand(cmd[0])
-
-                    if (cmd.size == 1 && command !is CommandWithArgument) {
-                        println(connectionHandler.createRequest(ServerRequest.createRequest(command, null))?.message)
-                    }
-
-                    var argument: Any? = null
+                    var argument: ArrayList<Any?> = arrayListOf()
 
                     if (cmd.size > 1){
-                        argument = cmd[1]
+                        argument.add(cmd[1])
                     }
 
                     when (command.name) {
                         "execute_script" -> throw InvalidValueException("Recursion detected!")
-                        "add" -> ServerRequest.createRequest(command,ClientAddCommand.execute(scriptReader,InputMode.SCRIPT))
+                        "add" -> argument.add(ClientAddCommand.execute(scriptReader,InputMode.SCRIPT))
                     }
 
+                    connectionHandler.createRequest(ServerRequest.createRequest(command,argument))
+
                 }
-            }catch (ne: NullPointerException){
-                return null
             }
-            catch (e: Exception) {
-                e.printStackTrace()
-            }
+            catch (e: Exception) {}
             return null
         }
     }

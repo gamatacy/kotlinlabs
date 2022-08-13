@@ -99,7 +99,7 @@ public class ProductBuilder {
         }
     }
 
-    private Integer idGenerator() {
+    public Integer idGenerator() {
         while (usedIdsList.contains(usedIds)) {
             usedIds += 1;
         }

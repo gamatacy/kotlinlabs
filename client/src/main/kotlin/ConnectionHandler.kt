@@ -1,5 +1,6 @@
 import commands.ExecutionResult
 import commands.ServerRequest
+import console.User
 import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
 import java.net.InetSocketAddress
@@ -13,31 +14,32 @@ class ConnectionHandler(
     private val socket: Socket = Socket()
     private lateinit var serverInput: ObjectInputStream
     private lateinit var serverOutput: ObjectOutputStream
+    private var reconnectAttempts = 0
 
-    fun getSocket() = socket
-
-    fun connect() {
+    fun connect(user: User) {
         try {
             println("Trying to connect...")
             socket.connect(InetSocketAddress(host,port))
-            println("Socket opened")
             serverOutput = ObjectOutputStream(socket.getOutputStream())
             serverInput = ObjectInputStream(socket.getInputStream())
             println("Connection set!")
+            serverOutput.writeObject(user)
         } catch (e: Exception) {
-            System.err.println("DISCONNECTED")
-            //e.printStackTrace()
+            System.err.println("Connection lost, trying to reconnect...")
+            if(reconnectAttempts < 3){
+                reconnectAttempts++
+                connect(user)
+            }
+            serverOutput.close()
+            serverInput.close()
+            socket.close()
+            System.err.println("Disconnected")
         }
     }
 
     fun createRequest(request: ServerRequest): ExecutionResult? {
-        return try {
-            serverOutput.writeObject(request)
-            getResponse()
-        } catch (e: Exception) {
-            e.printStackTrace()
-            null
-        }
+        serverOutput.writeObject(request)
+        return getResponse()
     }
 
     private fun getResponse(): ExecutionResult? {

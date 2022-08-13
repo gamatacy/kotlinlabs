@@ -9,13 +9,15 @@ import productClasses.ProductBuilder;
 
 import java.io.BufferedReader;
 import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Remove one element by id value
  */
 public class RemoveByIdCommand extends Command implements CommandWithArgument {
     private final CollectionManager collectionManager;
-    private Integer id;
+    private Integer id = null;
 
 
     public RemoveByIdCommand(CollectionManager collectionManager) {
@@ -25,15 +27,15 @@ public class RemoveByIdCommand extends Command implements CommandWithArgument {
 
     @Override
     public ExecutionResult execute(BufferedReader reader) {
-        return remove();
-    }
+        if (this.id == null){
+            return ExecutionResult.executionResult(false, "Must be int!");
+        }
 
-    public ExecutionResult remove() {
         Product[] array = collectionManager.getProductsCollection().toArray(new Product[0]);
         ArrayDeque<Product> updatedDeque = new ArrayDeque<>();
 
         for (Product product : array) {
-            if (product.getId().equals(id) == false) {
+            if (product.getId().intValue() != this.id.intValue()) {
                 ProductBuilder.getBuilder().removeId(product.getId());
                 updatedDeque.addLast(product);
             }
@@ -43,14 +45,15 @@ public class RemoveByIdCommand extends Command implements CommandWithArgument {
             return ExecutionResult.executionResult(false, "Product with this ID doesn't exist");
         }
 
+        this.id = null;
         this.collectionManager.updateCollection(updatedDeque);
         return ExecutionResult.executionResult(true, "Element removed");
     }
 
     @Override
-    public void setArgument(Object argument) {
+    public void setArgument(ArrayList<Object> argument) {
         try {
-            this.id = (int) argument;
+            this.id = Integer.valueOf(argument.get(0).toString());
         } catch (Exception e) {
             this.id = null;
         }

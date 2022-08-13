@@ -37,7 +37,7 @@ public class App {
                 new FilterByPartNumberCommand(collectionManager)
         );
 
-        ConsoleManager console = new ConsoleManager(commandManager, new BufferedReader(new InputStreamReader(System.in)), printStream);
+        ConsoleManager console = new ConsoleManager(commandManager, new BufferedReader(new InputStreamReader(System.in)), printStream, "app");
 
         if (args.length == 0) {
             path = "test.csv";

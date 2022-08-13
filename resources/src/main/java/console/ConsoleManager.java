@@ -12,18 +12,19 @@ import java.io.PrintStream;
 /**
  * Read input from user and return commands results
  */
-public class ConsoleManager implements Runnable{
-    private final String username = "user";
+public class ConsoleManager extends Thread {
+    private String username = "user";
     private final CommandManager commandManager;
     private final BufferedReader reader;
     private final CommandHistory history;
     private final PrintStream printStream;
 
-    public ConsoleManager(CommandManager commandmanager, BufferedReader reader, PrintStream printStream) {
+    public ConsoleManager(CommandManager commandmanager, BufferedReader reader, PrintStream printStream, String username) {
         this.commandManager = commandmanager;
         this.history = new CommandHistory();
         this.reader = reader;
         this.printStream = printStream;
+        this.username = username;
     }
 
     @Override

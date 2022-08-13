@@ -1,6 +1,7 @@
 import commands.CommandManager
 import commands.ServerRequest
 import commands.commandsFiles.*
+import console.User
 import productClasses.ProductBuilder
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -32,13 +33,16 @@ fun main() {
         UpdateCommand(null)
     )
 
-    connectionHandler.connect()
+    print("Enter username: ")
+    val user = User(readLine())
+
+    connectionHandler.connect(user)
 
     val console = UserConsole(commandManager,
         BufferedReader(InputStreamReader(System.`in`)),
         System.out,
         connectionHandler,
-        "BEBRA")
+        user.username)
 
     ProductBuilder.newBuilder()
 
