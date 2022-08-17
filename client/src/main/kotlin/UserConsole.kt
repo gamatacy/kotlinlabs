@@ -40,6 +40,8 @@ class UserConsole(
                 }
 
                 when (commandName) {
+                    "exit" -> break
+                    "history" -> history.printHistory(System.out)
                     "add" -> argument.add(ClientAddCommand.execute(reader, InputMode.USER))
                     "update" -> argument.add(ClientAddCommand.execute(reader, InputMode.USER))
                     "remove_all_by_manufacturer" -> argument.add(ClientRemoveByManCommand.execute(reader))
@@ -51,24 +53,28 @@ class UserConsole(
                     ))
                 }
 
-
-
                 var command = commandManager.getCommand(commandName)
 
-                println(
-                    connectionHandler.createRequest(
-                        ServerRequest.createRequest(
-                            command,
-                            argument
-                        )
-                    )?.message
+                var response = connectionHandler.createRequest(
+                    ServerRequest.createRequest(
+                        command,
+                        argument
+                    )
                 )
+
+                if (response != null) {
+                    if(response.result && commandName != "history") {
+                        history.updateHistory(commandName)
+                    }
+                    println(response.message)
+                }
 
             } catch (e: Exception) {
                 printStream.println(e.message)
             }
         }
         try {
+            println("Exit success")
             reader.close()
         } catch (e: Exception) {
             printStream.println(e.message)

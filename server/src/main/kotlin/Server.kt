@@ -25,6 +25,7 @@ fun main() {
     val collectionManager = CollectionManager()
     val fileManager = FileManager()
     val commandManager = CommandManager()
+
     commandManager.registerCommands(
         HelpCommand(commandManager.commandsInfo),
         HistoryCommand(),
@@ -44,7 +45,10 @@ fun main() {
         FilterByPartNumberCommand(collectionManager)
     )
 
+    serverSocket = ServerSocket(port)
+
     val console = ConsoleManager(commandManager, BufferedReader(InputStreamReader(System.`in`)), System.out, "server")
+    val threadHandler = ServerHandler(serverSocket,commandManager)
 
     try {
         ProductBuilder.newBuilder()
@@ -52,17 +56,12 @@ fun main() {
         collectionManager.fill(fileManager.fileCollection)
     } catch (e: Exception) {
         System.err.println(e.message)
-    } finally {
-        console.start()
     }
 
-
+    Thread(threadHandler).start()
     println("Waiting for connect")
-    serverSocket = ServerSocket(port)
-    while (true) {
-        ClientsHandler(serverSocket.accept(), commandManager).start()
-    }
-
+    console.run()
     serverSocket.close()
+    threadHandler.close()
 
 }

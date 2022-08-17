@@ -12,7 +12,7 @@ import java.io.PrintStream;
 /**
  * Read input from user and return commands results
  */
-public class ConsoleManager extends Thread {
+public class ConsoleManager {
     private String username = "user";
     private final CommandManager commandManager;
     private final BufferedReader reader;
@@ -27,7 +27,6 @@ public class ConsoleManager extends Thread {
         this.username = username;
     }
 
-    @Override
     public void run() {
         while (true) {
             printStream.print("<" + this.username + ">$");

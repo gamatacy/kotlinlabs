@@ -100,11 +100,11 @@ public class ProductBuilder {
     }
 
     public Integer idGenerator() {
-        while (usedIdsList.contains(usedIds)) {
-            usedIds += 1;
+        while (this.usedIdsList.contains(usedIds)) {
+            this.usedIds += 1;
         }
-        usedIdsList.add(usedIds);
-        return usedIds;
+        this.usedIdsList.add(usedIds);
+        return this.usedIds;
     }
 
     public void clearId(){this.usedIdsList = new HashSet<>(); usedIds = 0;}

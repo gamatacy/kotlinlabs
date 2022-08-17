@@ -1,36 +1,25 @@
-import collection.CollectionManager
 import commands.CommandManager
-import commands.ExecutionResult
-import commands.ServerRequest
-import console.User
 import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
+import java.net.ServerSocket
 import java.net.Socket
 
 class ClientsHandler(
-    var socket: Socket,
-    var commandManager: CommandManager
-) : Thread() {
+    private val serverSocket: ServerSocket,
+    private val commandManager: CommandManager
+) {
+    private lateinit var socket: Socket
 
-    override fun run() {
-        var input = ObjectInputStream(socket.getInputStream())
-        var output = ObjectOutputStream(socket.getOutputStream())
-
-        var username = (input.readObject() as User).username
-
-        println("\n$username connected\n")
-
+    fun acceptConnection(): Socket{
         try {
-            while (socket.isConnected) {
-                var request = input.readObject() as ServerRequest
-                output.writeObject(ServerCommandInvoker.invoke(request, commandManager))
-            }
+            socket = serverSocket.accept()
+            val input = ObjectInputStream(socket.getInputStream())
+            val output = ObjectOutputStream(socket.getOutputStream())
+            Thread(RequestHandler(input, output, commandManager)).start()
         }catch (e: Exception){
-            println("\n$username disconnected\n")
+            e.printStackTrace()
         }
-        input.close()
-        output.close()
-        socket.close()
+        return socket
     }
 
 }

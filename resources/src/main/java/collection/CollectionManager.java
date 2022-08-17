@@ -19,7 +19,6 @@ import java.util.Date;
 public class CollectionManager implements FillCollection {
     private Date creationDate;
     private ArrayDeque<Product> productsCollection = new ArrayDeque<>();
-    private ProductBuilder productBuilder = ProductBuilder.newBuilder().getBuilder();
 
     public CollectionManager() {
         this.creationDate = new Date();
@@ -50,7 +49,6 @@ public class CollectionManager implements FillCollection {
      * @param p Product
      */
     public void addToCollectionFirst(Product p) {
-        p.setId(productBuilder.idGenerator());
         productsCollection.addFirst(p);
     }
 

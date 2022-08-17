@@ -38,6 +38,7 @@ public class AddCommand extends Command implements CommandWithArgument {
                 e.printStackTrace();
             }
         } else {
+            argument.setId(ProductBuilder.getBuilder().idGenerator());
             collectionManager.addToCollectionFirst(argument);
             this.inputMode = InputMode.USER;
             argument = null;

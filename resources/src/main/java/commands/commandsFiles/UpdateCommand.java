@@ -31,6 +31,9 @@ public class UpdateCommand extends Command implements CommandWithArgument {
     @Override
     public ExecutionResult execute(BufferedReader reader) {
         Product[] products = collectionManager.getProductsCollection().toArray(new Product[0]);
+        if(this.id == null){
+            return ExecutionResult.executionResult(false, "Id must be int!");
+        }
         if (product == null) {
             for (int i = 0; i < products.length; i++) {
                 if (products[i].getId().intValue() == this.id.intValue()) {
@@ -39,6 +42,8 @@ public class UpdateCommand extends Command implements CommandWithArgument {
                     products[i] = ProductBuilder.getBuilder().buildProduct(fieldsReader.read(reader, InputMode.USER));
                     ArrayDeque<Product> updatedDeque = new ArrayDeque<>(Arrays.asList(products));
                     collectionManager.updateCollection(updatedDeque);
+                    id = null;
+                    product = null;
                     return ExecutionResult.executionResult(true, "Element updated");
                 }
             }
@@ -49,11 +54,13 @@ public class UpdateCommand extends Command implements CommandWithArgument {
                     products[i] = product;
                     ArrayDeque<Product> updatedDeque = new ArrayDeque<>(Arrays.asList(products));
                     collectionManager.updateCollection(updatedDeque);
+                    id = null;
+                    product = null;
                     return ExecutionResult.executionResult(true, "Element updated");
                 }
             }
         }
-        product = null;
+
         return ExecutionResult.executionResult(false, "No element with this id");
     }
 
@@ -62,9 +69,6 @@ public class UpdateCommand extends Command implements CommandWithArgument {
         try {
             this.id = Integer.valueOf(argument.get(0).toString());
             this.product = (Product) argument.get(1);
-        } catch (Exception e) {
-            this.id = null;
-            this.product = null;
-        }
+        } catch (Exception e) {}
     }
 }
