@@ -57,6 +57,10 @@ public class FilterByPartNumberCommand extends Command implements CommandWithArg
 
     @Override
     public void setArgument(ArrayList<Object> argument) {
-        this.argument = argument.get(0).toString();
+        try {
+            this.argument = argument.get(0).toString();
+        }catch (Exception e){
+            this.argument = "bruh.";
+        }
     }
 }

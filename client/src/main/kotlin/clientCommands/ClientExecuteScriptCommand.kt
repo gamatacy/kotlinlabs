@@ -19,10 +19,14 @@ class ClientExecuteScriptCommand {
             connectionHandler: ConnectionHandler,
             commandManager: CommandManager
         ): Any? {
+            var scriptLength = 0
+            var sucessCount = 0
             try {
                 val file: File = File(path)
                 val scriptReader = BufferedReader(FileReader(file))
+
                 while (true) {
+
                     var cmd = scriptReader.readLine().split(" ")
 
                     if (cmd.isEmpty()) {
@@ -31,21 +35,32 @@ class ClientExecuteScriptCommand {
 
                     var command = commandManager.getCommand(cmd[0])
                     var argument: ArrayList<Any?> = arrayListOf()
+                    scriptLength++
 
-                    if (cmd.size > 1){
+                    if (cmd.size > 1) {
                         argument.add(cmd[1])
                     }
 
                     when (command.name) {
                         "execute_script" -> throw InvalidValueException("Recursion detected!")
-                        "add" -> argument.add(ClientAddCommand.execute(scriptReader,InputMode.SCRIPT))
+                        "add" -> argument.add(ClientAddCommand.execute(scriptReader, InputMode.SCRIPT))
                     }
 
-                    connectionHandler.createRequest(ServerRequest.createRequest(command,argument))
+                    var response = connectionHandler.createRequest(ServerRequest.createRequest(command, argument))
 
+                    if (response != null) {
+                        if(response.result){
+                            sucessCount++
+                            println(response.message)
+                        }
+                    }
                 }
+
+            } catch (e: Exception) {}
+            when(sucessCount){
+                scriptLength -> println("\nScript executed")
+                else -> println("\nScript not fully executed")
             }
-            catch (e: Exception) {}
             return null
         }
     }

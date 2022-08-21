@@ -39,7 +39,9 @@ public class UpdateCommand extends Command implements CommandWithArgument {
                 if (products[i].getId().intValue() == this.id.intValue()) {
                     FieldsReader fieldsReader = new FieldsReader(Product.class);
                     ProductBuilder.getBuilder().removeId(this.id);
-                    products[i] = ProductBuilder.getBuilder().buildProduct(fieldsReader.read(reader, InputMode.USER));
+                    product = ProductBuilder.getBuilder().buildProduct(fieldsReader.read(reader, InputMode.USER));
+                    product.setId(this.id);
+                    products[i] = product;
                     ArrayDeque<Product> updatedDeque = new ArrayDeque<>(Arrays.asList(products));
                     collectionManager.updateCollection(updatedDeque);
                     id = null;

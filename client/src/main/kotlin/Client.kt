@@ -5,6 +5,7 @@ import console.User
 import productClasses.ProductBuilder
 import java.io.BufferedReader
 import java.io.InputStreamReader
+import java.util.logging.Logger
 
 fun main() {
     val host: String = "localhost"
@@ -36,16 +37,15 @@ fun main() {
     print("Enter username: ")
     val user = User(readLine())
 
-    connectionHandler.connect(user)
-
-    val console = UserConsole(commandManager,
-        BufferedReader(InputStreamReader(System.`in`)),
-        System.out,
-        connectionHandler,
-        user.username)
-
-    ProductBuilder.newBuilder()
-
-    console.run()
-
+    if (connectionHandler.connect(user)){
+        val console = UserConsole(commandManager,
+            BufferedReader(InputStreamReader(System.`in`)),
+            System.out,
+            connectionHandler,
+            user)
+        ProductBuilder.newBuilder()
+        console.run()
+    }else{
+        println("Try later(")
+    }
 }

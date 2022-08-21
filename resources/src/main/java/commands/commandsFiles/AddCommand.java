@@ -50,6 +50,7 @@ public class AddCommand extends Command implements CommandWithArgument {
 
     @Override
     public void setArgument(ArrayList<Object> argument) {
+        this.inputMode = InputMode.SCRIPT;
         try {
             this.argument = (Product) argument.get(0);
         } catch (Exception e) {

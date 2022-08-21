@@ -27,11 +27,7 @@ public class SaveCommand extends Command implements CommandWithArgument {
     @Override
     public ExecutionResult execute(BufferedReader reader) {
         try {
-            if (this.path == null) {
-                fileManager.saveFile("test.csv", this.collectionManager.getProductsCollection());
-            } else {
-                fileManager.saveFile(this.path, this.collectionManager.getProductsCollection());
-            }
+            fileManager.saveFile(this.path, this.collectionManager.getProductsCollection());
             return ExecutionResult.executionResult(true, "Collection saved");
         } catch (Exception e) {
             return ExecutionResult.executionResult(false, "Failed to saved collection");
@@ -40,6 +36,10 @@ public class SaveCommand extends Command implements CommandWithArgument {
 
     @Override
     public void setArgument(ArrayList<Object> argument) {
-        this.path = (String) argument.get(0);
+        try {
+            this.path = (String) argument.get(0);
+        }catch (Exception e){
+            this.path = "collection.csv";
+        }
     }
 }

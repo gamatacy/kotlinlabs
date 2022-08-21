@@ -3,6 +3,7 @@ import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
 import java.net.ServerSocket
 import java.net.Socket
+import java.net.SocketException
 
 class ClientsHandler(
     private val serverSocket: ServerSocket,
@@ -16,8 +17,11 @@ class ClientsHandler(
             val input = ObjectInputStream(socket.getInputStream())
             val output = ObjectOutputStream(socket.getOutputStream())
             Thread(RequestHandler(input, output, commandManager)).start()
-        }catch (e: Exception){
-            e.printStackTrace()
+        }
+        catch (e: Exception){
+            if(e !is SocketException){
+                e.printStackTrace()
+            }
         }
         return socket
     }

@@ -2,6 +2,7 @@ package commands;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class CommandHistory {
@@ -12,19 +13,13 @@ public class CommandHistory {
     }
 
     public void updateHistory(String command) {
+        if(commandHistory.size() == 8){
+            commandHistory.remove(0);
+        }
         commandHistory.add(command);
     }
 
     public void printHistory(PrintStream printStream) {
-        if (commandHistory.size() < 8) {
-            for (int i = 0; i < commandHistory.size();i++) {
-                printStream.println(commandHistory.get(i));
-            }
-        } else {
-            for (int i = 0; i < 8; i++) {
-                printStream.println(commandHistory.get(i));
-            }
-        }
-
+        commandHistory.stream().limit(8).forEach(printStream::println);
     }
 }

@@ -36,8 +36,9 @@ public class RemoveByIdCommand extends Command implements CommandWithArgument {
 
         for (Product product : array) {
             if (product.getId().intValue() != this.id.intValue()) {
-                ProductBuilder.getBuilder().removeId(product.getId());
                 updatedDeque.addLast(product);
+            }else{
+                ProductBuilder.getBuilder().removeId(this.id);
             }
         }
 

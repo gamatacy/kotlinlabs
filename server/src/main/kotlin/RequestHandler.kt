@@ -3,10 +3,11 @@ import commands.ServerRequest
 import console.User
 import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
+import java.net.SocketException
 
 class RequestHandler(
-    private val input : ObjectInputStream,
-    private val output : ObjectOutputStream,
+    private val input: ObjectInputStream,
+    private val output: ObjectOutputStream,
     private val commandManager: CommandManager
 ) : Runnable {
     private var username = "guest"
@@ -14,18 +15,21 @@ class RequestHandler(
     override fun run() {
         try {
             username = (input.readObject() as User).username
-        }catch (e: Exception){}
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
 
-        println("$username connected")
+        println("\n$username connected")
 
         while (true) {
             try {
                 var request = input.readObject() as ServerRequest
-                output.writeObject(ServerCommandInvoker.invoke(request, commandManager))
+                output.writeObject(ClientsCommandInvoker.invoke(request, commandManager))
+            } catch (se: SocketException) {
+                println("\n$username disconnected")
+                break
             } catch (e: Exception) {
                 e.printStackTrace()
-                println("$username disconnected")
-                break
             }
         }
 

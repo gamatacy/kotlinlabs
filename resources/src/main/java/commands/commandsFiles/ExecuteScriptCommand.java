@@ -27,12 +27,14 @@ public class ExecuteScriptCommand extends Command implements CommandWithArgument
 
     @Override
     public ExecutionResult execute(BufferedReader reader) {
+        if(this.path == null){
+            return ExecutionResult.executionResult(false, "");
+        }
         try {
             File file = new File(this.path);
             BufferedReader scriptReader = new BufferedReader(new FileReader(file));
             return CommandInvoker.invokeScriptCommand(scriptReader, commandManager);
         } catch (FileNotFoundException ef) {
-            ef.printStackTrace();
             return ExecutionResult.executionResult(false, "File doesn't exist");
         }
     }

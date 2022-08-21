@@ -39,28 +39,27 @@ public class ConsoleManager {
 
                 ExecutionResult executionResult = CommandInvoker.invokeUserCommand(command.split(" "), reader, commandManager);
 
-                if (executionResult.getResult()) {
-                    if (executionResult.getMessage().equals("Exit success")) {
-                        break;
+
+                switch (executionResult.getMessage()) {
+                    case ("Exit success") -> {
+                        System.out.println(executionResult.getMessage());
                     }
-                    if (executionResult.getMessage().equals("history")) {
+                    case ("history") -> {
                         history.printHistory(printStream);
-                    } else {
-                       printStream.println(executionResult.getMessage());
+                        continue;
                     }
-                    history.updateHistory(command.split(" ")[0]);
-                } else {
-                    printStream.println(executionResult.getMessage());
+                    default -> {
+                        history.updateHistory(command.split(" ")[0]);
+                        printStream.println(executionResult.getMessage());
+                        continue;
+                    }
                 }
+
+            break;
+
             } catch (Exception e) {
                 printStream.println(e.getMessage());
             }
-
-        }
-        try {
-            reader.close();
-        } catch (Exception e) {
-            printStream.println(e.getMessage());
         }
     }
 

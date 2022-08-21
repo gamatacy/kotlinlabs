@@ -1,27 +1,19 @@
 import collection.CollectionManager
 import commands.CommandManager
-import commands.ServerRequest
 import commands.commandsFiles.*
 import console.ConsoleManager
 import productClasses.ProductBuilder
 import utils.FileManager
 import java.io.BufferedReader
 import java.io.InputStreamReader
-import java.io.ObjectInputStream
-import java.io.ObjectOutputStream
 import java.net.ServerSocket
-import java.net.Socket
+
 
 fun main() {
 
     val serverSocket: ServerSocket
-    val socket: Socket
     val port: Int = 8080
-    var input: ObjectInputStream
-    var output: ObjectOutputStream
-    var request: ServerRequest
-
-    val path: String = "test2.csv"
+    val path: String = "collection.csv"
     val collectionManager = CollectionManager()
     val fileManager = FileManager()
     val commandManager = CommandManager()
@@ -58,10 +50,14 @@ fun main() {
         System.err.println(e.message)
     }
 
+    FunnyPics.printMyself()
+
     Thread(threadHandler).start()
     println("Waiting for connect")
     console.run()
     serverSocket.close()
     threadHandler.close()
+
+    FunnyPics.printRandom()
 
 }

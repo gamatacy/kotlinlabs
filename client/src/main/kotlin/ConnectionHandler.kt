@@ -11,31 +11,35 @@ class ConnectionHandler(
     private val host: String,
     private val port: Int
 ) {
-    private val socket: Socket = Socket()
+    private lateinit var socket: Socket
     private lateinit var serverInput: ObjectInputStream
     private lateinit var serverOutput: ObjectOutputStream
     private var reconnectAttempts = 0
+    private val timeout = 3000
 
-    fun connect(user: User) {
-        try {
-            println("Trying to connect...")
-            socket.connect(InetSocketAddress(host,port))
-            serverOutput = ObjectOutputStream(socket.getOutputStream())
-            serverInput = ObjectInputStream(socket.getInputStream())
-            println("Connection set!")
-            serverOutput.writeObject(user)
-        } catch (e: Exception) {
-            System.err.println("Connection lost, trying to reconnect...")
-            if(reconnectAttempts < 3){
+    fun connect(user: User): Boolean{
+        while (reconnectAttempts < 3) {
+            socket = Socket()
+            try {
+                println("Trying to connect...")
+                socket.connect(InetSocketAddress(host, port),timeout)
+                serverOutput = ObjectOutputStream(socket.getOutputStream())
+                serverInput = ObjectInputStream(socket.getInputStream())
+                println("Connection set!")
+                serverOutput.writeObject(user)
+                reconnectAttempts = 0
+                return true
+            } catch (e: Exception) {
                 reconnectAttempts++
-                connect(user)
+                println("Connection failed")
             }
-            serverOutput.close()
-            serverInput.close()
-            socket.close()
-            System.err.println("Disconnected")
+            Thread.sleep(10000)
         }
+        return false
     }
+
+
+
 
     fun createRequest(request: ServerRequest): ExecutionResult? {
         serverOutput.writeObject(request)
@@ -44,6 +48,10 @@ class ConnectionHandler(
 
     private fun getResponse(): ExecutionResult? {
         return (serverInput.readObject() as ExecutionResult?)
+    }
+
+    fun isConnected(): Boolean {
+        return socket.isConnected && !socket.isClosed
     }
 
 }

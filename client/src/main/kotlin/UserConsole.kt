@@ -2,9 +2,11 @@ import clientCommands.ClientAddCommand
 import clientCommands.ClientExecuteScriptCommand
 import clientCommands.ClientRemoveByManCommand
 import commands.*
+import console.User
 import enums.InputMode
 import java.io.BufferedReader
 import java.io.PrintStream
+import java.net.SocketException
 
 /**
  * Read input from user
@@ -14,15 +16,15 @@ class UserConsole(
     private val reader: BufferedReader,
     private val printStream: PrintStream,
     private var connectionHandler: ConnectionHandler,
-    private var username: String? = "user"
+    private val user: User
 ) {
-
+    private val username = user.username
     private val history: CommandHistory = CommandHistory()
 
     fun run() {
-        while (true) {
+        while (connectionHandler.isConnected()) {
 
-            printStream.print("<" + username + ">$")
+            printStream.print("<$username>$")
 
             try {
                 var cmd = reader.readLine().split(" ")
@@ -35,7 +37,7 @@ class UserConsole(
                 }
 
                 if (cmd.size > 1) {
-                    argument.add( cmd[1])
+                    argument.add(cmd[1])
 
                 }
 
@@ -45,12 +47,16 @@ class UserConsole(
                     "add" -> argument.add(ClientAddCommand.execute(reader, InputMode.USER))
                     "update" -> argument.add(ClientAddCommand.execute(reader, InputMode.USER))
                     "remove_all_by_manufacturer" -> argument.add(ClientRemoveByManCommand.execute(reader))
-                    "execute_script" -> argument.add(ClientExecuteScriptCommand.execute(
-                        reader,
-                        cmd[1],
-                        connectionHandler,
-                        commandManager
-                    ))
+                    "execute_script" ->{
+                        ClientExecuteScriptCommand.execute(
+                            reader,
+                            cmd[1],
+                            connectionHandler,
+                            commandManager
+                        )
+                        argument[0] = null
+                    }
+
                 }
 
                 var command = commandManager.getCommand(commandName)
@@ -63,22 +69,26 @@ class UserConsole(
                 )
 
                 if (response != null) {
-                    if(response.result && commandName != "history") {
+                    if (response.result && commandName != "history") {
                         history.updateHistory(commandName)
                     }
                     println(response.message)
                 }
 
+            } catch (se: SocketException) {
+                println("Connection lost")
+                connectionHandler.connect(user)
             } catch (e: Exception) {
-                printStream.println(e.message)
+                println(e.message)
             }
         }
         try {
             println("Exit success")
             reader.close()
         } catch (e: Exception) {
-            printStream.println(e.message)
+            e.printStackTrace()
         }
+
     }
 
 }

@@ -4,3 +4,7 @@ test3.csv
 /.idea
 1
 test.csv
+/out
+/client/build
+/server/build
+/resources/build
