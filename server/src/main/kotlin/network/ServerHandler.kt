@@ -1,3 +1,5 @@
+package network
+
 import commands.CommandManager
 import java.io.Closeable
 import java.net.ServerSocket

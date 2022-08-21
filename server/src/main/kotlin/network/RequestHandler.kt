@@ -1,3 +1,6 @@
+package network
+
+import ClientsCommandInvoker
 import commands.CommandManager
 import commands.ServerRequest
 import console.User
