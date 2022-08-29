@@ -5,18 +5,24 @@ import annotations.GreaterThan;
 import annotations.NotNull;
 import enums.UnitOfMeasure;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
+@Entity
+@Table(name = "products")
 public class Product implements Comparable<Product>, Serializable {
     @NotNull
     @GreaterThan
     @AutoGen
+    @Id
     private Integer id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     @NotNull
     private String name; //Поле не может быть null, Строка не может быть пустой
+
     @NotNull
     private Coordinates coordinates; //Поле не может быть null
+
     @NotNull
     @AutoGen
     private Date creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
@@ -36,10 +42,10 @@ public class Product implements Comparable<Product>, Serializable {
             Date creationDate,
             Float price,
             String partNumber,
-            int manufactureCost ,
+            int manufactureCost,
             UnitOfMeasure unitOfMeasure,
             Organization manufacturer
-    ){
+    ) {
         this.id = id;
         this.name = name;
         this.coordinates = coordinates;
@@ -59,7 +65,7 @@ public class Product implements Comparable<Product>, Serializable {
         return manufacturer;
     }
 
-    public Object[] productToObject(){
+    public Object[] productToObject() {
         Object[] objects = new Object[14];
         objects[0] = this.id;
         objects[1] = this.name;
@@ -74,7 +80,7 @@ public class Product implements Comparable<Product>, Serializable {
         objects[10] = this.manufacturer.getName();
         objects[11] = this.manufacturer.getFullName();
         objects[12] = this.manufacturer.getType();
-        objects[13] = this.manufacturer.getOfficialAddress().getZipCode();
+        objects[13] = this.manufacturer.getOfficialAddress();//.getZipCode();
         return objects;
     }
 
@@ -96,6 +102,7 @@ public class Product implements Comparable<Product>, Serializable {
     public Integer getId() {
         return id;
     }
+
     public void setId(Integer id) {
         this.id = id;
         this.manufacturer.setId(id);
@@ -103,15 +110,15 @@ public class Product implements Comparable<Product>, Serializable {
 
     /**
      * Compare products by id
+     *
      * @param product
      * @return int
      */
     @Override
     public int compareTo(Product product) {
-        if(this.id < product.getId()    ){
+        if (this.id < product.getId()) {
             return -1;
-        }
-        else{
+        } else {
             return 1;
         }
     }

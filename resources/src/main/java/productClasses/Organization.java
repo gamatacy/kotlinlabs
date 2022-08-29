@@ -8,9 +8,13 @@ import exceptions.CannotBeEmptyException;
 import exceptions.CannotBeNullException;
 import exceptions.InvalidValueException;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
+@Entity
+@Table(name="organizations")
 public class Organization implements Serializable {
+    @Id
     @NotNull
     @GreaterThan
     @AutoGen
@@ -20,9 +24,12 @@ public class Organization implements Serializable {
     @NotNull
     private String fullName; //Поле не может быть null
     @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name="organizationtype")
     private OrganizationType type; //Поле не может быть null
     @NotNull
-    private Address officialAddress; //Поле не может быть null
+    @Column(name="address")
+    private String officialAddress; //Поле не может быть null
 
 
     /**
@@ -40,8 +47,10 @@ public class Organization implements Serializable {
         this.name = name;
         this.fullName = fullName;
         this.type = type;
-        this.officialAddress = new Address(zipcode);
+        this.officialAddress = zipcode;//new Address(zipcode);
     }
+
+    public Organization(){};
 
     /**
      * @return int id
@@ -78,7 +87,7 @@ public class Organization implements Serializable {
     /**
      * @return Address
      */
-    public Address getOfficialAddress() {
+    public String getOfficialAddress() {
         return officialAddress;
     }
 
@@ -92,7 +101,7 @@ public class Organization implements Serializable {
     @Override
     public boolean equals(Object o) {
         Organization equal = (Organization) o;
-        if(equal.getName().equals(this.name) && equal.getFullName().equals(this.fullName) && equal.getType().equals(this.type) && equal.getOfficialAddress().getZipCode().equals(this.officialAddress.getZipCode())){
+        if(equal.getName().equals(this.name) && equal.getFullName().equals(this.fullName) && equal.getType().equals(this.type) && equal.getOfficialAddress().equals(this.officialAddress)){
             return true;
         }
         else {
@@ -114,7 +123,7 @@ public class Organization implements Serializable {
                 ", name='" + name + '\'' +
                 ", fullName='" + fullName + '\'' +
                 ", type=" + type +
-                ", officialAddress=" + officialAddress.getZipCode() +
+                ", officialAddress=" + officialAddress +
                 '}';
     }
 }

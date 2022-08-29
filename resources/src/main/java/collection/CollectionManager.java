@@ -15,7 +15,6 @@ import java.util.Date;
 /**
  * Manager class for interact with collection
  */
-
 public class CollectionManager implements FillCollection {
     private Date creationDate;
     private ArrayDeque<Product> productsCollection = new ArrayDeque<>();
@@ -24,38 +23,22 @@ public class CollectionManager implements FillCollection {
         this.creationDate = new Date();
     }
 
-    /**
-     * @return creationDate of collection
-     */
     public Date getCreationDate() {
         return creationDate;
     }
 
-    /**
-     * @return Collection of products
-     */
     public ArrayDeque<Product> getProductsCollection() {
         return productsCollection;
     }
 
-    /**
-     * @param collection Product collection
-     */
     public void updateCollection(ArrayDeque<Product> collection) {
         this.productsCollection = collection;
     }
 
-    /**
-     * @param p Product
-     */
     public void addToCollectionFirst(Product p) {
         productsCollection.addFirst(p);
     }
 
-
-    /**
-     * @return Product
-     */
     public Product getCollectionFirst() throws InvalidValueException {
         if (this.productsCollection.size() != 0) {
             return productsCollection.getFirst();
@@ -64,9 +47,6 @@ public class CollectionManager implements FillCollection {
         }
     }
 
-    /**
-     * @return Collection size
-     */
     public int getCollectionSize() {
         return productsCollection.size();
     }
@@ -79,11 +59,6 @@ public class CollectionManager implements FillCollection {
         }
     }
 
-    /**
-     * Fill collection from other collection.
-     *
-     * @param records collection of CSVRecords
-     */
     @Override
     public void fill(Iterable<CSVRecord> records) {
         int successCount = 0;

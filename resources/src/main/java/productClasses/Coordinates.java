@@ -5,9 +5,12 @@ import annotations.NotNull;
 import exceptions.CannotBeNullException;
 import exceptions.InvalidValueException;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.io.Serializable;
 
-
+@Entity
+@Table(name = "products")
 public class Coordinates implements Serializable {
     @NotNull
     @LowerThan(value = 177)
