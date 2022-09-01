@@ -48,7 +48,7 @@ public class RemoveByIdCommand extends Command implements CommandWithArgument {
 
         this.id = null;
         this.collectionManager.updateCollection(updatedDeque);
-        return ExecutionResult.executionResult(true, "Element removed");
+        return ExecutionResult.executionResult(true, "removed");
     }
 
     @Override

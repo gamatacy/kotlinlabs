@@ -57,8 +57,32 @@ public class Product implements Comparable<Product>, Serializable {
         this.manufacturer = manufacturer;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public Coordinates getCoordinates() {
+        return coordinates;
+    }
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public Float getPrice() {
+        return price;
+    }
+
     public String getPartNumber() {
         return partNumber;
+    }
+
+    public UnitOfMeasure getUnitOfMeasure() {
+        return unitOfMeasure;
+    }
+
+    public int getManufactureCost() {
+        return manufactureCost;
     }
 
     public Organization getManufacturer() {
@@ -86,6 +110,18 @@ public class Product implements Comparable<Product>, Serializable {
 
     @Override
     public String toString() {
+        if (manufacturer == null){
+            return "Product{" +
+                    "id=" + id +
+                    ", name='" + name + '\'' +
+                    ", coordinates=" + coordinates.toString() +
+                    ", creationDate=" + creationDate +
+                    ", price=" + price +
+                    ", partNumber='" + partNumber + '\'' +
+                    ", manufactureCost=" + manufactureCost +
+                    ", unitOfMeasure=" + unitOfMeasure +
+                    '}';
+        }
         return "Product{" +
                 "id=" + id +
                 ", name='" + name + '\'' +

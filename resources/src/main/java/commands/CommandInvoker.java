@@ -42,9 +42,8 @@ public class CommandInvoker {
                     break;
                 }
                 Command command = commandManager.getCommand(input[0]);
-                if (command.getClass() == AddCommand.class) {
-                    ((AddCommand) command).setArgument(null);
-                    ((AddCommand) command).setScriptMode();
+                if (command instanceof CommandWithArgument) {
+                    ((CommandWithArgument) command).setArgument(null);
                     command.execute(reader);
                 } else if (command.getClass() == ExecuteScriptCommand.class) {
                     throw new InvalidValueException("Recursion detected");

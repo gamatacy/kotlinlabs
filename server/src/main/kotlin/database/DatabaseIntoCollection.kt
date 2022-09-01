@@ -4,6 +4,7 @@ import java.util.ArrayDeque
 import productClasses.Coordinates
 import productClasses.Product
 import productClasses.ProductBuilder
+import productClasses.ProductEntity
 
 class DatabaseIntoCollection {
     companion object {
@@ -17,6 +18,7 @@ class DatabaseIntoCollection {
                 for (entity in list){
                     var product = entity as ProductEntity
                     val organization = product.manufacturerId?.let { OrganizationDao.getById(it) }
+                    ProductBuilder.getBuilder().addId(product.id)
 
                     deque.add(ProductBuilder.getBuilder().build(
                         product.id,
@@ -35,6 +37,34 @@ class DatabaseIntoCollection {
 
             session?.transaction?.commit()
             return deque
+        }
+
+        fun invertConvert(deque: ArrayDeque<Product>){
+            var session = HibernateSessionFactory.getSessionFactory()?.openSession()
+            session?.beginTransaction()
+            session?.createQuery("DELETE FROM Organization")?.executeUpdate()
+            session?.createQuery("DELETE FROM ProductEntity")?.executeUpdate()
+            session?.transaction?.commit()
+
+            for (product in deque){
+                var productEntity = ProductEntity(
+                    product.id!!,
+                    product!!.name,
+                    product!!.coordinates.x,
+                    product!!.coordinates.y,
+                    product!!.creationDate,
+                    product!!.price,
+                    product!!.partNumber,
+                    product!!.unitOfMeasure,
+                    product!!.manufactureCost,
+                    product.id!!
+                )
+
+                ProductDao.add(productEntity)
+
+                OrganizationDao.add(product.manufacturer)
+            }
+
         }
 
     }

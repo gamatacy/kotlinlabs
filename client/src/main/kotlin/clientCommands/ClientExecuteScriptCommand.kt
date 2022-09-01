@@ -44,6 +44,7 @@ class ClientExecuteScriptCommand {
                     when (command.name) {
                         "execute_script" -> throw InvalidValueException("Recursion detected!")
                         "add" -> argument.add(ClientAddCommand.execute(scriptReader, InputMode.SCRIPT))
+                        "update" -> argument.add(ClientAddCommand.execute(scriptReader, InputMode.SCRIPT))
                     }
 
                     var response = connectionHandler.createRequest(ServerRequest.createRequest(command, argument))

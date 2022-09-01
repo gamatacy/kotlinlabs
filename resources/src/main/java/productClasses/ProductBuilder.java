@@ -107,10 +107,18 @@ public class ProductBuilder {
         return this.usedIds;
     }
 
+    public void addId(Integer id){
+        this.usedIdsList.add(id);
+    }
+
     public void clearId(){this.usedIdsList = new HashSet<>(); usedIds = 0;}
 
     public void removeId(Integer id){
         this.usedIdsList.remove(id);
+    }
+
+    public Boolean checkId(Integer id){
+        return this.usedIdsList.contains(id);
     }
 
 }

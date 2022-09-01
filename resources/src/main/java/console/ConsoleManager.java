@@ -9,9 +9,7 @@ import commands.ExecutionResult;
 import java.io.BufferedReader;
 import java.io.PrintStream;
 
-/**
- * Read input from user and return commands results
- */
+//deprecated
 public class ConsoleManager {
     private String username = "user";
     private final CommandManager commandManager;

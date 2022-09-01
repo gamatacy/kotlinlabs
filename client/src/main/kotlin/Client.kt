@@ -1,11 +1,9 @@
 import commands.CommandManager
-import commands.ServerRequest
 import commands.commandsFiles.*
 import console.User
 import productClasses.ProductBuilder
 import java.io.BufferedReader
 import java.io.InputStreamReader
-import java.util.logging.Logger
 
 fun main() {
     val host: String = "localhost"
@@ -35,7 +33,13 @@ fun main() {
     )
 
     print("Enter username: ")
-    val user = User(readLine())
+    val username = readLine()
+    print("Enter password: ")
+    val password = readLine()
+
+    val user = User(username,password)
+
+    println(user.password)
 
     if (connectionHandler.connect(user)){
         val console = UserConsole(commandManager,

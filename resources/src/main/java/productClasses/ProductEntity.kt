@@ -1,8 +1,10 @@
-package database
+package productClasses
 
+import console.User
 import enums.UnitOfMeasure
 import java.util.*
 import javax.persistence.*
+
 
 @Entity
 @Table(name="products")
@@ -32,7 +34,12 @@ open class ProductEntity(
     open var manufactureCost: Int? = null,
 
     @Column(name="manufacturer")
-    open var manufacturerId: Int? = null
+    open var manufacturerId: Int? = null,
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner")
+    open var owner: User? = null
+
 )
 {
 

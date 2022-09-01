@@ -4,6 +4,13 @@ import productClasses.Organization
 
 class OrganizationDao {
     companion object{
+        fun add(organization: Organization) {
+            val session = HibernateSessionFactory.getSessionFactory()?.openSession()
+            session?.beginTransaction()
+            session?.save(organization)
+            session?.transaction?.commit()
+        }
+
         fun getById(id: Int): Organization? {
             val session = HibernateSessionFactory.getSessionFactory()?.openSession()
             session?.beginTransaction()

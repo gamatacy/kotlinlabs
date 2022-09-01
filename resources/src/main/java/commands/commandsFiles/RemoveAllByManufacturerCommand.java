@@ -19,7 +19,7 @@ import java.util.ArrayList;
  */
 public class RemoveAllByManufacturerCommand extends Command implements CommandWithArgument {
     private final CollectionManager collectionManager;
-    private Product argument = null;
+    private Integer argument = null;
     private Product product;
 
     public RemoveAllByManufacturerCommand(CollectionManager collectionManager) {
@@ -29,22 +29,14 @@ public class RemoveAllByManufacturerCommand extends Command implements CommandWi
 
     @Override
     public ExecutionResult execute(BufferedReader reader) {
-        if(argument == null) {
-            FieldsReader fieldsReader = new FieldsReader(Organization.class);
-            product = ProductBuilder.getBuilder().buildManufacturer(fieldsReader.read(reader, InputMode.USER));
-        }
-        else {
-            product = argument;
-        }
-
         Product[] products = collectionManager.getProductsCollection().toArray(new Product[0]);
         ArrayDeque<Product> newDeque = new ArrayDeque<>();
 
         for (int i = 0; i < collectionManager.getCollectionSize(); i++) {
-            if (products[i].getManufacturer().equals(product.getManufacturer())) {
+            if (products[i].getManufacturer().getId() == argument.intValue()) {
                 continue;
             } else {
-                ProductBuilder.getBuilder().removeId(product.getId());
+                ProductBuilder.getBuilder().removeId(argument);
                 newDeque.addFirst(products[i]);
             }
         }
@@ -54,14 +46,18 @@ public class RemoveAllByManufacturerCommand extends Command implements CommandWi
             return ExecutionResult.executionResult(false, "No elements with this manufacturer");
         } else {
             collectionManager.updateCollection(newDeque);
-            return ExecutionResult.executionResult(true, "Collection updated");
+            return ExecutionResult.executionResult(true, "removed");
         }
     }
 
 
     @Override
     public void setArgument(ArrayList<Object> argument) {
-        this.argument = (Product) argument.get(0);
+        try {
+            this.argument = Integer.valueOf(String.valueOf(argument.get(0)));
+        }catch (Exception e){
+
+        }
     }
 
 }
