@@ -4,9 +4,11 @@ import collection.CollectionManager
 import commands.Command
 import commands.CommandWithArgument
 import commands.ExecutionResult
+import console.User
 import database.DatabaseIntoCollection
 import database.OrganizationDao
 import database.ProductDao
+import database.UserDao
 import productClasses.ProductEntity
 import enums.InputMode
 import productClasses.FieldsReader
@@ -19,6 +21,7 @@ class ServerAddCommand : Command, CommandWithArgument {
     private var argument: ArrayList<Any>? = null
     private var collectionManager: CollectionManager
     private var inputMode: InputMode = InputMode.USER
+    private var user: User? = null;
 
     constructor(collectionManager: CollectionManager) : super("add", "добавить новый элемент в коллекцию") {
         this.collectionManager = collectionManager
@@ -34,6 +37,12 @@ class ServerAddCommand : Command, CommandWithArgument {
             }
         }
 
+        if (user != null) {
+            if (!UserDao.isUserExist(user!!)) {
+                UserDao.add(user!!)
+            }
+        }
+
         if (product != null) {
             var id = ProductBuilder.getBuilder().idGenerator()
             var productEntity = ProductEntity(
@@ -46,7 +55,8 @@ class ServerAddCommand : Command, CommandWithArgument {
                 product!!.partNumber,
                 product!!.unitOfMeasure,
                 product!!.manufactureCost,
-                id
+                id,
+                user
             )
             var organization = product!!.manufacturer
 
@@ -75,9 +85,10 @@ class ServerAddCommand : Command, CommandWithArgument {
         if (argument != null) {
             if (argument.isNotEmpty()) {
                 this.argument = argument
-                this.product = argument?.get(0) as Product
+                this.product = argument[0] as Product
+                this.user = argument[1] as User
             }
-        }else{
+        } else {
             this.inputMode = InputMode.SCRIPT
         }
     }

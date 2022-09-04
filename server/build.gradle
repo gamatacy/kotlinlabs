@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'org.example'
-version '1.0-SNAPSHOT'
+version '1.5'
 
 repositories {
     mavenCentral()
@@ -29,8 +29,11 @@ dependencies {
 test {
     useJUnitPlatform()
 }
-/**
+
+
+
 jar {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
     manifest {
         attributes "Main-Class": "ServerKt"
     }
@@ -38,4 +41,4 @@ jar {
         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
-*/
+

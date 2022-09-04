@@ -12,11 +12,10 @@ fun main() {
     val connectionHandler: ConnectionHandler = ConnectionHandler(host,port)
 
     val commandManager = CommandManager()
-
     commandManager.registerCommands(
         AddCommand(null),
         RemoveAllByManufacturerCommand(null),
-        ClearCommand(null),
+        //ClearCommand(null),
         ExecuteScriptCommand(null,null),
         ExitCommand(),
         FilterByPartNumberCommand(null),

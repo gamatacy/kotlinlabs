@@ -1,5 +1,6 @@
 package productClasses;
 
+import console.User;
 import enums.OrganizationType;
 import enums.UnitOfMeasure;
 
@@ -52,6 +53,22 @@ public class ProductBuilder {
         Organization manufacturer = new Organization((Integer) productFields[0], (String) productFields[10], (String) productFields[11], (OrganizationType) productFields[12], (String) productFields[13]);
 
         return build(id, name, coordinates, creationDate, price, partNumber, manufactureCost, unitOfMeasure, manufacturer);
+    }
+
+    public Product buildWithOwner(Integer id,
+                                  String name,
+                                  Coordinates coordinates,
+                                  Date creationDate,
+                                  Float price,
+                                  String partNumber,
+                                  int manufactureCost,
+                                  UnitOfMeasure unitOfMeasure,
+                                  Organization manufacturer,
+                                  User owner) {
+
+        Product product = new Product(id, name, coordinates, creationDate, price, partNumber, manufactureCost, unitOfMeasure, manufacturer, owner);
+        return product;
+
     }
 
     public Product buildProduct(Object[] productFields) {

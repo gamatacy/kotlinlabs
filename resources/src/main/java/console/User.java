@@ -1,6 +1,8 @@
 package console;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import productClasses.ProductEntity;
 import utils.HashCreator;
 
@@ -13,6 +15,8 @@ import java.util.List;
 
 @Entity
 @Getter
+@Setter
+@NoArgsConstructor
 @Table(name = "users")
 public class User implements Serializable {
     @Id

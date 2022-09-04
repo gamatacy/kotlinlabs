@@ -1,32 +1,35 @@
 package database
 
 import console.User
-import productClasses.ProductEntity
 
-class ProductDao {
+class UserDao {
     companion object {
-        fun add(product: ProductEntity) {
+        fun add(user: User) {
             val session = HibernateSessionFactory.getSessionFactory()?.openSession()
             session?.beginTransaction()
-            session?.save(product)
+            session?.save(user)
             session?.transaction?.commit()
         }
 
-        fun getById(id: Int): ProductEntity? {
-            val session = HibernateSessionFactory.getSessionFactory()?.openSession()
-            session?.beginTransaction()
-            var productEntity = session?.get(ProductEntity::class.java, id)
-            session?.transaction?.commit()
-            return productEntity
+        fun checkPassword(username: String, password: String): Boolean {
+            var user = getUser(username)
+            return user?.password.equals(password)
         }
 
-        fun deleteById(id: Int) {
+        fun isUserExist(user: User): Boolean {
             val session = HibernateSessionFactory.getSessionFactory()?.openSession()
             session?.beginTransaction()
-            var product = session?.get(ProductEntity::class.java, id)
-            product?.manufacturerId?.let { OrganizationDao.deleteById(it) }
-            session?.delete(product)
+            var user = getUser(user.username)
             session?.transaction?.commit()
+            return user != null
+        }
+
+        private fun getUser(username: String): User? {
+            val session = HibernateSessionFactory.getSessionFactory()?.openSession()
+            session?.beginTransaction()
+            var user = session?.get(User::class.java, username)
+            session?.transaction?.commit()
+            return user
         }
     }
 }

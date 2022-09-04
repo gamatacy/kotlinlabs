@@ -18,10 +18,10 @@ public class FieldsReader {
     }
 
     public Object[] read(BufferedReader reader, InputMode inputMode) {
-        Object[] values = new Object[allFields.length];
+        Object[] values = new Object[allFields.length - 1];
 
         int counter = 0;
-        while (counter < allFields.length) {
+        while (counter < allFields.length - 1) {
             Field field = allFields[counter];
             String input = null;
 

@@ -4,6 +4,7 @@ import ConnectionHandler
 import commands.CommandManager
 import commands.CommandWithArgument
 import commands.ServerRequest
+import console.User
 import enums.InputMode
 import exceptions.InvalidValueException
 import productClasses.FieldsReader
@@ -17,7 +18,8 @@ class ClientExecuteScriptCommand {
             reader: BufferedReader,
             path: String,
             connectionHandler: ConnectionHandler,
-            commandManager: CommandManager
+            commandManager: CommandManager,
+            user: User
         ): Any? {
             var scriptLength = 0
             var sucessCount = 0
@@ -46,6 +48,8 @@ class ClientExecuteScriptCommand {
                         "add" -> argument.add(ClientAddCommand.execute(scriptReader, InputMode.SCRIPT))
                         "update" -> argument.add(ClientAddCommand.execute(scriptReader, InputMode.SCRIPT))
                     }
+
+                    argument.add(user)
 
                     var response = connectionHandler.createRequest(ServerRequest.createRequest(command, argument))
 

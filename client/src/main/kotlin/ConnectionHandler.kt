@@ -28,6 +28,11 @@ class ConnectionHandler(
                 serverInput = ObjectInputStream(socket.getInputStream())
                 println("Connection set!")
                 serverOutput.writeObject(user)
+                var res = serverInput.readObject() as ExecutionResult
+                println(res.message)
+                if (!res.result){
+                    break
+                }
                 reconnectAttempts = 0
                 return true
             } catch (e: Exception) {

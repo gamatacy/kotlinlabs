@@ -15,12 +15,12 @@ class DatabaseIntoCollection {
             var deque = ArrayDeque<Product>(list?.size!!)
 
             if (list != null) {
-                for (entity in list){
+                for (entity in list) {
                     var product = entity as ProductEntity
                     val organization = product.manufacturerId?.let { OrganizationDao.getById(it) }
                     ProductBuilder.getBuilder().addId(product.id)
 
-                    deque.add(ProductBuilder.getBuilder().build(
+                    var p = ProductBuilder.getBuilder().buildWithOwner(
                         product.id,
                         product.name,
                         product.y?.let { Coordinates(product.x, it) },
@@ -29,8 +29,11 @@ class DatabaseIntoCollection {
                         product.partNumber,
                         product.manufactureCost!!,
                         product.unitOfMeasure,
-                        organization
-                    ))
+                        organization,
+                        product.owner
+                    )
+
+                    deque.add(p)
 
                 }
             }
@@ -39,14 +42,14 @@ class DatabaseIntoCollection {
             return deque
         }
 
-        fun invertConvert(deque: ArrayDeque<Product>){
+        fun invertConvert(deque: ArrayDeque<Product>) {
             var session = HibernateSessionFactory.getSessionFactory()?.openSession()
             session?.beginTransaction()
             session?.createQuery("DELETE FROM Organization")?.executeUpdate()
             session?.createQuery("DELETE FROM ProductEntity")?.executeUpdate()
             session?.transaction?.commit()
 
-            for (product in deque){
+            for (product in deque) {
                 var productEntity = ProductEntity(
                     product.id!!,
                     product!!.name,
@@ -57,7 +60,8 @@ class DatabaseIntoCollection {
                     product!!.partNumber,
                     product!!.unitOfMeasure,
                     product!!.manufactureCost,
-                    product.id!!
+                    product.id!!,
+                    product.owner
                 )
 
                 ProductDao.add(productEntity)

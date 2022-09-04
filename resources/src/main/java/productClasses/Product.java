@@ -3,6 +3,7 @@ package productClasses;
 import annotations.AutoGen;
 import annotations.GreaterThan;
 import annotations.NotNull;
+import console.User;
 import enums.UnitOfMeasure;
 
 import javax.persistence.*;
@@ -34,6 +35,7 @@ public class Product implements Comparable<Product>, Serializable {
     private int manufactureCost;
     private UnitOfMeasure unitOfMeasure; //Поле может быть null
     private Organization manufacturer; //Поле может быть null
+    private User owner;
 
     public Product(
             Integer id,
@@ -55,6 +57,41 @@ public class Product implements Comparable<Product>, Serializable {
         this.manufactureCost = manufactureCost;
         this.unitOfMeasure = unitOfMeasure;
         this.manufacturer = manufacturer;
+    }
+
+    public Product(
+            Integer id,
+            String name,
+            Coordinates coordinates,
+            Date creationDate,
+            Float price,
+            String partNumber,
+            int manufactureCost,
+            UnitOfMeasure unitOfMeasure,
+            Organization manufacturer,
+            User owner
+    ) {
+        this.id = id;
+        this.name = name;
+        this.coordinates = coordinates;
+        this.creationDate = creationDate;
+        this.price = price;
+        this.partNumber = partNumber;
+        this.manufactureCost = manufactureCost;
+        this.unitOfMeasure = unitOfMeasure;
+        this.manufacturer = manufacturer;
+        this.owner = owner;
+    }
+
+
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+        this.manufacturer.setId(id);
     }
 
     public String getName() {
@@ -89,6 +126,14 @@ public class Product implements Comparable<Product>, Serializable {
         return manufacturer;
     }
 
+    public User getOwner(){
+        return owner;
+    }
+
+    public void setOwner(User user){
+        this.owner = owner;
+    }
+
     public Object[] productToObject() {
         Object[] objects = new Object[14];
         objects[0] = this.id;
@@ -108,6 +153,7 @@ public class Product implements Comparable<Product>, Serializable {
         return objects;
     }
 
+
     @Override
     public String toString() {
         if (manufacturer == null){
@@ -120,6 +166,7 @@ public class Product implements Comparable<Product>, Serializable {
                     ", partNumber='" + partNumber + '\'' +
                     ", manufactureCost=" + manufactureCost +
                     ", unitOfMeasure=" + unitOfMeasure +
+                    ", owner=" + owner +
                     '}';
         }
         return "Product{" +
@@ -132,17 +179,11 @@ public class Product implements Comparable<Product>, Serializable {
                 ", manufactureCost=" + manufactureCost +
                 ", unitOfMeasure=" + unitOfMeasure +
                 ", manufacturer=" + manufacturer.toString() +
+                ", owner=" + owner +
                 '}';
     }
 
-    public Integer getId() {
-        return id;
-    }
 
-    public void setId(Integer id) {
-        this.id = id;
-        this.manufacturer.setId(id);
-    }
 
     /**
      * Compare products by id

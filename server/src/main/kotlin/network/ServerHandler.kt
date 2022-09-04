@@ -19,7 +19,6 @@ class ServerHandler(
                 socketPool.add(clientsHandler.acceptConnection())
             }
         } catch (e: Exception) {
-            e.printStackTrace()
             println("Server closed.")
         }
     }

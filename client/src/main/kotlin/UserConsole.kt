@@ -44,17 +44,30 @@ class UserConsole(
                 when (commandName) {
                     "exit" -> break
                     "history" -> history.printHistory(System.out)
-                    "add" -> argument.add(ClientAddCommand.execute(reader, InputMode.USER))
-                    "update" -> argument.add(ClientAddCommand.execute(reader, InputMode.USER))
-                    "remove_all_by_manufacturer" -> argument.add(ClientRemoveByManCommand.execute(reader))
-                    "execute_script" ->{
+                    "add" -> {
+                        argument.add(ClientAddCommand.execute(reader, InputMode.USER))
+                        argument.add(user)
+                    }
+                    "update" -> {
+                        argument.add(ClientAddCommand.execute(reader, InputMode.USER))
+                        argument.add(user)
+                    }
+                    "remove_all_by_manufacturer" -> {
+                        argument.add(ClientRemoveByManCommand.execute(reader))
+                        argument.add(user)
+                    }
+                    "execute_script" -> {
                         ClientExecuteScriptCommand.execute(
                             reader,
                             cmd[1],
                             connectionHandler,
-                            commandManager
+                            commandManager,
+                            user
                         )
                         argument[0] = null
+                    }
+                    else -> {
+                        argument.add(user)
                     }
 
                 }
