@@ -44,8 +44,11 @@ class ConnectionHandler(
         return false
     }
 
-
-
+    private fun logIn(username: String): User{
+        print("Enter password: ")
+        val password = readLine()
+        return User(username,password)
+    }
 
     fun createRequest(request: ServerRequest): ExecutionResult? {
         serverOutput.writeObject(request)

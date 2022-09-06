@@ -38,8 +38,6 @@ fun main() {
 
     val user = User(username,password)
 
-    println(user.password)
-
     if (connectionHandler.connect(user)){
         val console = UserConsole(commandManager,
             BufferedReader(InputStreamReader(System.`in`)),

@@ -4,6 +4,7 @@ import collection.CollectionManager
 import commands.Command
 import commands.CommandWithArgument
 import commands.ExecutionResult
+import console.User
 import database.ProductDao
 import enums.InputMode
 import productClasses.FieldsReader
@@ -16,6 +17,7 @@ class ServerUpdateCommand : Command, CommandWithArgument {
     private var product: Product? = null
     private var id: Int? = null
     private var argument: ArrayList<Any>? = null
+    private var user: User? = null
 
     constructor(collectionManager: CollectionManager) : super(
         "update",
@@ -26,11 +28,15 @@ class ServerUpdateCommand : Command, CommandWithArgument {
 
     override fun execute(reader: BufferedReader?): ExecutionResult {
         if(argument == null) {
-            return ExecutionResult.executionResult(true, "Element not updated!")
+            return ExecutionResult.executionResult(false, "Element not updated!")
         }
         if(!ProductBuilder.getBuilder().checkId(id)){
-            return ExecutionResult.executionResult(true, "Element with this id doesn't exist!")
+            return ExecutionResult.executionResult(false, "Element with this id doesn't exist!")
         }
+        if(!ProductDao.getById(this.id!!)?.owner?.username.equals(this.user?.username)){
+            return ExecutionResult.executionResult(false, "You do not have access to this product!")
+        }
+
 
         ProductDao.deleteById(id!!)
         ProductBuilder.getBuilder().removeId(id)
@@ -48,6 +54,7 @@ class ServerUpdateCommand : Command, CommandWithArgument {
 
         var array = ArrayList<Any>(1)
         product?.let { array.add(it) }
+        user?.let { array.add(it) }
         var add = ServerAddCommand(collectionManager)
         add.setArgument(array)
         var res = add.execute(null)
@@ -60,16 +67,22 @@ class ServerUpdateCommand : Command, CommandWithArgument {
     }
 
     override fun setArgument(argument: ArrayList<Any>?) {
-        println(argument)
+        this.user = null
+        this.argument = null
+        this.product = null
+        this.id = null
+        try{
         if (argument != null) {
             if (argument.isNotEmpty()) {
                 this.argument = argument
                 this.id = Integer.valueOf(argument[0] as String)
-                if (argument.size > 1) {
-                    this.product = argument[1] as Product
+                this.product = argument[1] as Product
+                if (argument.size > 2) {
+                    this.user = argument[2] as User
                 }
             }
         }
+        }catch (e: Exception){}
     }
 
 }

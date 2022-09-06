@@ -4,6 +4,7 @@ import collection.CollectionManager;
 import commands.Command;
 import commands.CommandWithArgument;
 import commands.ExecutionResult;
+import console.User;
 import enums.InputMode;
 import productClasses.FieldsReader;
 import productClasses.Product;
@@ -22,6 +23,7 @@ public class UpdateCommand extends Command implements CommandWithArgument {
     private CollectionManager collectionManager;
     private Integer id = null;
     private Product product = null;
+    private User user = null;
 
     public UpdateCommand(CollectionManager collectionManager) {
         super("update", "обновить значение элемента коллекции, id которого равен заданному");
@@ -52,6 +54,11 @@ public class UpdateCommand extends Command implements CommandWithArgument {
         }else {
             for (int i = 0; i < products.length; i++) {
                 if (products[i].getId().intValue() == this.id.intValue()) {
+                    if (products[i].getOwner() != null){
+                        if (products[i].getOwner().getUsername().equals(this.user.getUsername())){
+                            return ExecutionResult.executionResult(false, "You do not have access to this product!");
+                        }
+                    }
                     product.setId(this.id);
                     products[i] = product;
                     ArrayDeque<Product> updatedDeque = new ArrayDeque<>(Arrays.asList(products));
@@ -71,6 +78,7 @@ public class UpdateCommand extends Command implements CommandWithArgument {
         try {
             this.id = Integer.valueOf(argument.get(0).toString());
             this.product = (Product) argument.get(1);
+            this.user = (User) argument.get(2);
         } catch (Exception e) {}
     }
 }
