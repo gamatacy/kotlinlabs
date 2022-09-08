@@ -27,14 +27,16 @@ class ServerUpdateCommand : Command, CommandWithArgument {
     }
 
     override fun execute(reader: BufferedReader?): ExecutionResult {
-        if(argument == null) {
+        if (argument == null) {
             return ExecutionResult.executionResult(false, "Element not updated!")
         }
-        if(!ProductBuilder.getBuilder().checkId(id)){
+        if (!ProductBuilder.getBuilder().checkId(id)) {
             return ExecutionResult.executionResult(false, "Element with this id doesn't exist!")
         }
-        if(!ProductDao.getById(this.id!!)?.owner?.username.equals(this.user?.username)){
-            return ExecutionResult.executionResult(false, "You do not have access to this product!")
+        if (!ProductDao.getById(this.id!!)?.owner?.username.equals(this.user?.username)) {
+            if (ProductDao.getById(this.id!!)?.owner != null) {
+                return ExecutionResult.executionResult(false, "You do not have access to this product!")
+            }
         }
 
 
@@ -71,18 +73,19 @@ class ServerUpdateCommand : Command, CommandWithArgument {
         this.argument = null
         this.product = null
         this.id = null
-        try{
-        if (argument != null) {
-            if (argument.isNotEmpty()) {
-                this.argument = argument
-                this.id = Integer.valueOf(argument[0] as String)
-                this.product = argument[1] as Product
-                if (argument.size > 2) {
-                    this.user = argument[2] as User
+        try {
+            if (argument != null) {
+                if (argument.isNotEmpty()) {
+                    this.argument = argument
+                    this.id = Integer.valueOf(argument[0] as String)
+                    this.product = argument[1] as Product
+                    if (argument.size > 2) {
+                        this.user = argument[2] as User
+                    }
                 }
             }
+        } catch (e: Exception) {
         }
-        }catch (e: Exception){}
     }
 
 }

@@ -32,6 +32,7 @@ class ServerAddCommand : Command, CommandWithArgument {
             try {
                 val fieldsReader = FieldsReader(Product::class.java)
                 product = ProductBuilder.getBuilder().buildProduct(fieldsReader.read(reader, inputMode))
+                ProductBuilder.getBuilder().removeId(product!!.id)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
@@ -44,9 +45,9 @@ class ServerAddCommand : Command, CommandWithArgument {
         }
 
         if (product != null) {
-            var id = ProductBuilder.getBuilder().idGenerator()
+            this.product!!.id = ProductBuilder.getBuilder().idGenerator()
             var productEntity = ProductEntity(
-                id,
+                product!!.id,
                 product!!.name,
                 product!!.coordinates.x,
                 product!!.coordinates.y,
@@ -55,7 +56,7 @@ class ServerAddCommand : Command, CommandWithArgument {
                 product!!.partNumber,
                 product!!.unitOfMeasure,
                 product!!.manufactureCost,
-                id,
+                product!!.id,
                 user
             )
             var organization = product!!.manufacturer
@@ -63,7 +64,7 @@ class ServerAddCommand : Command, CommandWithArgument {
             ProductDao.add(productEntity)
 
             if (organization != null) {
-                organization.id = id
+                organization.id = product!!.id
                 OrganizationDao.add(organization)
             }
 
