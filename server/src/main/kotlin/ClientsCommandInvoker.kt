@@ -7,6 +7,7 @@ import java.util.ArrayList
 
 class ClientsCommandInvoker {
     companion object {
+        @Synchronized
         fun invoke(request: ServerRequest, commandManager: CommandManager): ExecutionResult? {
             val command = commandManager.getCommand(request.command.name)
             if (command is CommandWithArgument) {

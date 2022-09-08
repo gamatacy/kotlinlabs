@@ -13,7 +13,7 @@ import java.net.ServerSocket
 fun main() {
 
     val serverSocket: ServerSocket
-    val port: Int = 8080
+    val port: Int = 29500
     val path: String = "collection.csv"
     val collectionManager = CollectionManager()
     val fileManager = FileManager()

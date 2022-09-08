@@ -9,7 +9,7 @@ import java.util.logging.Logger
 
 fun main() {
     val host: String = "localhost"
-    val port: Int = 8080
+    val port: Int = 29500
 
     val connectionHandler: ConnectionHandler = ConnectionHandler(host,port)
 

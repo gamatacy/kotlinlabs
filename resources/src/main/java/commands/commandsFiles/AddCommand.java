@@ -29,10 +29,12 @@ public class AddCommand extends Command implements CommandWithArgument {
     public ExecutionResult execute(BufferedReader reader) {
         if (argument == null) {
             try {
+                System.out.println("brruh");
                 FieldsReader fieldsReader = new FieldsReader(Product.class);
                 Product product = ProductBuilder.getBuilder().buildProduct(fieldsReader.read(reader, inputMode));
                 collectionManager.addToCollectionFirst(product);
                 this.inputMode = InputMode.USER;
+                argument = null;
                 return ExecutionResult.executionResult(true, "Element added");
             } catch (Exception e) {
                 e.printStackTrace();
@@ -44,6 +46,8 @@ public class AddCommand extends Command implements CommandWithArgument {
             argument = null;
             return ExecutionResult.executionResult(true, "Element added");
         }
+        this.inputMode = InputMode.USER;
+        argument = null;
         return ExecutionResult.executionResult(false, "Element not added");
     }
 
@@ -54,6 +58,7 @@ public class AddCommand extends Command implements CommandWithArgument {
         try {
             this.argument = (Product) argument.get(0);
         } catch (Exception e) {
+            this.inputMode = InputMode.USER;
             this.argument = null;
         }
     }
