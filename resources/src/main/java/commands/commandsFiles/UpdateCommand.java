@@ -26,7 +26,7 @@ public class UpdateCommand extends Command implements CommandWithArgument {
     private User user = null;
 
     public UpdateCommand(CollectionManager collectionManager) {
-        super("update", "обновить значение элемента коллекции, id которого равен заданному");
+        super("update", "update element by id");
         this.collectionManager = collectionManager;
     }
 

@@ -21,7 +21,7 @@ class ServerUpdateCommand : Command, CommandWithArgument {
 
     constructor(collectionManager: CollectionManager) : super(
         "update",
-        "обновить значение элемента коллекции, id которого равен заданному"
+        "update element by id"
     ) {
         this.collectionManager = collectionManager
     }

@@ -19,7 +19,7 @@ public class ExecuteScriptCommand extends Command implements CommandWithArgument
     private FileManager fileManager;
 
     public ExecuteScriptCommand(CommandManager commandManager, FileManager fileManager) {
-        super("execute_script", "считать и исполнить скрипт из указанного файла");
+        super("execute_script", "invoke script from file");
         this.commandManager = commandManager;
         this.fileManager = fileManager;
     }

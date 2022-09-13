@@ -19,7 +19,7 @@ public class RemoveHeadCommand extends Command implements CommandWithArgument {
     private User user = null;
 
     public RemoveHeadCommand(CollectionManager collectionManager) {
-        super("remove_head", "вывести первый элемент коллекции и удалить его");
+        super("remove_head", "print and delete first element");
         this.collectionManager = collectionManager;
     }
 

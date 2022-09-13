@@ -7,7 +7,8 @@ import java.io.InputStreamReader
 
 fun main() {
     val host: String = "localhost"
-    val port: Int = 8080
+    print("Enter port: ")
+    val port: Int = Integer.valueOf(readLine())
 
     val connectionHandler: ConnectionHandler = ConnectionHandler(host,port)
 

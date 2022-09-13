@@ -15,7 +15,7 @@ import java.net.ServerSocket
 fun main() {
 
     val serverSocket: ServerSocket
-    val port: Int = 8080
+
     val path: String = "collection.csv"
     val collectionManager = CollectionManager()
     val fileManager = FileManager()
@@ -41,6 +41,8 @@ fun main() {
         ServerRemoveCommand(collectionManager)
     )
 
+    print("Enter port")
+    val port: Int = Integer.valueOf(readLine())
     serverSocket = ServerSocket(port)
 
     val console = Console(commandManager, BufferedReader(InputStreamReader(System.`in`)), System.out, "server")

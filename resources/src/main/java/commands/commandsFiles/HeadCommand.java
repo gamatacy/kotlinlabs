@@ -14,7 +14,7 @@ public class HeadCommand extends Command {
 
 
     public HeadCommand(CollectionManager collectionManager) {
-        super("head", "вывести первый элемент коллекции");
+        super("head", "print first element");
         this.collectionManager = collectionManager;
     }
 

@@ -169,6 +169,20 @@ public class Product implements Comparable<Product>, Serializable {
                     ", owner=" + owner +
                     '}';
         }
+        if (owner != null){
+            return "Product{" +
+                    "id=" + id +
+                    ", name='" + name + '\'' +
+                    ", coordinates=" + coordinates.toString() +
+                    ", creationDate=" + creationDate +
+                    ", price=" + price +
+                    ", partNumber='" + partNumber + '\'' +
+                    ", manufactureCost=" + manufactureCost +
+                    ", unitOfMeasure=" + unitOfMeasure +
+                    ", manufacturer=" + manufacturer.toString() +
+                    ", owner=" + owner.getUsername() +
+                    '}';
+        }
         return "Product{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
@@ -179,7 +193,6 @@ public class Product implements Comparable<Product>, Serializable {
                 ", manufactureCost=" + manufactureCost +
                 ", unitOfMeasure=" + unitOfMeasure +
                 ", manufacturer=" + manufacturer.toString() +
-                ", owner=" + owner +
                 '}';
     }
 

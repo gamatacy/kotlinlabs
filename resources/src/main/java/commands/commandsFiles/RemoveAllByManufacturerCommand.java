@@ -25,7 +25,7 @@ public class RemoveAllByManufacturerCommand extends Command implements CommandWi
     private User user = null;
 
     public RemoveAllByManufacturerCommand(CollectionManager collectionManager) {
-        super("remove_all_by_manufacturer", "удалить из коллекции все элементы, значение поля manufacturer которого эквивалентно заданному");
+        super("remove_all_by_manufacturer", "delete elements by manufacturer");
         this.collectionManager = collectionManager;
     }
 

@@ -19,7 +19,7 @@ public class SaveCommand extends Command implements CommandWithArgument {
     private String path;
 
     public SaveCommand(CollectionManager collectionManager, FileManager fileManager) {
-        super("save", " сохранить коллекцию в файл");
+        super("save", "save collection into file");
         this.collectionManager = collectionManager;
         this.fileManager = fileManager;
     }

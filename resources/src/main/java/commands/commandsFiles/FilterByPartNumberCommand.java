@@ -18,7 +18,7 @@ public class FilterByPartNumberCommand extends Command implements CommandWithArg
     private String argument = null;
 
     public FilterByPartNumberCommand(CollectionManager collectionManager) {
-        super("filter_by_part_number", "вывести элементы, значение поля partNumber которых равно заданному");
+        super("filter_by_part_number", "filter elements by partNumber value");
         this.collectionManager = collectionManager;
     }
 

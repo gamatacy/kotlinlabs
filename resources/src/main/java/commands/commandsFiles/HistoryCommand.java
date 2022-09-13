@@ -11,7 +11,7 @@ import java.io.BufferedReader;
 public class HistoryCommand extends Command {
 
     public HistoryCommand() {
-        super("history", "вывести последние 8 команд");
+        super("history", "print last 8 commands");
     }
 
     @Override

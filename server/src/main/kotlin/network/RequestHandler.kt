@@ -30,11 +30,9 @@ class RequestHandler(
                     try {
                         var request = input.readObject() as ServerRequest
                         output.writeObject(ClientsCommandInvoker.invoke(request, commandManager, user))
-                    } catch (se: SocketException) {
+                    } catch (e: Exception) {
                         println("\n$username disconnected")
                         break
-                    } catch (e: Exception) {
-                        e.printStackTrace()
                     }
                 }
             } else {

@@ -13,7 +13,7 @@ public class HelpCommand extends Command {
     private final Collection<Command> commands;
 
     public HelpCommand(Collection<Command> commands) {
-        super("help", "вывести справку по доступным командам");
+        super("help", "print info about commands");
         this.commands = commands;
     }
 

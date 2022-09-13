@@ -23,7 +23,7 @@ class ServerAddCommand : Command, CommandWithArgument {
     private var inputMode: InputMode = InputMode.USER
     private var user: User? = null;
 
-    constructor(collectionManager: CollectionManager) : super("add", "добавить новый элемент в коллекцию") {
+    constructor(collectionManager: CollectionManager) : super("add", "add new element") {
         this.collectionManager = collectionManager
     }
 

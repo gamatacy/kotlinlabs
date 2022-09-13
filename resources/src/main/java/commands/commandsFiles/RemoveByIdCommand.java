@@ -22,7 +22,7 @@ public class RemoveByIdCommand extends Command implements CommandWithArgument {
     private User user = null;
 
     public RemoveByIdCommand(CollectionManager collectionManager) {
-        super("remove_by_id", " удалить элемент из коллекции по его id");
+        super("remove_by_id", "delete element by id");
         this.collectionManager = collectionManager;
     }
 

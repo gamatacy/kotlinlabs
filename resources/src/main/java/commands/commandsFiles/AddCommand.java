@@ -21,7 +21,7 @@ public class AddCommand extends Command implements CommandWithArgument {
     private Product argument = null;
 
     public AddCommand(CollectionManager collectionManager) {
-        super("add", "добавить новый элемент в коллекцию");
+        super("add", "add new element");
         this.collectionManager = collectionManager;
     }
 
